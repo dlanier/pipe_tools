@@ -80,3 +80,48 @@ def get_sorted_clustering_reverse_dictionary(labels_df, column_name=1):
                 break
 
     return {v: k for k, v in cluster_number_dict.items()}
+
+
+def pipeline_results_compare(results_directory, trim_point):
+    """ differs_dict_of_lists = pipeline_results_compare(results_directory, trim_point) 
+    Args:
+        results_directory:      with multiple runs of (exactly) the same pipeline
+        trim_point:             Place to split the time stamp off of the file name e.g. "_Tue_10"
+    Returns:
+        differs_dict_of_lists:  dict of lists of file that did not match their predicessor
+    """
+    dir_list = os.listdir(results_directory)
+    previous_file_name = ''
+    previous_full_file_name = ''
+    differs_dict_of_lists = {}
+    for fn in dir_list:
+        if previous_file_name == '' or previous_file_name != fn.split(trim_point)[0]:
+            previous_full_file_name = os.path.join(results_directory, fn)
+            previous_file_name = fn.split(trim_point)[0]
+
+        elif previous_file_name == fn.split(trim_point)[0]:
+            
+            if filecmp.cmp(previous_full_file_name, os.path.join(results_directory, fn), shallow=False) != True:
+
+                if fn.split(trim_point)[0] in differs_dict_of_lists.keys():
+                    differs_dict_of_lists[fn.split(trim_point)[0]].append(fn)
+                else:
+                    _, pfn = os.path.split(previous_full_file_name)
+                    differs_dict_of_lists[fn.split(trim_point)[0]] = [pfn]
+                    differs_dict_of_lists[fn.split(trim_point)[0]].append(fn)
+                    
+            previous_full_file_name = os.path.join(results_directory, fn)
+            previous_file_name = fn.split(trim_point)[0]
+            
+    return differs_dict_of_lists
+
+def display_pipeline_results_compare(differs_dict_of_lists):
+    """ display a result from pipeline_results_compare function 
+    Args:
+        differs_dict_of_lists:  return dictionary of mismatched files list from pipeline_results_compare
+    """
+    for k in list(differs_dict_of_lists.keys()):
+        print(k,':')
+        k_list = differs_dict_of_lists[k]
+        for fn in k_list:
+            print('\t',fn)
