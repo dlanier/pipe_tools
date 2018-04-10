@@ -24,3 +24,6 @@ _mac/
 _mac
 .xml
 xml
+.ipynb_checkpoints/
+.DS_Store
+
