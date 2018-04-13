@@ -4,6 +4,28 @@ import filecmp
 import numpy as np
 import pandas as pd
 
+def dataframe_is_binary(unk_df):
+    """ is_binary = dataframe_is_binary(unk_df)
+    check matrix to see if the data is all equal to either 1 or 0 
+    Args:
+        unk_df:     numerical pandas dataframe of unknown data conformity
+        
+    Returns:
+        is_binary:  True or False (all data is either = 1 or = 0)
+    """
+    row_size = unk_df.shape[0]
+    col_size = unk_df.shape[1]
+    non_binary = 0
+    for index, row in unk_df.iterrows():
+        if (int(sum(row == 0)) + int(sum(row == 1))) != col_size:
+            non_binary += 1
+    
+    if non_binary > 0:
+        return False
+    else:
+        return True
+
+
 def get_cluster_sets_dict(one_df, column_name=1):
     """ csd = get_cluster_sets_dict(one_df) 
     Args:
