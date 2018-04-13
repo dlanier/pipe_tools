@@ -4,6 +4,32 @@ import filecmp
 import numpy as np
 import pandas as pd
 
+def get_functions_dict(file_name):
+    """ Usage: function_dict = get_functions_dict(file_name)
+    Args:
+        file_name:      full path of python file name
+    Returns:
+        function_dict:  function name: function definition string
+    """
+    fname = os.path.abspath(file_name)
+    function_dict = {'header': ''}
+    build_string = ''
+    header_name = 'header'
+    last_function_name = header_name
+    with open(fname, 'r') as fh:
+        for line in fh:
+            if "def " in line:
+                function_dict[last_function_name] = build_string
+                build_string = line
+                func_name = line.split('(')[0]
+                func_name = func_name[4:]
+                function_dict[func_name] = ''
+                last_function_name = func_name
+            else:
+                build_string += line
+                
+    return function_dict
+
 def dataframe_is_binary(unk_df):
     """ is_binary = dataframe_is_binary(unk_df)
     check matrix to see if the data is all equal to either 1 or 0 
