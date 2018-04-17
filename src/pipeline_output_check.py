@@ -68,6 +68,21 @@ def get_cluster_sets_dict(one_df, column_name=1):
         
     return csd
 
+def get_cluster_sets_dict_from_array(one_arr):
+    """ csd = get_cluster_sets_dict(one_df) 
+    Args:
+        one_arr:
+    Returns:
+        clusters_dict:  cluster_number: number_in_cluster
+    """
+    csd = {}
+    n_clusters = one_arr.max() + 1
+    for k in range(0, n_clusters):
+        s = (one_arr == k).sum()
+        csd[k] = s
+        
+    return csd
+
 def compare_labels(df1, df2, verbose=True):
     """ eq_count, neq_count = compare_labels(df1, df2) 
     Args:
