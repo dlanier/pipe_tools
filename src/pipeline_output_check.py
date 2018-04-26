@@ -4,6 +4,24 @@ import filecmp
 import numpy as np
 import pandas as pd
 
+def get_pip3_versions_dict():
+    """ get installed versions from pip3 """
+    file_name = 'pip_tst_list.txt'
+    pip_str = 'pip3 list &> ' + file_name
+    os.system(pip_str)
+
+    pip3_vd = {}
+    with open(file_name, 'r') as fh:
+        for line in fh:
+            n, N = line.split()
+            if n[0] == '-' or n == 'Package':
+                continue
+            pip3_vd[n] = N
+
+    os.remove(file_name)
+
+    return pip3_vd
+
 def get_functions_dict(file_name):
     """ Usage: function_dict = get_functions_dict(file_name)
     Args:
