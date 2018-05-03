@@ -59,7 +59,7 @@ def save_installed_versions_to_txt(dir_name=None, file_name=None, time_stamp=Tru
         
     if file_name is None:
         file_name = 'py_module_versions_'
-    elif:
+    else:
         _, file_name = os.path.split(file_name)
         file_name, _ = os.path.splitext(file_name)
         
