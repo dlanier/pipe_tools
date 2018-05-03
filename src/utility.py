@@ -3,6 +3,7 @@ lanier4@illinois.edu
 """
 import os
 import time
+import yaml
 from inspect import getmembers, isfunction, getsource, signature
 
 conscientious_message = 'USER MISTAKE -- NOT AN ERROR'
@@ -46,14 +47,26 @@ def display_module_functions(imported_module, show_imported_functions=False):
                 print(docs_string,'\n')
 
 
-def save_installed_versions_to_txt(dir_name=None, file_name=None, time_stamp=False):
-    """ write the pip3 view of installed packages """
+def save_installed_versions_to_txt(dir_name=None, file_name=None, time_stamp=True):
+    """ write the pip3 view of installed packages 
+    Args:
+        dir_name:           directory name to save in (default is current - run directory)
+        file_name:          file name without directory or extension
+        time_stamp:         default is True: add a time-date stamp to the name 
+    """
     if dir_name is None:
         dir_name = os.getcwd()
+        
     if file_name is None:
-        file_name = 'py_module_versions_' + time.strftime("%a_%d_%b_%Y_%H_%M_%S", time.localtime()) + '.txt'
+        file_name = 'py_module_versions_'
+    elif:
+        _, file_name = os.path.split(file_name)
+        file_name, _ = os.path.splitext(file_name)
+        
     if time_stamp == True:
         file_name = file_name + time.strftime("%a_%d_%b_%Y_%H_%M_%S", time.localtime()) + '.txt'
+    else:
+        file_name = file_name + '.txt'
     
     full_file_name = os.path.join(dir_name, file_name)
     pip_str = 'pip3 list &> ' + full_file_name
@@ -223,7 +236,7 @@ def dict_write_file(input_dict, file_name='dict_file.txt'):
     """ write a python dict to a text file - intended for version installation data """
     try:
         with open(file_name, 'w') as file:
-             file.write(json.dumps(input_dict))
+             file.write(yaml.dumps(input_dict))
     except:
         print(file_name,'fails to write')
         pass
