@@ -78,6 +78,28 @@ def std_out_run_parameters_str(run_parameters, std_output=True):
     return run_parameters_string
 
 
+def run_parameters_to_string(run_pars):
+    """  """
+    max_key_length = 2
+    for k in run_pars.keys():
+        if len(k) > max_key_length:
+            max_key_length = len(k)
+    max_key_length += 5
+
+    run_pars_string = ''
+    for k, v in run_pars.items():
+        key_padding = (max_key_length - len(k)) * ' '
+        if isinstance(v, int):
+            v_str = '%i' % (v)
+        elif isinstance(v, float):
+            v_str = '%f' % (v)
+        else:
+            v_str = v
+        run_pars_string += k + ':' + key_padding + v_str + '\n'
+
+    return run_pars_string
+
+
 def user_data_list(target_dir, FEXT):
     """ user_file_list = update_user_data_list(user_data_dir, FEXT)
     Args:
@@ -148,8 +170,14 @@ class ParameterSetWidgets():
 
         self._controls_displayed = False
 
-    def _save_parameters(self, _):
-        print('Saving under construction')
+    def _save_parameters(self, button):
+        # button.disabled = True
+        run_pars_string = run_parameters_to_string(self.get_run_parameters())
+        directory_name = self._input_dir_name
+        file_name = kn.create_timestamped_filename(self._input_file_name, name_extension='.yml')
+        full_file_name = os.path.join(directory_name, file_name)
+        with open(full_file_name, 'w') as fd:
+            fd.write(run_pars_string)
 
     def _show_html_parameters(self):
         self.all_parameters_view_box.value = get_run_parameters_html_table(self.ed_par_button.parameters)
