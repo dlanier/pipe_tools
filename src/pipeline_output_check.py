@@ -4,49 +4,31 @@ import filecmp
 import numpy as np
 import pandas as pd
 
-def get_pip3_versions_dict():
-    """ get installed versions from pip3 """
-    file_name = 'pip_tst_list.txt'
-    pip_str = 'pip3 list &> ' + file_name
-    os.system(pip_str)
-
-    pip3_vd = {}
-    with open(file_name, 'r') as fh:
-        for line in fh:
-            n, N = line.split()
-            if n[0] == '-' or n == 'Package':
-                continue
-            pip3_vd[n] = N
-
-    os.remove(file_name)
-
-    return pip3_vd
-
-def get_functions_dict(file_name):
-    """ Usage: function_dict = get_functions_dict(file_name)
+def redirect_run_parameters(run_pars_in, spreadsheet_data_path, run_directory=None):
+    """ reset the relative path parameters with new_data_path variable
     Args:
-        file_name:      full path of python file name
+        run_pars_in:            run_parameters python dict
+        spreadsheet_data_path:  spreadsheet files directory
+        run_directory:          where the code is oriented
+        
     Returns:
-        function_dict:  function name: function definition string
+        run_pars_out:           run_parameters python dict with new path set
     """
-    fname = os.path.abspath(file_name)
-    function_dict = {'header': ''}
-    build_string = ''
-    header_name = 'header'
-    last_function_name = header_name
-    with open(fname, 'r') as fh:
-        for line in fh:
-            if "def " in line:
-                function_dict[last_function_name] = build_string
-                build_string = line
-                func_name = line.split('(')[0]
-                func_name = func_name[4:]
-                function_dict[func_name] = ''
-                last_function_name = func_name
-            else:
-                build_string += line
-                
-    return function_dict
+    if run_directory is None:
+        run_directory = os.getcwd()
+        
+    run_pars_out = {}
+    for par_key, par in run_pars_in.items():
+        if 'full_path' in par_key:
+            _, file_name = os.path.split(par)
+            run_pars_out[par_key] = os.path.join(spreadsheet_data_path, file_name)
+        elif par_key == 'run_directory':
+            run_pars_out[par_key] = run_directory
+        else:
+            run_pars_out[par_key] = par
+        
+    return run_pars_out
+
 
 def dataframe_is_binary(unk_df):
     """ is_binary = dataframe_is_binary(unk_df)
