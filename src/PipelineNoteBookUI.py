@@ -7,14 +7,17 @@ sobh@illinois.edu
 import os
 import pandas as pd
 from pandas.io.common import EmptyDataError
+import yaml
 
 from IPython.display import display
 import ipywidgets as widgets
 
 import knpackage.toolbox as kn
 
+YAML_TAB_STRING = ' ' * 5
+
 #                                                                                       set default file types
-PARAMETER_FILE_TYPES = ['.yml']
+PARAMETER_FILE_TYPES = ['.yml', '.txt']
 USER_DATAFILE_EXTENSIONS_LIST = ['.tsv', '.txt', '.df', '.gz', '.csv']
 
 #                                                                                       layout styles
@@ -44,7 +47,8 @@ def get_progress_bar(run_parameters):
     return run_parameters
 
 def get_run_parameters_html_table(run_parameters, show_list=None):
-    """ html_table = get_run_parameters_html_table(run_parameters)
+    """ for widgets.
+    html_table = get_run_parameters_html_table(run_parameters)
     """
     orderd_keys = sorted(run_parameters.keys())
     html_table = '<table>\n'
@@ -57,7 +61,7 @@ def get_run_parameters_html_table(run_parameters, show_list=None):
 
 
 def std_out_run_parameters_str(run_parameters, std_output=True):
-    """ static function to display run_parameters dict """
+    """ static function to display run_parameters dict to command line or cell output """
     run_parameters_string = ''
     left_string_length = 1
     for k in run_parameters.keys():
@@ -77,8 +81,12 @@ def std_out_run_parameters_str(run_parameters, std_output=True):
     return run_parameters_string
 
 
-def run_parameters_to_string(run_pars):
-    """ writable dictionary string """
+def run_parameters_to_string(run_pars, prefix_string=''):
+    """ yaml format writable dictionary string
+    Args:
+         run_pars:          python dict
+         prefix_string:     for inset where key refers to another dict
+    """
     max_key_length = 2
     for k in run_pars.keys():
         if len(k) > max_key_length:
@@ -96,10 +104,12 @@ def run_parameters_to_string(run_pars):
             v_str = '%f' % (v)
         elif isinstance(v, str):
             v_str = v
+        elif isinstance(v, dict):
+            v_str = run_parameters_to_string(v, prefix_string=YAML_TAB_STRING)
         else:
             v_str = str(v)
 
-        run_pars_string += k + ':' + key_padding + v_str + '\n'
+        run_pars_string += prefix_string + k + ':' + key_padding + v_str + '\n'
 
     return run_pars_string
 
@@ -131,7 +141,7 @@ PARS_EDIT_BUTTON_NAME_SET = {'edit': 'Edit', 'set': 'Set'}
 class ParameterSetWidgets():
     """ pending improvements:
     1 Add | Remove Key-Value button in middle of Save - Show_All
-    
+
     2 IF  - Edit button is clicked when key-value is in USER_DATAFILE_EXTENSIONS_LIST
             - change control logic in edit_parameter
         - Select (file) is retargeted to user_data directory
@@ -143,7 +153,17 @@ class ParameterSetWidgets():
     """
 
     def __init__(self, input_data_dir=None, file_types=PARAMETER_FILE_TYPES):
-        """ initialize all control widget to unselected state """
+        """ Constructor: create all control widgets with no-parameters state
+
+        Args:
+            self:                   implicitly construct self
+            input_data_dir:         valid directory name with appropriate permissions
+            file_types:             list of acceptable file types e.g. ['.yml', '.txt']
+
+        Returns:
+            self:                   controls instantiated with controls displayed flag set False
+                                    --                                             to display, call self.show_controls()
+        """
         if os.path.isdir(input_data_dir) == True:
             self.input_data_dir = input_data_dir
         else:
@@ -208,7 +228,12 @@ class ParameterSetWidgets():
         self._controls_displayed = False
 
     def show_controls(self):
-        """ display controls below cell where called: """
+        """ display controls below jupyter notebook cell where called
+        Args:
+             self:              initialized set of controls with or without valid directory/filename or parameters
+        Returns:
+            self:               with controls displayed flag set True
+        """
         if self._controls_displayed == True:
             return
         display(self.yaml_file_selector)
@@ -218,39 +243,63 @@ class ParameterSetWidgets():
         self._controls_displayed = True
 
     def get_selected_file_name(self):
-        """ self.select_file_button.file_selector data_directory and selected file """
+        """ read the file name from the select file dropdown self.select_file_button.file_selector
+        Args:
+            self:               .select_file_button.file_selector
+                                .select_file_button.data_directory
+        Returns:
+            full_file_name:     suitable for opening   --   else None
+        """
         full_file_name = os.path.join(self.select_file_button.file_selector.data_directory,
                                       self.select_file_button.file_selector.value)
+
         if not os.path.isfile(full_file_name):
             full_file_name = None
+
         return full_file_name
 
     def set_run_parameters(self, button):
-        """ callback for self.select_file_button  Select """
+        """ open the selected file and set this object's run_parameters into the display
+        Args:
+            self:               self.select_file_button      --     callback for "Select"
+        Returns:
+            self:               ._input_dir_name, _input_file_name,
+                                .ed_par_button.parameters, & all children
+        """
         directory_name = self.select_file_button.file_selector.data_directory
         file_name = self.select_file_button.file_selector.value
         if os.path.isfile(os.path.join(directory_name, file_name)):
             try:
-                parameters_dictionary = kn.get_run_parameters(directory_name, file_name)
-                self._input_dir_name = directory_name
-                self._input_file_name = file_name
-                keys_list = sorted(list(parameters_dictionary.keys()))
-                self.ed_par_button.parameters = {k: parameters_dictionary[k] for k in keys_list}
+                #                                       opening the parameters validates the selected dir & name
+                parameters_dictionary                   = self._open_run_parameters(directory_name, file_name)
+                self._input_dir_name                    = directory_name
+                self._input_file_name                   = file_name
+                #                                       replace this objects parameters and display the keys
+                keys_list                               = sorted(list(parameters_dictionary.keys()))
+                self.ed_par_button.parameters           = {k: parameters_dictionary[k] for k in keys_list}
                 self.ed_par_button.key_selector.options = keys_list
-                key_value = keys_list[0]
-                self.ed_par_button.key_selector.value = key_value
-                text_list = list(self.ed_par_button.parameters.values())
+                #                                       # replace & display the values options
+                key_value                               = keys_list[0]
+                self.ed_par_button.key_selector.value   = key_value
+                text_list                               = list(self.ed_par_button.parameters.values())
                 self.ed_par_button.parameter_ed.options = text_list
-                self.ed_par_button.parameter_ed.value = str(self.ed_par_button.parameters[key_value])
+                self.ed_par_button.parameter_ed.value   = str(self.ed_par_button.parameters[key_value])
             except:
-                parameters_dictionary = {'No Input': 'No Data'}
-                self.ed_par_button.parameters = parameters_dictionary
-                self._input_dir_name = None
-                self._input_file_name = None
+                #                                       fail by resetting object to uninitialized state
+                parameters_dictionary                   = {'No Input': 'No Data'}
+                self.ed_par_button.parameters           = parameters_dictionary
+                self._input_dir_name                    = None
+                self._input_file_name                   = None
                 pass
 
     def _key_value_change(self, dropdown):
-        """ callback for self.ed_par_button.key_selector (observe value change) """
+        """ callback for self.ed_par_button.key_selector (observe value change)
+        Args:
+             self:          .ed_par_button    all children
+             dropdown:      self.ed_par_button.key_selector   --    observe value callback
+        Returns:
+            self:           self.ed_par_button                --    children reset
+        """
         key_value = self.ed_par_button.key_selector.value
         par_value = self.ed_par_button.parameters[key_value]
         self.ed_par_button.parameter_ed.value = str(par_value)
@@ -258,24 +307,38 @@ class ParameterSetWidgets():
         self.ed_par_button.parameter_ed.disabled = True
 
     def edit_parameter(self, button):
-        """ callback for self.ed_par_button Edit | Set """
+        """ Callback for self.ed_par_button == "Edit" / "Set" Button
+        Args:
+             self:      this object
+             button:    self.ed_par_button = widgets.Button    "Edit" / "Set"
+        Returns:
+            self:       this object with "Edit" "Set" reset to opposite and
+                        self.all_parameters_view_box.value updated if
+                        self.show_run_parameters_button.description set "Hide" (e.g. do show now)
+        """
         if button.description == PARS_EDIT_BUTTON_NAME_SET['edit']:
-            button.description = PARS_EDIT_BUTTON_NAME_SET['set']
-            button.parameter_ed.disabled = False
+            button.description                          = PARS_EDIT_BUTTON_NAME_SET['set']
+            button.parameter_ed.disabled                = False
         else:
-            button.description = PARS_EDIT_BUTTON_NAME_SET['edit']
-            key_value = button.key_selector.value
-            text_value = button.parameter_ed.value
-            self.ed_par_button.parameters[key_value] = text_value
-            text_list = list(self.ed_par_button.parameters.values())
-            self.ed_par_button.parameter_ed.options = text_list
-            button.parameter_ed.disabled = True
-
+            button.description                          = PARS_EDIT_BUTTON_NAME_SET['edit']
+            key_value                                   = button.key_selector.value
+            text_value                                  = button.parameter_ed.value
+            self.ed_par_button.parameters[key_value]    = text_value
+            text_list                                   = list(self.ed_par_button.parameters.values())
+            self.ed_par_button.parameter_ed.options     = text_list
+            button.parameter_ed.disabled                = True
+            #                                           Update the parameters display if currently showing
             if self.show_run_parameters_button.description == VIEW_BUTTON_NAME_DEFAULTS['hide']:
                 self._show_html_parameters()
 
     def _view_all(self, button):
-        """ callback for self.show_run_parameters_button  """
+        """ "Show_All" / "Hide" Callback
+        Args:
+            self:           ._show_html_parameters()
+            button:         .show_run_parameters_button
+        Returns:
+            self:           self.all_parameters_view_box.value       --     either cleared or displayed
+        """
         if self.show_run_parameters_button.description == VIEW_BUTTON_NAME_DEFAULTS['show']:
             button.description = VIEW_BUTTON_NAME_DEFAULTS['hide']
             self._show_html_parameters()
@@ -284,14 +347,14 @@ class ParameterSetWidgets():
             self._hide_html_parameters()
 
     def _show_html_parameters(self):
-        """ self.all_parameters_view_box fill """
+        """ self.all_parameters_view_box        -- Fill """
         self.all_parameters_view_box.value = get_run_parameters_html_table(self.ed_par_button.parameters)
 
     def _hide_html_parameters(self):
-        """ self.all_parameters_view_box clear """
+        """ self.all_parameters_view_box        -- Clear """
         self.all_parameters_view_box.value = ''
 
-    def get_run_parameters(self):
+    def get_edited_run_parameters(self):
         """ get the ordered run parameters as held by self.ed_par_button  """
         keys_list = sorted(list(self.ed_par_button.parameters.keys()))
         return {k: self.ed_par_button.parameters[k] for k in keys_list}
@@ -301,10 +364,47 @@ class ParameterSetWidgets():
         std_out_run_parameters_str(self.ed_par_button.parameters, std_output=True)
 
     def _save_parameters(self, button):
-        """ callback for self.save_run_parameters_button Save """
-        run_pars_string = run_parameters_to_string(self.get_run_parameters())
-        directory_name = self._input_dir_name
-        file_name = kn.create_timestamped_filename(self._input_file_name, name_extension='.yml')
+        """ "Save" Callback
+        Args:
+             self:
+             button:            self.save_run_parameters_button Save
+        """
+        #                                   get the edited parameters from the controls
+        run_parameters      = self.get_edited_run_parameters()
+        run_pars_string     = run_parameters_to_string(run_parameters)
+
+        #                                   compose the output file name
+        if 'SaveTo_directory' in run_parameters:
+            directory_name  = run_parameters['AA-SaveTo_directory']
+        else:
+            directory_name = os.getcwd()
+        if 'AA-SaveAs_file_name' in run_parameters:
+            file_name   = kn.create_timestamped_filename(run_parameters['AA-SaveAs_file_name'], name_extension='.yml')
+        else:
+            file_name   = kn.create_timestamped_filename(self._input_file_name, name_extension='.yml')
+
+        #                                   fearlessly write the file
         full_file_name = os.path.join(directory_name, file_name)
         with open(full_file_name, 'w') as fd:
             fd.write(run_pars_string)
+
+    def _open_run_parameters(self, run_directory, run_file):
+        """ Read run directory name and run_file into a dictionary
+
+        Args:
+            self:               private function
+            run_directory:      directory where run_file is expected.
+            run_file:           run_parameters file   ('.yml')
+        Returns:
+            run_parameters:     python dictionary of name - value parameters.
+        """
+        run_file_name = os.path.join(run_directory, run_file)
+        with open(run_file_name, 'r') as file_handle:
+            run_parameters = yaml.load(file_handle)
+
+        #                                                   establish ouput file name for save function
+        file_name = kn.create_timestamped_filename(run_file, name_extension='.yml')
+        run_parameters['AA-SaveAs_file_name'] = file_name
+        run_parameters['AA-SaveTo_directory'] = run_directory
+
+        return run_parameters
