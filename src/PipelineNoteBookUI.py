@@ -129,8 +129,10 @@ VIEW_BUTTON_NAME_DEFAULTS = {'show': 'Show_All', 'hide':'Hide'}
 PARS_EDIT_BUTTON_NAME_SET = {'edit': 'Edit', 'set': 'Set'}
 
 class ParameterSetWidgets():
-    """ pending improvement:
-    IF  - Edit button is clicked when USER_DATAFILE_EXTENSIONS_LIST is extension of key-value
+    """ pending improvements:
+    1 Add | Remove Key-Value button in middle of Save - Show_All
+    
+    2 IF  - Edit button is clicked when key-value is in USER_DATAFILE_EXTENSIONS_LIST
             - change control logic in edit_parameter
         - Select (file) is retargeted to user_data directory
             - self.select_file_button.file_selector.data_directory changes
@@ -147,12 +149,10 @@ class ParameterSetWidgets():
         else:
             self.input_data_dir = os.getcwd()
 
-        #                                                                   Select File dropdown & button
-        self.select_file_button = widgets.Button(description='Select',
-                                               disabled=False,
-                                               button_style='',
-                                               tooltip='show | hide selected file')
-        self.select_file_button.view_box = widgets.HTML(value="", description="")
+        #                                                            self.select_file_button "owns" self...file_selector
+        self.select_file_button = widgets.Button(description='Select', disabled=False,
+                                                 button_style='', tooltip='show | hide selected file')
+        # self.select_file_button.view_box = widgets.HTML(value="", description="")
         self.select_file_button.file_selector = widgets.Dropdown(options=user_data_list(self.input_data_dir, file_types),
                                                                  description='', layout=lisbox_layout)
         self.select_file_button.file_selector.data_directory = input_data_dir
@@ -160,7 +160,7 @@ class ParameterSetWidgets():
         self.yaml_file_selector = widgets.Box([self.select_file_button.file_selector, self.select_file_button],
                                               layout=box_layout)
 
-        #                                                                   Create key-value boxs w edit-set button
+        #                          self.ed_par_button "owns" the parameters,  self...key_selector &  self...parameter_ed
         parameters_dictionary = {'No Input': 'No Data'}
         self._input_dir_name = None
         self._input_file_name = None
@@ -174,7 +174,7 @@ class ParameterSetWidgets():
         self.ed_par_button.key_selector = widgets.Dropdown(options=keys_list,
                                                            value=str(keys_list[0]),
                                                            description='')
-        self.ed_par_button.key_selector.observe(self.key_value_change, 'value')
+        self.ed_par_button.key_selector.observe(self._key_value_change, 'value')
         key_value = self.ed_par_button.key_selector.value
         value_text = str(parameters_dictionary[key_value])
         self.ed_par_button.parameter_ed = widgets.Text(options=text_list,
@@ -189,7 +189,7 @@ class ParameterSetWidgets():
                                                          tooltip='Show | Hide all parameters')
         self.show_run_parameters_button.on_click(self._view_all)
 
-        #                                                                   Create Save & Show|Hide buttons
+        #                                                                            instantiate Save, Show|Hide buttons
         self.save_run_parameters_button = widgets.Button(description='Save',
                                                          disabled=False,
                                                          button_style='',
@@ -197,17 +197,36 @@ class ParameterSetWidgets():
         self.save_run_parameters_button.on_click(self._save_parameters)
         self.all_parameters_view_box = widgets.HTML(value='No Data', placeholder='',description='')
 
-        #                                                                   Create HBoxes for all controls
+        #                                                                                  package the three widget sets
         self.view_save_buttons = widgets.Box([self.save_run_parameters_button, self.show_run_parameters_button],
                                               layout=box_layout)
-        self.parameters_editor = widgets.HBox([ self.ed_par_button.key_selector,
-                                                    self.ed_par_button.parameter_ed,
-                                                    self.ed_par_button], layout=box_layout)
+        self.parameters_editor = widgets.HBox([self.ed_par_button.key_selector,
+                                               self.ed_par_button.parameter_ed,
+                                               self.ed_par_button], layout=box_layout)
         self.show_save_box = widgets.VBox([self.view_save_buttons, self.all_parameters_view_box])
+        #          set flag S.T. show_controls will only show once
         self._controls_displayed = False
 
+    def show_controls(self):
+        """ display controls below cell where called: """
+        if self._controls_displayed == True:
+            return
+        display(self.yaml_file_selector)
+        # display(self.select_file_button.view_box)
+        display(self.parameters_editor)
+        display(self.show_save_box)
+        self._controls_displayed = True
+
+    def get_selected_file_name(self):
+        """ self.select_file_button.file_selector data_directory and selected file """
+        full_file_name = os.path.join(self.select_file_button.file_selector.data_directory,
+                                      self.select_file_button.file_selector.value)
+        if not os.path.isfile(full_file_name):
+            full_file_name = None
+        return full_file_name
+
     def set_run_parameters(self, button):
-        """ callback for self.select_file_button """
+        """ callback for self.select_file_button  Select """
         directory_name = self.select_file_button.file_selector.data_directory
         file_name = self.select_file_button.file_selector.value
         if os.path.isfile(os.path.join(directory_name, file_name)):
@@ -230,59 +249,16 @@ class ParameterSetWidgets():
                 self._input_file_name = None
                 pass
 
-    def _save_parameters(self, button):
-        """ callback for self.save_run_parameters_button """
-        run_pars_string = run_parameters_to_string(self.get_run_parameters())
-        directory_name = self._input_dir_name
-        file_name = kn.create_timestamped_filename(self._input_file_name, name_extension='.yml')
-        full_file_name = os.path.join(directory_name, file_name)
-        with open(full_file_name, 'w') as fd:
-            fd.write(run_pars_string)
-
-    def _show_html_parameters(self):
-        """ self.all_parameters_view_box fill """
-        self.all_parameters_view_box.value = get_run_parameters_html_table(self.ed_par_button.parameters)
-
-    def _hide_html_parameters(self):
-        """ self.all_parameters_view_box clear """
-        self.all_parameters_view_box.value = ''
-
-    def _view_all(self, button):
-        """ callback for self.show_run_parameters_button  """
-        if self.show_run_parameters_button.description == VIEW_BUTTON_NAME_DEFAULTS['show']:
-            button.description = VIEW_BUTTON_NAME_DEFAULTS['hide']
-            self._show_html_parameters()
-        else:
-            button.description = VIEW_BUTTON_NAME_DEFAULTS['show']
-            self._hide_html_parameters()
-
-    def show_controls(self):
-        if self._controls_displayed == True:
-            return
-        display(self.yaml_file_selector)
-        display(self.select_file_button.view_box)
-        display(self.parameters_editor)
-        display(self.show_save_box)
-        self._controls_displayed = True
-
-    def get_selected_file_name(self):
-        """ self.select_file_button.file_selector data_directory and selected file """
-        full_file_name = os.path.join(self.select_file_button.file_selector.data_directory,
-                                      self.select_file_button.file_selector.value)
-        if not os.path.isfile(full_file_name):
-            full_file_name = None
-
-        return full_file_name
-
-    def key_value_change(self, _):
+    def _key_value_change(self, dropdown):
         """ callback for self.ed_par_button.key_selector (observe value change) """
         key_value = self.ed_par_button.key_selector.value
         par_value = self.ed_par_button.parameters[key_value]
         self.ed_par_button.parameter_ed.value = str(par_value)
         self.ed_par_button.description = PARS_EDIT_BUTTON_NAME_SET['edit']
+        self.ed_par_button.parameter_ed.disabled = True
 
     def edit_parameter(self, button):
-        """ show | hide the parameter """
+        """ callback for self.ed_par_button Edit | Set """
         if button.description == PARS_EDIT_BUTTON_NAME_SET['edit']:
             button.description = PARS_EDIT_BUTTON_NAME_SET['set']
             button.parameter_ed.disabled = False
@@ -295,6 +271,26 @@ class ParameterSetWidgets():
             self.ed_par_button.parameter_ed.options = text_list
             button.parameter_ed.disabled = True
 
+            if self.show_run_parameters_button.description == VIEW_BUTTON_NAME_DEFAULTS['hide']:
+                self._show_html_parameters()
+
+    def _view_all(self, button):
+        """ callback for self.show_run_parameters_button  """
+        if self.show_run_parameters_button.description == VIEW_BUTTON_NAME_DEFAULTS['show']:
+            button.description = VIEW_BUTTON_NAME_DEFAULTS['hide']
+            self._show_html_parameters()
+        else:
+            button.description = VIEW_BUTTON_NAME_DEFAULTS['show']
+            self._hide_html_parameters()
+
+    def _show_html_parameters(self):
+        """ self.all_parameters_view_box fill """
+        self.all_parameters_view_box.value = get_run_parameters_html_table(self.ed_par_button.parameters)
+
+    def _hide_html_parameters(self):
+        """ self.all_parameters_view_box clear """
+        self.all_parameters_view_box.value = ''
+
     def get_run_parameters(self):
         """ get the ordered run parameters as held by self.ed_par_button  """
         keys_list = sorted(list(self.ed_par_button.parameters.keys()))
@@ -303,3 +299,12 @@ class ParameterSetWidgets():
     def cell_display_run_parameters(self):
         """ print formatted dict to std out """
         std_out_run_parameters_str(self.ed_par_button.parameters, std_output=True)
+
+    def _save_parameters(self, button):
+        """ callback for self.save_run_parameters_button Save """
+        run_pars_string = run_parameters_to_string(self.get_run_parameters())
+        directory_name = self._input_dir_name
+        file_name = kn.create_timestamped_filename(self._input_file_name, name_extension='.yml')
+        full_file_name = os.path.join(directory_name, file_name)
+        with open(full_file_name, 'w') as fd:
+            fd.write(run_pars_string)
