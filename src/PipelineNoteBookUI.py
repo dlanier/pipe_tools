@@ -485,9 +485,9 @@ class ParameterSetWidgets():
         else:
             directory_name = os.getcwd()
         if 'AA-SaveAs_file_name' in run_parameters:
-            file_name   = kn.create_timestamped_filename(run_parameters['AA-SaveAs_file_name'], name_extension='.yml')
+            file_name   = kn.create_timestamped_filename(run_parameters['AA-SaveAs_file_name'], name_extension='yml')
         else:
-            file_name   = kn.create_timestamped_filename(self._input_file_name, name_extension='.yml')
+            file_name   = kn.create_timestamped_filename(self._input_file_name, name_extension='yml')
 
         #                                   fearlessly write the file
         full_file_name = os.path.join(directory_name, file_name)
@@ -509,7 +509,7 @@ class ParameterSetWidgets():
             run_parameters = yaml.load(file_handle)
 
         #                                                   establish ouput file name for save function
-        file_name = kn.create_timestamped_filename(run_file, name_extension='.yml')
+        file_name = kn.create_timestamped_filename(run_file, name_extension='yml')
         run_parameters['AA-SaveAs_file_name'] = file_name
         run_parameters['AA-SaveTo_directory'] = run_directory
 
