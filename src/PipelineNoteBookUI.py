@@ -137,6 +137,12 @@ def user_data_list(target_dir, FEXT):
 
 VIEW_BUTTON_NAME_DEFAULTS = {'show': 'Show_All', 'hide':'Hide'}
 PARS_EDIT_BUTTON_NAME_SET = {'edit': 'Edit', 'set': 'Set'}
+PARS_ADD_BUTTON_NAME_SET = {'new': 'New Parameter', 'add': 'Add'}
+
+YAML_FILE_SELECT_LABEL = 'Select Parameters File'
+PARAMETERS_EDITOR_LABEL = 'Parameters Edit by Key - Value'
+
+NO_DATA_DICTIONARY = {'No Input': 'No Data'}
 
 class ParameterSetWidgets():
     """ pending improvements:
@@ -169,25 +175,30 @@ class ParameterSetWidgets():
         else:
             self.input_data_dir = os.getcwd()
 
-        #                                                            self.select_file_button "owns" self...file_selector
-        self.select_file_button = widgets.Button(description='Select', disabled=False,
+        # TOP                                                        self.select_file_button "owns" self...file_selector
+        self.select_file_button = widgets.Button(description='Select-Revert', disabled=False,
                                                  button_style='', tooltip='show | hide selected file')
-        # self.select_file_button.view_box = widgets.HTML(value="", description="")
+
         self.select_file_button.file_selector = widgets.Dropdown(options=user_data_list(self.input_data_dir, file_types),
                                                                  description='', layout=lisbox_layout)
         self.select_file_button.file_selector.data_directory = input_data_dir
         self.select_file_button.on_click(self.set_run_parameters)
 
-
-
-        #                          self.ed_par_button "owns" the parameters,  self...key_selector &  self...parameter_ed
-        parameters_dictionary = {'No Input': 'No Data'}
+        # MIDDLE                   self.ed_par_button "owns" the parameters,  self...key_selector &  self...parameter_ed
+        parameters_dictionary = NO_DATA_DICTIONARY
         self._input_dir_name = None
         self._input_file_name = None
+
         self.ed_par_button = widgets.Button(description=PARS_EDIT_BUTTON_NAME_SET['edit'],
                                             disabled=False,
                                             button_style='',
                                             tooltip='show | hide selected file')
+        self.del_par_button = widgets.Button(description='delete',
+                                            disabled=True,
+                                            button_style='',
+                                            tooltip='delete selected parameter')
+        self.del_par_button.on_click(self._delete_selected_parameter)
+
         keys_list = sorted(list(parameters_dictionary.keys()))
         self.ed_par_button.parameters = {k: parameters_dictionary[k] for k in keys_list}
         text_list = list(self.ed_par_button.parameters.values())
@@ -195,8 +206,6 @@ class ParameterSetWidgets():
                                                            value=str(keys_list[0]),
                                                            description='')
         self.ed_par_button.key_selector.observe(self._key_value_change, 'value')
-        key_value = self.ed_par_button.key_selector.value
-        value_text = str(parameters_dictionary[key_value])
         self.ed_par_button.parameter_ed = widgets.Text(options=text_list,
                                                        value=str(text_list[0]),
                                                        placeholder='Type something',
@@ -209,36 +218,101 @@ class ParameterSetWidgets():
                                                          tooltip='Show | Hide all parameters')
         self.show_run_parameters_button.on_click(self._view_all)
 
-        #                                                                            instantiate Save, Show|Hide buttons
+        # BOTTOM                                                                     instantiate Save, Show|Hide buttons
         self.save_run_parameters_button = widgets.Button(description='Save',
-                                                         disabled=False,
+                                                         disabled=True,
                                                          button_style='',
                                                          tooltip='Save run parameters')
-
         self.save_run_parameters_button.on_click(self._save_parameters)
+
+        self.add_parameter_button = widgets.Button(description=PARS_ADD_BUTTON_NAME_SET['new'],
+                                                         disabled=True,
+                                                         button_style='',
+                                                         tooltip='Save run parameters')
+        self.add_parameter_button.on_click(self._add_parameter)
+        self.add_parameter_button.new_parameter = widgets.Text(value='None',
+                                                              placeholder='Type something',
+                                                              description='',
+                                                              disabled=True)
+
         self.all_parameters_view_box = widgets.HTML(value='No Data', placeholder='',description='')
 
-        #                                                                                  package the three widget sets
-        self.ed_par_button.file_select_label = widgets.Label(value='Select Parameter File')
-
+        # TOP                                                                                     package widget set TOP
+        self.ed_par_button.file_select_label = widgets.Label(value=YAML_FILE_SELECT_LABEL)
         self.yaml_file_selector = widgets.VBox([self.ed_par_button.file_select_label,
                                                 widgets.HBox([self.select_file_button.file_selector,
                                                               self.select_file_button],
                                                              layout=box_layout)] )
-
-        self.select_file_button.parameter_edit_label = widgets.Label(value='Select Parameter Key, Edit Value')
+        # MIDDLE                                                                               package widget set MIDDLE
+        self.select_file_button.parameter_edit_label = widgets.Label(value=PARAMETERS_EDITOR_LABEL)
         self.parameters_editor = widgets.VBox([self.select_file_button.parameter_edit_label,
                                                widgets.HBox([self.ed_par_button.key_selector,
-                                               self.ed_par_button.parameter_ed,
-                                               self.ed_par_button], layout=box_layout) ])
+                                                             self.del_par_button,
+                                                             self.ed_par_button.parameter_ed,
+                                                             self.ed_par_button], layout=box_layout) ])
 
-        self.view_save_buttons = widgets.HBox([self.save_run_parameters_button, self.show_run_parameters_button],
+        # BOTTOM                                                                               package widget set BOTTOM
+        self.view_save_buttons = widgets.HBox([self.save_run_parameters_button,
+                                               self.add_parameter_button.new_parameter,
+                                               self.add_parameter_button,
+                                               self.show_run_parameters_button],
                                               layout=box_layout)
-
         self.show_save_box = widgets.VBox([self.view_save_buttons, self.all_parameters_view_box])
 
-        #          set flag - show_controls only once
+        #                                                                           set a FLAG - show_controls only once
         self._controls_displayed = False
+
+    def _update_controls_run_parameters(self, parameters_dictionary):
+        """ reset the controls run_parameters """
+        #                                       replace this objects parameters and display the keys
+        keys_list = sorted(list(parameters_dictionary.keys()))
+        self.ed_par_button.parameters = {k: parameters_dictionary[k] for k in keys_list}
+        self.ed_par_button.key_selector.options = keys_list
+        #                                       # replace & display the values options
+        key_value = keys_list[0]
+        self.ed_par_button.key_selector.value = key_value
+        text_list = list(self.ed_par_button.parameters.values())
+        self.ed_par_button.parameter_ed.options = text_list
+        self.ed_par_button.parameter_ed.value = str(self.ed_par_button.parameters[key_value])
+
+        if self.show_run_parameters_button.description == VIEW_BUTTON_NAME_DEFAULTS['hide']:
+            # show the full set of parameters, and reset the Show_All | Hide button to Hide state (enabled)
+            self._show_html_parameters()
+        self.show_run_parameters_button.disabled = False
+        self.add_parameter_button.disabled = False
+
+    def _add_parameter(self, button):
+        """ callback for self.add_parameter_button """
+        if self.add_parameter_button.description == PARS_ADD_BUTTON_NAME_SET['new']:
+            self.add_parameter_button.description = PARS_ADD_BUTTON_NAME_SET['add']
+            self.add_parameter_button.new_parameter.disabled = False
+        else:
+            self.add_parameter_button.description = PARS_ADD_BUTTON_NAME_SET['new']
+            self.add_parameter_button.new_parameter.value = 'None'
+            self.add_parameter_button.new_parameter.disabled = True
+            new_parameter_key = self.add_parameter_button.new_parameter.value
+            if new_parameter_key in ['None', 'none']:
+                return
+            run_parameters = self.ed_par_button.parameters
+            run_parameters[new_parameter_key] = None
+            self._update_controls_run_parameters(run_parameters)
+            self.ed_par_button.key_selector.value = new_parameter_key
+            self.save_run_parameters_button.disabled = False
+
+    def _delete_selected_parameter(self, button):
+        """ callback for self.del_par_button
+
+        """
+        key_to_delete = self.ed_par_button.key_selector.value
+        run_parameters = self.ed_par_button.parameters
+        if len(run_parameters) == 1:
+            run_parameters = NO_DATA_DICTIONARY
+            self.del_par_button.disabled = True
+        else:
+            del(run_parameters[key_to_delete])
+
+        self._update_controls_run_parameters(run_parameters)
+        self.save_run_parameters_button.disabled = False
 
     def show_controls(self):
         """ display controls below jupyter notebook cell where called
@@ -285,24 +359,42 @@ class ParameterSetWidgets():
             try:
                 #                                       opening the parameters validates the selected dir & name
                 parameters_dictionary                   = self._open_run_parameters(directory_name, file_name)
+                #                                       set description to "hide" to show_all
+                self.show_run_parameters_button.description = VIEW_BUTTON_NAME_DEFAULTS['hide']
+                self._update_controls_run_parameters(parameters_dictionary)
                 self._input_dir_name                    = directory_name
                 self._input_file_name                   = file_name
-                #                                       replace this objects parameters and display the keys
-                keys_list                               = sorted(list(parameters_dictionary.keys()))
-                self.ed_par_button.parameters           = {k: parameters_dictionary[k] for k in keys_list}
-                self.ed_par_button.key_selector.options = keys_list
-                #                                       # replace & display the values options
-                key_value                               = keys_list[0]
-                self.ed_par_button.key_selector.value   = key_value
-                text_list                               = list(self.ed_par_button.parameters.values())
-                self.ed_par_button.parameter_ed.options = text_list
-                self.ed_par_button.parameter_ed.value   = str(self.ed_par_button.parameters[key_value])
+
+                # #                                       replace this objects parameters and display the keys
+                # keys_list                               = sorted(list(parameters_dictionary.keys()))
+                # self.ed_par_button.parameters           = {k: parameters_dictionary[k] for k in keys_list}
+                # self.ed_par_button.key_selector.options = keys_list
+                # #                                       # replace & display the values options
+                # key_value                               = keys_list[0]
+                # self.ed_par_button.key_selector.value   = key_value
+                # text_list                               = list(self.ed_par_button.parameters.values())
+                # self.ed_par_button.parameter_ed.options = text_list
+                # self.ed_par_button.parameter_ed.value   = str(self.ed_par_button.parameters[key_value])
+                #
+                # # show the full set of parameters, and reset the Show_All | Hide button to Hide state (enabled)
+                # self._show_html_parameters()
+                # self.show_run_parameters_button.description = VIEW_BUTTON_NAME_DEFAULTS['hide']
+                # self.show_run_parameters_button.disabled = False
+
+                self.save_run_parameters_button.disabled = True
+                self.del_par_button.disabled = False
+
             except:
                 #                                       fail by resetting object to uninitialized state
                 parameters_dictionary                   = {'No Input': 'No Data'}
                 self.ed_par_button.parameters           = parameters_dictionary
                 self._input_dir_name                    = None
                 self._input_file_name                   = None
+
+                # Hide the full set of parameters, and reset the Show_All | Hide button to Show_All (disabled)
+                self._hide_html_parameters()
+                self.show_run_parameters_button.description = VIEW_BUTTON_NAME_DEFAULTS['show']
+                self.show_run_parameters_button.disabled = True
                 pass
 
     def _key_value_change(self, dropdown):
@@ -343,6 +435,7 @@ class ParameterSetWidgets():
             #                                           Update the parameters display if currently showing
             if self.show_run_parameters_button.description == VIEW_BUTTON_NAME_DEFAULTS['hide']:
                 self._show_html_parameters()
+            self.save_run_parameters_button.disabled = False
 
     def _view_all(self, button):
         """ "Show_All" / "Hide" Callback
