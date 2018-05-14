@@ -3,6 +3,9 @@ lanier4@illinois.edu
 """
 import os
 import time
+import numpy as np
+import pandas as pd
+
 import yaml
 from inspect import getmembers, isfunction, getsource, signature
 
@@ -12,6 +15,20 @@ def show_conscientious_message():
     """ avoid throwing an error: just show_conscientious_message() """
     print(conscientious_message)
 
+def get_sample_n_nans(in_df):
+    """ get the number of nans in each column
+    Args:
+         in_df:                 a pandas dataframe with column names or numbers
+    Returns:
+        columns_n_nans_dict:    column name to number of nans dict
+    """
+    columns_n_nans_dict = {}
+    for col_name in list(in_df.columns):
+        km_nan_index = in_df[col_name].index[in_df[col_name].apply(np.isnan)]
+        L = km_nan_index.tolist()
+        columns_n_nans_dict[col_name] = len(L)
+
+    return columns_n_nans_dict
 
 def display_module_functions(imported_module, show_imported_functions=False):
     """ Usage: display_module_functions(any_module) 

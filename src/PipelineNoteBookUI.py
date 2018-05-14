@@ -177,8 +177,8 @@ class ParameterSetWidgets():
                                                                  description='', layout=lisbox_layout)
         self.select_file_button.file_selector.data_directory = input_data_dir
         self.select_file_button.on_click(self.set_run_parameters)
-        self.yaml_file_selector = widgets.Box([self.select_file_button.file_selector, self.select_file_button],
-                                              layout=box_layout)
+
+
 
         #                          self.ed_par_button "owns" the parameters,  self...key_selector &  self...parameter_ed
         parameters_dictionary = {'No Input': 'No Data'}
@@ -214,17 +214,30 @@ class ParameterSetWidgets():
                                                          disabled=False,
                                                          button_style='',
                                                          tooltip='Save run parameters')
+
         self.save_run_parameters_button.on_click(self._save_parameters)
         self.all_parameters_view_box = widgets.HTML(value='No Data', placeholder='',description='')
 
         #                                                                                  package the three widget sets
-        self.view_save_buttons = widgets.Box([self.save_run_parameters_button, self.show_run_parameters_button],
-                                              layout=box_layout)
-        self.parameters_editor = widgets.HBox([self.ed_par_button.key_selector,
+        self.ed_par_button.file_select_label = widgets.Label(value='Select Parameter File')
+
+        self.yaml_file_selector = widgets.VBox([self.ed_par_button.file_select_label,
+                                                widgets.HBox([self.select_file_button.file_selector,
+                                                              self.select_file_button],
+                                                             layout=box_layout)] )
+
+        self.select_file_button.parameter_edit_label = widgets.Label(value='Select Parameter Key, Edit Value')
+        self.parameters_editor = widgets.VBox([self.select_file_button.parameter_edit_label,
+                                               widgets.HBox([self.ed_par_button.key_selector,
                                                self.ed_par_button.parameter_ed,
-                                               self.ed_par_button], layout=box_layout)
+                                               self.ed_par_button], layout=box_layout) ])
+
+        self.view_save_buttons = widgets.HBox([self.save_run_parameters_button, self.show_run_parameters_button],
+                                              layout=box_layout)
+
         self.show_save_box = widgets.VBox([self.view_save_buttons, self.all_parameters_view_box])
-        #          set flag S.T. show_controls will only show once
+
+        #          set flag - show_controls only once
         self._controls_displayed = False
 
     def show_controls(self):
