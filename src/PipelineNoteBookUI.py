@@ -288,7 +288,6 @@ class ParameterSetWidgets():
             self.add_parameter_button.new_parameter.disabled = False
         else:
             self.add_parameter_button.description = PARS_ADD_BUTTON_NAME_SET['new']
-            self.add_parameter_button.new_parameter.value = 'None'
             self.add_parameter_button.new_parameter.disabled = True
             new_parameter_key = self.add_parameter_button.new_parameter.value
             if new_parameter_key in ['None', 'none']:
@@ -298,6 +297,7 @@ class ParameterSetWidgets():
             self._update_controls_run_parameters(run_parameters)
             self.ed_par_button.key_selector.value = new_parameter_key
             self.save_run_parameters_button.disabled = False
+            self.add_parameter_button.new_parameter.value = 'None'
 
     def _delete_selected_parameter(self, button):
         """ callback for self.del_par_button
