@@ -17,8 +17,10 @@ def show_conscientious_message():
 
 def get_sample_n_nans(in_df):
     """ get the number of nans in each column
+
     Args:
          in_df:                 a pandas dataframe with column names or numbers
+
     Returns:
         columns_n_nans_dict:    column name to number of nans dict
     """
@@ -30,8 +32,47 @@ def get_sample_n_nans(in_df):
 
     return columns_n_nans_dict
 
+
+def txt_to_list(file_name):
+    """ pythonically read text file into a list of lines
+
+    Args:
+        file_name:           text file - each line will be treated as one name with spaces removed
+
+    Returns:
+        text_list:           list of lines with spaces removed
+    """
+    with open(file_name, 'r') as fd:
+        data = fd.readlines()
+    return [d.strip() for d in data]
+
+
+def merge_txt_to_samples_df(file_name_1, file_name_2):
+    """ get the binary dataframe of one file list inside the other
+
+    Args:
+        file_name_1:          text file one - each line will equal one row (without spaces)
+        file_name_2:          text file two
+
+    Returns:
+        samples_df:           dataframe with file one names as index to ones if in file two, else zero
+    """
+    samples_df = None
+    data_list_1 = sorted(list(set(txt_to_list(file_name_1))))
+    data_list_2 = sorted(list(set(txt_to_list(file_name_2))))
+    if len(data_list_1) > 0 and len(data_list_2) > 0:
+        if len(data_list_1) >= len(data_list_2):
+            samples_df = pd.DataFrame(data=np.zeros(len(data_list_1)), index=data_list_1)
+            for gene_name in data_list_2:
+                if gene_name in data_list_1:
+                    samples_df.loc[gene_name] = 1
+
+    return samples_df
+
+
 def display_module_functions(imported_module, show_imported_functions=False):
-    """ Usage: display_module_functions(any_module) 
+    """ Usage: display_module_functions(any_module)
+
     Args:
         imported_module:         an imported python module
         show_imported_functions: default is False - ignore imported functions
@@ -65,7 +106,8 @@ def display_module_functions(imported_module, show_imported_functions=False):
 
 
 def save_installed_versions_to_txt(dir_name=None, file_name=None, time_stamp=True):
-    """ write the pip3 view of installed packages 
+    """ write the pip3 view of installed packages
+
     Args:
         dir_name:           directory name to save in (default is current - run directory)
         file_name:          file name without directory or extension
@@ -149,7 +191,8 @@ def read_version_dict_file(versions_file_full_path):
 
 
 def display_version_dictionary(python_dict):
-    """ std out formatted display of a python dictionary 
+    """ std out formatted display of a python dictionary
+
     Args:
         python_dict:    a python dictionary {'name1':'def1', 'name2':'def2',... }
     """
@@ -192,38 +235,6 @@ def get_installed_differences_dict(required_versions_dict):
             
     return differences_dict
 
-
-def read_version_dict_file(versions_file_full_path):
-    """ get the installed versions from a version list 
-    
-    Args:
-        versions_file_full_path:    valid path to a text file created with unix command: pip3 list &> ver.txt
-        display_version_numbers:    print the output to the command line
-        
-    Returns:
-        actual_version_dict:        python dict of form { package_name: installed_version_number }
-    """
-    try:
-        with open(versions_file_full_path, 'r') as fd:
-            package_names_lines = fd.read().splitlines()
-    except:
-        print(versions_file_full_path, '\nfailed to open\n')
-        return None
-    
-    ignore_name_list = ['Package']
-    ignore_version_list = ['-------']
-    package_names_dict = {}    
-    for line in package_names_lines:
-        str_list = line.split()
-        package_name = str_list[0]
-        package_version = str_list[1]
-        if package_name in ignore_name_list or package_version in ignore_version_list:
-            continue
-            print('skipp', package_name)
-        else:
-            package_names_dict[package_name] = package_version
-            
-    return package_names_dict
 
 
 def dict_file_read(file_name):
