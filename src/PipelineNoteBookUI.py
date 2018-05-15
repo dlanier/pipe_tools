@@ -563,9 +563,14 @@ class ParameterSetWidgets():
             run_parameters = yaml.load(file_handle)
 
         #                                                   establish ouput file name for save function
-        file_name = kn.create_timestamped_filename(run_file, name_extension='yml')
+        _, run_file_core_name = os.path.split(run_file_name)
+        run_file_core_name, _ = os.path.splitext(run_file_core_name)
+        file_name = kn.create_timestamped_filename(run_file_core_name, name_extension='yml')
         run_parameters['AA-SaveAs_file_name'] = file_name
-        run_parameters['AA-SaveTo_directory'] = run_directory
+        if self._input_dir_name is None or os.path.isdir(self._input_dir_name) == False:
+            run_parameters['AA-SaveTo_directory'] = run_directory
+        else:
+            run_parameters['AA-SaveTo_directory'] = self._input_dir_name
 
         return run_parameters
 
