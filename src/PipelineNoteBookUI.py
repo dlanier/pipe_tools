@@ -5,8 +5,8 @@ sobh@illinois.edu
 
 """
 import os
-import pandas as pd
-from pandas.io.common import EmptyDataError
+# import pandas as pd
+# from pandas.io.common import EmptyDataError
 import yaml
 
 from IPython.display import display
@@ -31,7 +31,14 @@ box_layout = widgets.Layout(display='inline-flex',
 
 
 def get_progress_bar(run_parameters):
-    """ Usage: run_parameters = get_progress_bar(run_parameters) """
+    """ Usage: run_parameters = get_progress_bar(run_parameters) # displays progress bar & returns handle key
+
+    Args:
+         run_parameters:    python dict of key: value pairs
+
+    Returns:
+        run_parameters:     with progress_bar key pointer to a (displayed) widgets.IntProgress bar
+    """
     max_count = run_parameters['num_iteration']
     run_parameters['progress_bar'] = widgets.IntProgress(
         value=7,
@@ -46,9 +53,16 @@ def get_progress_bar(run_parameters):
 
     return run_parameters
 
+
 def get_run_parameters_html_table(run_parameters, show_list=None):
-    """ for widgets.
-    html_table = get_run_parameters_html_table(run_parameters)
+    """ formatting for widgets.html_table
+
+    Args:
+        run_parameters:
+        show_list:
+
+    Returns:
+        html_table:     the run_parameters formatted as an html <table>...
     """
     orderd_keys = sorted(run_parameters.keys())
     html_table = '<table>\n'
@@ -61,31 +75,44 @@ def get_run_parameters_html_table(run_parameters, show_list=None):
 
 
 def std_out_run_parameters_str(run_parameters, std_output=True):
-    """ static function to display run_parameters dict to command line or cell output """
+    """ static function to display run_parameters dict to command line or cell output
+
+    Args:
+         run_parameters:
+         std_output:
+
+    Returns:
+        run_parameters_string:  run_parameters formatted as     centered: strings
+    """
     run_parameters_string = ''
+
+    # determine the length of the longest key string:
     left_string_length = 1
     for k in run_parameters.keys():
         if len(k) > left_string_length:
             left_string_length = len(k)
-
+    # construct the formatting string
     format_string = '%s%i%s: %s' % ('%', left_string_length + 1, 's', '%s')
 
+    # construct the output string by iteration through the dict
     keys_list = sorted(list(run_parameters.keys()))
     for k in keys_list:
         v = run_parameters[k]
         if std_output == True:
             print(format_string % (k, v))
-        else:
-            run_parameters_string += format_string % (k, v) + '\n'
-
+        run_parameters_string += format_string % (k, v) + '\n'
     return run_parameters_string
 
 
 def run_parameters_to_string(run_pars, prefix_string=''):
-    """ yaml format writable dictionary string
+    """ yaml format writable dictionary string used by _save_parameters
+
     Args:
          run_pars:          python dict
          prefix_string:     for inset where key refers to another dict
+
+    Returns:
+         run_pars_string:   the run parameters as a yaml file writable string
     """
     max_key_length = 2
     for k in run_pars.keys():
@@ -116,11 +143,13 @@ def run_parameters_to_string(run_pars, prefix_string=''):
 
 def user_data_list(target_dir, FEXT):
     """ user_file_list = update_user_data_list(user_data_dir, FEXT)
+
     Args:
         target_dir:     directory to list
         FEXT:           File extension list e.g. ['.tsv', '.txt']
+    Returns:
+        my_file_list:   the list of files with the specified prefixes
     """
-    # print('target_dir = ', target_dir)
     my_file_list = []
     for f in os.listdir(target_dir):
         if os.path.isfile(os.path.join(target_dir, f)):
@@ -135,6 +164,7 @@ def user_data_list(target_dir, FEXT):
 
     return my_file_list
 
+
 VIEW_BUTTON_NAME_DEFAULTS = {'show': 'Show_All', 'hide':'Hide'}
 PARS_EDIT_BUTTON_NAME_SET = {'edit': 'Edit', 'set': 'Set'}
 PARS_ADD_BUTTON_NAME_SET = {'new': 'New Parameter', 'add': 'Add'}
@@ -145,19 +175,31 @@ PARAMETERS_EDITOR_LABEL = 'Parameters Edit by Key - Value'
 NO_DATA_DICTIONARY = {'No Input': 'No Data'}
 
 class ParameterSetWidgets():
-    """ pending improvements:
-    1 Add | Remove Key-Value button in middle of Save - Show_All
+    """ Set of widgets to select, edit, access and save a .yml file of key: value pairs as python dict
+    (no directly accessable parameters)
 
-    2 IF  - Edit button is clicked when key-value is in USER_DATAFILE_EXTENSIONS_LIST
-            - change control logic in edit_parameter
-        - Select (file) is retargeted to user_data directory
-            - self.select_file_button.file_selector.data_directory changes
-        - Select moves file name to key-value
-            - set_run_parameters as callback for self.select_file_button needs switching function
-        - Set updates the parameter
-            - - change control logic in edit_parameter
+    methods:
+        obj = ParameterSetWidgets(input_data_dir, file_types)
+        obj.show_controls()
+        obj.get_selected_file_name()
+        obj.get_edited_run_parameters()
+        obj.cell_display_run_parameters()
+
+    private-ish methods:            ( may change state of object )
+        _add_parameter(self, button)
+        _delete_selected_parameter(self, button)
+        _edit_parameter(self, button)
+        _hide_html_parameters(self)
+        _key_value_change(self, dropdown)
+        _open_run_parameters(self, run_directory, run_file)
+        _save_parameters(self, button)
+        _set_run_parameters(self, button)
+        _show_html_parameters(self)
+        _update_controls_run_parameters(self, parameters_dictionary)
+        _view_all(self, button)
+
+    TODO:   add refresh key to yaml files list
     """
-
     def __init__(self, input_data_dir=None, file_types=PARAMETER_FILE_TYPES):
         """ Constructor: create all control widgets with no-parameters state
 
@@ -179,10 +221,12 @@ class ParameterSetWidgets():
         self.select_file_button = widgets.Button(description='Select-Revert', disabled=False,
                                                  button_style='', tooltip='show | hide selected file')
 
-        self.select_file_button.file_selector = widgets.Dropdown(options=user_data_list(self.input_data_dir, file_types),
-                                                                 description='', layout=lisbox_layout)
+        options = user_data_list(self.input_data_dir, file_types)
+        options.append('Refresh')
+        self.select_file_button.file_selector = widgets.Dropdown(options=options,description='', layout=lisbox_layout)
+        self.select_file_button.file_selector.file_types = file_types
         self.select_file_button.file_selector.data_directory = input_data_dir
-        self.select_file_button.on_click(self.set_run_parameters)
+        self.select_file_button.on_click(self._set_run_parameters)
 
         # MIDDLE                   self.ed_par_button "owns" the parameters,  self...key_selector &  self...parameter_ed
         parameters_dictionary = NO_DATA_DICTIONARY
@@ -211,7 +255,7 @@ class ParameterSetWidgets():
                                                        placeholder='Type something',
                                                        description='',
                                                        disabled=True)
-        self.ed_par_button.on_click(self.edit_parameter)
+        self.ed_par_button.on_click(self._edit_parameter)
         self.show_run_parameters_button = widgets.Button(description=VIEW_BUTTON_NAME_DEFAULTS['show'],
                                                          disabled=False,
                                                          button_style='',
@@ -337,6 +381,12 @@ class ParameterSetWidgets():
         Returns:
             full_file_name:     suitable for opening   --   else None
         """
+        if self.select_file_button.file_selector.value == 'Refresh':
+            options = user_data_list(self.input_data_dir, self.select_file_button.file_selector.file_types)
+            options.append('Refresh')
+            self.select_file_button.file_selector.options = options
+            self.select_file_button.file_selector.value = self.select_file_button.file_selector.options[0]
+
         full_file_name = os.path.join(self.select_file_button.file_selector.data_directory,
                                       self.select_file_button.file_selector.value)
 
@@ -345,7 +395,7 @@ class ParameterSetWidgets():
 
         return full_file_name
 
-    def set_run_parameters(self, button):
+    def _set_run_parameters(self, button):
         """ open the selected file and set this object's run_parameters into the display
         Args:
             self:               self.select_file_button      --     callback for "Select"
@@ -411,11 +461,13 @@ class ParameterSetWidgets():
         self.ed_par_button.description = PARS_EDIT_BUTTON_NAME_SET['edit']
         self.ed_par_button.parameter_ed.disabled = True
 
-    def edit_parameter(self, button):
+    def _edit_parameter(self, button):
         """ Callback for self.ed_par_button == "Edit" / "Set" Button
+
         Args:
              self:      this object
              button:    self.ed_par_button = widgets.Button    "Edit" / "Set"
+
         Returns:
             self:       this object with "Edit" "Set" reset to opposite and
                         self.all_parameters_view_box.value updated if
@@ -439,9 +491,11 @@ class ParameterSetWidgets():
 
     def _view_all(self, button):
         """ "Show_All" / "Hide" Callback
+
         Args:
             self:           ._show_html_parameters()
             button:         .show_run_parameters_button
+
         Returns:
             self:           self.all_parameters_view_box.value       --     either cleared or displayed
         """
@@ -514,3 +568,46 @@ class ParameterSetWidgets():
         run_parameters['AA-SaveTo_directory'] = run_directory
 
         return run_parameters
+
+class SpreadsheetDataObject():
+    """ spreadsheet as object of analysis sdo = SpreadsheetDataObject('/home/mydir/spreadsheet_df)
+    1)  spreadsheet condition:  nans, unique index and columns, duplicate rows, columns, type consistanecy,...
+    2)  available analysis:     methods and pipelines determined by the spreadsheet condition
+    3)  output available:       graphical, tabular, numerical ranking
+    """
+    def __init__(self, spreadsheet_name_full_path=None):
+        """ . """
+        self.spreadsheet_name_full_path = spreadsheet_name_full_path
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
