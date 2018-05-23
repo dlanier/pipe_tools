@@ -70,4 +70,4 @@ def get_yaml_df(yaml_dir, fill_string='not used'):
         for k, v in run_parameters.items():
             yaml_file_df[f_name].loc[k] = v
 
-    return yaml_file_df
+    return yaml_file_df.T
