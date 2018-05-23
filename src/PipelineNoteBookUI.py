@@ -5,9 +5,13 @@ sobh@illinois.edu
 
 """
 import os
+import warnings
+import sys
 # import pandas as pd
 # from pandas.io.common import EmptyDataError
 import yaml
+sys.path.insert(1, '../src')
+import yaml_utility as yamut
 
 from IPython.display import display
 import ipywidgets as widgets
@@ -15,6 +19,10 @@ import ipywidgets as widgets
 import knpackage.toolbox as kn
 
 YAML_TAB_STRING = ' ' * 5
+
+TRUE_STRINGS = ['True', 'true', 1]
+FALSE_STRINGS = ['False', 'false', 0]
+NONE_STRINGS = ['none', 'None']
 
 #                                                                                       set default file types
 PARAMETER_FILE_TYPES = ['.yml', '.txt']
@@ -72,6 +80,27 @@ def get_run_parameters_html_table(run_parameters, show_list=None):
     html_table += '</table>'
 
     return html_table
+
+
+def get_run_parameters(run_file_name):
+    """ get the run parameters from the full file name """
+    run_parameters = None
+    try:
+        with open(run_file_name, 'r') as file_handle:
+            run_parameters = yaml.load(file_handle)
+    except:
+        try:
+            import knpackage.toolbox as kn
+            run_dir, run_file = os.path.split(run_file_name)
+            run_parameters = kn.get_run_parameters(run_dir, run_file)
+        except:
+            pass
+        pass
+    finally:
+        if run_parameters is None:
+            run_parameters = {}
+
+    return run_parameters
 
 
 def std_out_run_parameters_str(run_parameters, std_output=True):
@@ -165,7 +194,7 @@ def user_data_list(target_dir, FEXT):
     return my_file_list
 
 
-VIEW_BUTTON_NAME_DEFAULTS = {'show': 'Show_All', 'hide':'Hide'}
+VIEW_BUTTON_NAME_DEFAULTS = {'show': 'Show', 'hide':'Hide'}
 PARS_EDIT_BUTTON_NAME_SET = {'edit': 'Edit', 'set': 'Set'}
 PARS_ADD_BUTTON_NAME_SET = {'new': 'New Parameter', 'add': 'Add'}
 
@@ -584,9 +613,91 @@ class SpreadsheetDataObject():
         """ . """
         self.spreadsheet_name_full_path = spreadsheet_name_full_path
 
+ignore_columns_list = ['cluster_ip_address', 'cluster_shared_ram',
+                       'cluster_shared_volumn', 'processing_method',
+                       'parallelism', 'run_directory', 'tmp_directory']
+
+class SelectViewRunWidget():
+    """  """
+    def __init__(self, callback_function, selection_directory='run_dir', results_dir='run_dir/results'):
+        """  """
+        warnings.filterwarnings('ignore')
+
+        self.selection_directory = selection_directory
+        self.results_dir = results_dir
+        self.callback_function = callback_function
+
+        if os.path.isdir(self.results_dir) == False:
+            os.makedirs(self.results_dir)
+
+        self.filename_selector      = widgets.Dropdown(options=user_data_list(self.selection_directory,
+                                                                              FEXT=PARAMETER_FILE_TYPES),
+                                                       description='', layout=lisbox_layout)
+
+        self.show_parameters_button     = widgets.Button(description=VIEW_BUTTON_NAME_DEFAULTS['show'],
+                                                     disabled=False, button_style='',
+                                                     tooltip='show | hide parameters')
+        self.show_parameters_button.on_click(self._toggle_view_run_parameters)
+
+        self.view_parameters_box    = widgets.HTML(value="", description="")
+
+        self.run_button             = widgets.Button(description='Run',
+                                                     disabled=False)
+        self.run_button.on_click(self._open_parameters_and_run_callback_function)
+
+        # Package for display                                                                     package the widget set
+        self.button_set_html_header = widgets.HTML(value='')
+        self.view_save_buttons = widgets.VBox([self.button_set_html_header,
+                                               widgets.HBox([self.filename_selector,
+                                                             self.show_parameters_button,
+                                                             self.run_button],
+                                                            layout=box_layout), self.view_parameters_box])
+
+        display(self.view_save_buttons)
+        self._display_yaml_df()
 
 
+    def _display_yaml_df(self):
+        run_files_df = yamut.get_yaml_df(self.selection_directory)
+        columns_list = list(run_files_df.columns)
+        display_list = []
+        for col_name in columns_list:
+            if col_name in ignore_columns_list:
+                continue
+            display_list.append(col_name)
 
+        self.button_set_html_header.value = run_files_df[display_list].to_html()
+
+
+    def _open_parameters_and_run_callback_function(self, button):
+        self.run_button.disabled = True
+        run_file_name = os.path.join(self.selection_directory, self.filename_selector.value)
+        run_parameters = get_run_parameters(run_file_name)
+        run_parameters['output_dir'] = self.results_dir
+
+        self.callback_function(run_parameters)
+
+        self.run_button.disabled = False
+
+
+    def _toggle_view_run_parameters(self, button):
+        if self.show_parameters_button.description == VIEW_BUTTON_NAME_DEFAULTS['show']:
+            self.show_parameters_button.description = VIEW_BUTTON_NAME_DEFAULTS['hide']
+            # open the selected file,
+            run_file_name = os.path.join(self.selection_directory, self.filename_selector.value)
+            run_parameters = get_run_parameters(run_file_name)
+
+            # get_run_parameters_html_table(run_paramters)
+            run_parameters_html = get_run_parameters_html_table(run_parameters)
+
+            # display the html_table in the view parameters box
+            self.view_parameters_box.value = run_parameters_html
+        else:
+            self.show_parameters_button.description = VIEW_BUTTON_NAME_DEFAULTS['show']
+            self.view_parameters_box.value = ''
+
+def get_html_page():
+    return '<!doctype html><html><head><body><p>"Hello HTML"</p></body></head></html>'
 
 
 
