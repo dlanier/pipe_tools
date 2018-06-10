@@ -182,15 +182,16 @@ def read_version_dict_file(versions_file_full_path):
         package_name = str_list[0]
         package_version = str_list[1]
         if package_name in ignore_name_list or package_version in ignore_version_list:
+            # print('skipp', package_name)
             continue
-            print('skipp', package_name)
+
         else:
             package_names_dict[package_name] = package_version
             
     return package_names_dict
 
 
-def display_version_dictionary(python_dict):
+def display_version_dictionary(python_dict, header=None):
     """ std out formatted display of a python dictionary
 
     Args:
@@ -202,11 +203,18 @@ def display_version_dictionary(python_dict):
         return
     L = max([len(o) for o in list(python_dict.keys())])
     format_string = '%s%i%s: %s'%('%', L, 's', '%s')
-    for key_n, value_n in python_dict.items():
+    dict_keys = sorted(list(python_dict.keys()))
+
+    if not header is None:
+        print(format_string % (header[0], header[1]))
+        print('')
+
+    for key_n in dict_keys:
         if key_n[-3:] == '---' or key_n[-3:] == '--:' or key_n == 'Packages':
             continue
-        print(format_string%(key_n, value_n))
-        
+
+        print(format_string % (key_n, str(python_dict[key_n])))
+
 
 def get_versions_intallation_dict(required_versions_dict, installed_versions_dict=None):
     """ required versions compare installed versions """
@@ -229,12 +237,12 @@ def get_installed_differences_dict(required_versions_dict):
     """ returns dict of versions required vs versions installed that are different """
     comparison_dict = get_versions_intallation_dict(required_versions_dict)
     differences_dict = {}
+
     for package_name, compare_list in comparison_dict.items():
         if compare_list[0] != compare_list[1]:
             differences_dict[package_name] = compare_list
             
     return differences_dict
-
 
 
 def dict_file_read(file_name):

@@ -167,6 +167,8 @@ def user_data_list(target_dir, FEXT):
 
 
 VIEW_BUTTON_NAME_DEFAULTS = {'show': 'Show All', 'hide':'Hide'}
+VIEW_HIDE_BUTTON_NAME_DICT = VIEW_BUTTON_NAME_DEFAULTS
+HELP_BUTTON_NAME_DEFAULTS = {'show': 'Help', 'hide':'Hide'}
 PARS_EDIT_BUTTON_NAME_SET = {'edit': 'Edit', 'set': 'Set'}
 PARS_ADD_BUTTON_NAME_SET = {'new': 'New Parameter', 'add': 'Add'}
 
@@ -577,3 +579,94 @@ class ParameterSetWidgets():
 
         return run_parameters
 
+class SelectViewRunWidget():
+    """  """
+    def __init__(self, callback_function, selection_directory='run_dir', results_dir='run_dir/results'):
+        """  """
+        warnings.filterwarnings('ignore')
+
+        self.selection_directory = selection_directory
+        self.results_dir = results_dir
+        self.callback_function = callback_function
+
+        if os.path.isdir(self.results_dir) == False:
+            os.makedirs(self.results_dir)
+
+        self.filename_selector      = widgets.Dropdown(options=user_data_list(self.selection_directory,
+                                                                              FEXT=PARAMETER_FILE_TYPES),
+                                                       description='', layout=lisbox_layout)
+
+        self.show_parameters_button     = widgets.Button(description=VIEW_HIDE_BUTTON_NAME_DICT['show'],
+                                                     disabled=False, button_style='',
+                                                     tooltip='show | hide parameters')
+        self.show_parameters_button.on_click(self._toggle_view_run_parameters)
+
+        self.view_parameters_box    = widgets.HTML(value="", description="")
+
+        self.run_button             = widgets.Button(description='Run',
+                                                     disabled=False)
+        self.run_button.on_click(self._open_parameters_and_run_callback_function)
+
+        # Package for display                                                                     package the widget set
+        self.button_set_html_header = widgets.HTML(value='')
+        self.view_save_buttons = widgets.VBox([self.button_set_html_header,
+                                               widgets.HBox([self.filename_selector,
+                                                             self.show_parameters_button,
+                                                             self.run_button],
+                                                            layout=box_layout), self.view_parameters_box])
+
+        display(self.view_save_buttons)
+
+
+
+    def _open_parameters_and_run_callback_function(self, button):
+        self.run_button.disabled = True
+        run_file_name = os.path.join(self.selection_directory, self.filename_selector.value)
+        run_parameters = get_run_parameters(run_file_name)
+        run_parameters['output_dir'] = self.results_dir
+
+        self.callback_function(run_parameters)
+
+        self.run_button.disabled = False
+
+
+    def _toggle_view_run_parameters(self, button):
+        if self.show_parameters_button.description == VIEW_HIDE_BUTTON_NAME_DICT['show']:
+            self.show_parameters_button.description = VIEW_HIDE_BUTTON_NAME_DICT['hide']
+            # open the selected file,
+            run_file_name = os.path.join(self.selection_directory, self.filename_selector.value)
+            run_parameters = get_run_parameters(run_file_name)
+
+            # get_run_parameters_html_table(run_paramters)
+            run_parameters_html = get_run_parameters_html_table(run_parameters)
+
+            # display the html_table in the view parameters box
+            self.view_parameters_box.value = run_parameters_html
+        else:
+            self.show_parameters_button.description = VIEW_HIDE_BUTTON_NAME_DICT['show']
+            self.view_parameters_box.value = ''
+
+def get_html_page(html_page_file):
+    if html_page_file is None:
+        print('html_page_file is none')
+    return '<!doctype html><html><head><body><p>"Help in HTML widget"</p></body></head></html>'
+
+class show_notebooks_help():
+    def __init__(self, help_page_file=None):
+        self.help_page_file = help_page_file
+        self.help_html = get_html_page(help_page_file)
+
+        self.show_hide_help_button = widgets.Button(description=HELP_BUTTON_NAME_DEFAULTS['show'])
+        self.help_html_box = widgets.HTML(value="", description="")
+        self.show_hide_help_button.on_click(self.show_hide_help)
+
+        display(widgets.VBox([self.show_hide_help_button, self.help_html_box]))
+
+
+    def show_hide_help(self, button):
+        if button.description == HELP_BUTTON_NAME_DEFAULTS['show']:
+            button.description = HELP_BUTTON_NAME_DEFAULTS['hide']
+            self.help_html_box.value = get_html_page(self.help_page_file)
+        else:
+            button.description = HELP_BUTTON_NAME_DEFAULTS['show']
+            self.help_html_box.value = ''
