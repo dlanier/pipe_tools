@@ -1,0 +1,27 @@
+WDL file	fullpathname	n_workflows	n_tasks	n_inputs	n_outputs	n_commands
+MasterWorkflow.wdl	../../../ncsa_genomics/MayomicsVC/src/wdl_scripts/MasterWorkflow.wdl	1	0	3	0	0
+alignment.wdl	../../../ncsa_genomics/MayomicsVC/src/wdl_scripts/Alignment/Tasks/alignment.wdl	0	1	0	1	1
+dedup.wdl	../../../ncsa_genomics/MayomicsVC/src/wdl_scripts/Alignment/Tasks/dedup.wdl	0	1	1	1	1
+trim_sequences.wdl	../../../ncsa_genomics/MayomicsVC/src/wdl_scripts/Alignment/Tasks/trim_sequences.wdl	0	1	0	1	1
+Testalignment.wdl	../../../ncsa_genomics/MayomicsVC/src/wdl_scripts/Alignment/TestTasks/Testalignment.wdl	1	0	0	0	0
+Testdedup.wdl	../../../ncsa_genomics/MayomicsVC/src/wdl_scripts/Alignment/TestTasks/Testdedup.wdl	1	0	0	0	0
+Testtrim_sequences.wdl	../../../ncsa_genomics/MayomicsVC/src/wdl_scripts/Alignment/TestTasks/Testtrim_sequences.wdl	1	0	0	0	0
+Alignment_ForWorkflow.wdl	../../../ncsa_genomics/MayomicsVC/src/wdl_scripts/Alignment/Workflow/Alignment_ForWorkflow.wdl	1	0	3	1	0
+TestAlignment.wdl	../../../ncsa_genomics/MayomicsVC/src/wdl_scripts/Alignment/Workflow/TestAlignment.wdl	1	0	2	0	0
+deliver_alignment.wdl	../../../ncsa_genomics/MayomicsVC/src/wdl_scripts/DeliveryOfAlignment/Tasks/deliver_alignment.wdl	1	1	0	1	1
+Testdeliver_alignment.wdl	../../../ncsa_genomics/MayomicsVC/src/wdl_scripts/DeliveryOfAlignment/TestTasks/Testdeliver_alignment.wdl	1	0	0	0	0
+DeliverAlignment_ForWorkflow.wdl	../../../ncsa_genomics/MayomicsVC/src/wdl_scripts/DeliveryOfAlignment/Workflow/DeliverAlignment_ForWorkflow.wdl	1	0	1	0	0
+TestDeliverAlignment.wdl	../../../ncsa_genomics/MayomicsVC/src/wdl_scripts/DeliveryOfAlignment/Workflow/TestDeliverAlignment.wdl	1	0	0	0	0
+deliver_HaplotyperVC.wdl	../../../ncsa_genomics/MayomicsVC/src/wdl_scripts/DeliveryOfHaplotyperVC/Tasks/deliver_HaplotyperVC.wdl	1	1	0	0	1
+Testdeliver_haplotyperVC.wdl	../../../ncsa_genomics/MayomicsVC/src/wdl_scripts/DeliveryOfHaplotyperVC/TestTasks/Testdeliver_haplotyperVC.wdl	1	0	0	0	0
+DeliverHaplotyperVC_ForWorkflow.wdl	../../../ncsa_genomics/MayomicsVC/src/wdl_scripts/DeliveryOfHaplotyperVC/Workflow/DeliverHaplotyperVC_ForWorkflow.wdl	1	0	1	0	0
+bqsr.wdl	../../../ncsa_genomics/MayomicsVC/src/wdl_scripts/HaplotyperVC/Tasks/bqsr.wdl	0	1	1	1	1
+haplotyper.wdl	../../../ncsa_genomics/MayomicsVC/src/wdl_scripts/HaplotyperVC/Tasks/haplotyper.wdl	0	1	0	1	1
+realignment.wdl	../../../ncsa_genomics/MayomicsVC/src/wdl_scripts/HaplotyperVC/Tasks/realignment.wdl	0	1	0	1	1
+vqsr.wdl	../../../ncsa_genomics/MayomicsVC/src/wdl_scripts/HaplotyperVC/Tasks/vqsr.wdl	0	1	1	1	1
+Testbqsr.wdl	../../../ncsa_genomics/MayomicsVC/src/wdl_scripts/HaplotyperVC/TestTasks/Testbqsr.wdl	1	0	0	0	0
+Testhaplotyper.wdl	../../../ncsa_genomics/MayomicsVC/src/wdl_scripts/HaplotyperVC/TestTasks/Testhaplotyper.wdl	1	0	0	0	0
+Testrealignment.wdl	../../../ncsa_genomics/MayomicsVC/src/wdl_scripts/HaplotyperVC/TestTasks/Testrealignment.wdl	1	0	0	0	0
+Testvqsr.wdl	../../../ncsa_genomics/MayomicsVC/src/wdl_scripts/HaplotyperVC/TestTasks/Testvqsr.wdl	1	0	0	0	0
+HaplotyperVC_ForWorkflow.wdl	../../../ncsa_genomics/MayomicsVC/src/wdl_scripts/HaplotyperVC/Workflow/HaplotyperVC_ForWorkflow.wdl	1	0	4	1	0
+TestHaplotyperVC.wdl	../../../ncsa_genomics/MayomicsVC/src/wdl_scripts/HaplotyperVC/Workflow/TestHaplotyperVC.wdl	1	0	3	0	0
