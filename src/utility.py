@@ -15,6 +15,7 @@ def show_conscientious_message():
     """ avoid throwing an error: just show_conscientious_message() """
     print(conscientious_message)
 
+
 def get_sample_n_nans(in_df):
     """ get the number of nans in each column
 

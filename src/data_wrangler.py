@@ -56,6 +56,7 @@ def get_version_dict(package_names_list, display_version_numbers=True):
 
     return actual_version_dict
 
+
 def show_df_heads(data_dir):
     """ display the head of dataframe files in a directory """
     files_dict = {}
@@ -97,6 +98,7 @@ def get_directory_dataframe_shapes(data_directory):
             dir_listing.append('%-55s : (%6d, %6d)'%(f,n_rows,n_cols))
     return dir_listing        
 
+
 def get_dataframe_row_col_count(full_file_name):
     """ if column count is zero or one then maybe file is not tab separated 
     Args:
@@ -116,6 +118,7 @@ def get_dataframe_row_col_count(full_file_name):
         return row_count, col_count
     else:
         return 0, 0
+
 
 def show_dictionary(a_dict):
     """ display a set of run parameters """
@@ -182,6 +185,7 @@ def delay_time(time_delay=1):
     for k in range(0, time_delay):
         if k == k: pass
     return
+
 
 def is_prime(n):
     """ check if is prime """
