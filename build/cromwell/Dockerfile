@@ -1,7 +1,7 @@
 FROM amd64/ubuntu:bionic
 LABEL Dan Lanier="lanier4@illinois.edu"
 
-RUN apt-get update && apt-get install -y openjdk-8-jdk
+RUN apt-get update && apt-get install -y openjdk-8-jdk vim
 
 RUN export JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64/
 RUN export PATH=$PATH:$JAVA_HOME/bin
