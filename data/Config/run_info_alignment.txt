@@ -1,0 +1,44 @@
+DebugMode="-d"
+
+PairedEnd="true"
+InputRead1="/projects/bioinformatics/jallen17/Inputs/hg38_chr_20_21_22_merged_copy1_read1.fq.gz"
+InputRead2="/projects/bioinformatics/jallen17/Inputs/hg38_chr_20_21_22_merged_copy1_read2.fq.gz"
+
+Adapters="/projects/bioinformatics/jallen17/Inputs/TruSeqAdaptors.fasta"
+
+Ref="/projects/bioinformatics/jallen17/Reference/Homo_sapiens_assembly38.fasta"
+RefAnn="/projects/bioinformatics/jallen17/Reference/Homo_sapiens_assembly38.fasta.ann"
+RefSa="/projects/bioinformatics/jallen17/Reference/Homo_sapiens_assembly38.fasta.sa"
+RefBwt="/projects/bioinformatics/jallen17/Reference/Homo_sapiens_assembly38.fasta.bwt"
+RefPac="/projects/bioinformatics/jallen17/Reference/Homo_sapiens_assembly38.fasta.pac"
+RefAmb="/projects/bioinformatics/jallen17/Reference/Homo_sapiens_assembly38.fasta.amb"
+RefFai="/projects/bioinformatics/jallen17/Reference/Homo_sapiens_assembly38.fasta.fai"
+
+Platform="ILLUMINA"
+Group="NEAT_sim"
+
+ChunkSizeInBases="10000000"
+
+BQSRKnownSites="/projects/bioinformatics/jallen17/Reference/Mills_and_1000G_gold_standard.indels.hg38.vcf,/projects/bioinformatics/jallen17/Reference/dbsnp_138.hg38.vcf"
+RealignmentKnownSites="/projects/bioinformatics/jallen17/Reference/Mills_and_1000G_gold_standard.indels.hg38.vcf"
+
+DBSNP="/projects/bioinformatics/jallen17/Reference/dbsnp_138.hg38.vcf"
+DBSNPIdx="/projects/bioinformatics/jallen17/Reference/dbsnp_138.hg38.vcf.idx"
+
+
+InputAlignedSortedBam="/projects/bioinformatics/jallen17/Delivery/1/WGS_chr1_5X_E0.005_chunk1.aligned.sorted.deduped.bam"
+InputAlignedSortedBamBai="/projects/bioinformatics/jallen17/Delivery/1/WGS_chr1_5X_E0.005_chunk1.aligned.sorted.deduped.bam.bai"
+RecalTable="/projects/bioinformatics/jallen17/Delivery/1/WGS_chr1_5X_E0.005_chunk1.recal_data.table"
+HaplotyperExtraOptionsString=""'--emit_mode variant --gq_bands 1-60,60-99/19,99 --min_base_qual 10 --pcr_indel_model CONSERVATIVE --phasing 1 --ploidy 2 --prune_factor 2'""
+
+
+VqsrSnpResourceString=""'--resource /projects/bioinformatics/DataPacks/human/gatk_bundle_Oct_2017/gatk_bundle_hg38/1000G_phase1.snps.high_confidence.hg38.vcf.gz --resource_param 1000G,known=false,training=true,truth=false,prior=10.0 --resource /projects/bioinformatics/DataPacks/human/gatk_bundle_Oct_2017/gatk_bundle_hg38/1000G_omni2.5.hg38.vcf.gz --resource_param omni,known=false,training=true,truth=false,prior=12.0 --resource /projects/bioinformatics/jallen17/Reference/dbsnp_138.hg38.vcf --resource_param dbsnp,known=true,training=false,truth=false,prior=2.0 --resource /projects/bioinformatics/DataPacks/human/gatk_bundle_Oct_2017/gatk_bundle_hg38/hapmap_3.3.hg38.vcf.gz --resource_param hapmap,known=false,training=true,truth=true,prior=15.0'""
+
+VqsrIndelResourceString=""'--resource /projects/bioinformatics/jallen17/Reference/dbsnp_138.hg38.vcf --resource_param dbsnp,known=true,training=false,truth=false,prior=2.0 --resource /projects/bioinformatics/jallen17/Reference/Mills_and_1000G_gold_standard.indels.hg38.vcf --resource_param Mills,known=false,training=true,truth=true,prior=12.0'""
+
+AnnotateText=""'--annotation DP --annotation QD --annotation FS --annotation SOR --annotation MQ --annotation MQRankSum --annotation ReadPosRankSum'""
+
+
+
+DeliveryFolder_Block_1="/projects/bioinformatics/jallen17/Delivery/1"
+DeliveryFolder_Block_2a="/projects/bioinformatics/jallen17/Delivery/2a"

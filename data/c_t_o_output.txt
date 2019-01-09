@@ -1,0 +1,542 @@
+
+good rc:  ../bee0078e-c605-4b1f-b820-fc55f26c0992/call-trimseq/RunTrimSequencesTask/53ee5bac-eef5-45ea-928e-02036880f994/call-TRIMSEQ_paired/shard-0/execution
+
+
+~~~~~~~~~~full_filename~~~~~~~~~~~~~~:
+/projects/bioinformatics/DEL/cromwell-executions/GermlineMasterWF/bee0078e-c605-4b1f-b820-fc55f26c0992/call-trimseq/RunTrimSequencesTask/53ee5bac-eef5-45ea-928e-02036880f994/call-TRIMSEQ_paired/shard-0/execution/stdout
+
+
+
+*****************************************************************************
+
+/projects/bioinformatics/DEL/cromwell-executions/GermlineMasterWF/bee0078e-c605-4b1f-b820-fc55f26c0992/call-trimseq/RunTrimSequencesTask/53ee5bac-eef5-45ea-928e-02036880f994/call-TRIMSEQ_paired/shard-0/inputs/-459509103/trim_sequences.sh 
+
+called by: lanier4 on Wed Jan  9 10:08:30 CST 2019
+
+command line input: -P true -l /projects/bioinformatics/DEL/cromwell-executions/GermlineMasterWF/bee0078e-c605-4b1f-b820-fc55f26c0992/call-trimseq/RunTrimSequencesTask/53ee5bac-eef5-45ea-928e-02036880f994/call-TRIMSEQ_paired/shard-0/inputs/-1459658655/WGS_chr1_5X_E0.005_L1_read1.fastq.gz -r /projects/bioinformatics/DEL/Inputs/WGS_chr1_5X_E0.005_L1_read2.fastq.gz -s WGS_chr1_5X_E0.005_chunk1 -A /projects/bioinformatics/DEL/cromwell-executions/GermlineMasterWF/bee0078e-c605-4b1f-b820-fc55f26c0992/call-trimseq/RunTrimSequencesTask/53ee5bac-eef5-45ea-928e-02036880f994/call-TRIMSEQ_paired/shard-0/inputs/-1459658655/TruSeqAdaptors.fasta -C /usr/local/apps/bioapps/python/Python-3.6.1/bin -t 8 -e /projects/bioinformatics/DEL/cromwell-executions/GermlineMasterWF/bee0078e-c605-4b1f-b820-fc55f26c0992/call-trimseq/RunTrimSequencesTask/53ee5bac-eef5-45ea-928e-02036880f994/call-TRIMSEQ_paired/shard-0/inputs/-1630584390/TrimEnvProfile.file -F /projects/bioinformatics/DEL/cromwell-executions/GermlineMasterWF/bee0078e-c605-4b1f-b820-fc55f26c0992/call-trimseq/RunTrimSequencesTask/53ee5bac-eef5-45ea-928e-02036880f994/call-TRIMSEQ_paired/shard-0/inputs/-459509103/shared_functions.sh
+
+*****************************************************************************
+
+[2019-01-09T10:08:30-0600] [INFO] [trim_sequences.sh] [TBD] [TBD] [0] 	[CUTADAPT] START.
+
+[2019-01-09T10:08:51-0600] [INFO] [trim_sequences.sh] [TBD] [TBD] [0] 	[CUTADAPT] Trimmed adapters in /projects/bioinformatics/DEL/cromwell-executions/GermlineMasterWF/bee0078e-c605-4b1f-b820-fc55f26c0992/call-trimseq/RunTrimSequencesTask/53ee5bac-eef5-45ea-928e-02036880f994/call-TRIMSEQ_paired/shard-0/inputs/-1459658655/TruSeqAdaptors.fasta from input sequences. CUTADAPT log: WGS_chr1_5X_E0.005_chunk1.cutadapt.log
+
+[2019-01-09T10:08:51-0600] [INFO] [trim_sequences.sh] [TBD] [TBD] [0] 	[CUTADAPT] Finished trimming adapter sequences.
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
+
+~~~~~~~~~~full_filename~~~~~~~~~~~~~~:
+/projects/bioinformatics/DEL/cromwell-executions/GermlineMasterWF/bee0078e-c605-4b1f-b820-fc55f26c0992/call-trimseq/RunTrimSequencesTask/53ee5bac-eef5-45ea-928e-02036880f994/call-TRIMSEQ_paired/shard-0/execution/stderr
+
+++ trap sigusrhandler1 SIGUSR1
+
+++ trap sigusrhandler2 SIGUSR2
+
+++ export LD_LIBRARY_PATH=
+
+++ LD_LIBRARY_PATH=
+
++ /bin/bash /projects/bioinformatics/DEL/cromwell-executions/GermlineMasterWF/bee0078e-c605-4b1f-b820-fc55f26c0992/call-trimseq/RunTrimSequencesTask/53ee5bac-eef5-45ea-928e-02036880f994/call-TRIMSEQ_paired/shard-0/inputs/-459509103/trim_sequences.sh -P true -l /projects/bioinformatics/DEL/cromwell-executions/GermlineMasterWF/bee0078e-c605-4b1f-b820-fc55f26c0992/call-trimseq/RunTrimSequencesTask/53ee5bac-eef5-45ea-928e-02036880f994/call-TRIMSEQ_paired/shard-0/inputs/-1459658655/WGS_chr1_5X_E0.005_L1_read1.fastq.gz -r /projects/bioinformatics/DEL/Inputs/WGS_chr1_5X_E0.005_L1_read2.fastq.gz -s WGS_chr1_5X_E0.005_chunk1 -A /projects/bioinformatics/DEL/cromwell-executions/GermlineMasterWF/bee0078e-c605-4b1f-b820-fc55f26c0992/call-trimseq/RunTrimSequencesTask/53ee5bac-eef5-45ea-928e-02036880f994/call-TRIMSEQ_paired/shard-0/inputs/-1459658655/TruSeqAdaptors.fasta -C /usr/local/apps/bioapps/python/Python-3.6.1/bin -t 8 -e /projects/bioinformatics/DEL/cromwell-executions/GermlineMasterWF/bee0078e-c605-4b1f-b820-fc55f26c0992/call-trimseq/RunTrimSequencesTask/53ee5bac-eef5-45ea-928e-02036880f994/call-TRIMSEQ_paired/shard-0/inputs/-1630584390/TrimEnvProfile.file -F /projects/bioinformatics/DEL/cromwell-executions/GermlineMasterWF/bee0078e-c605-4b1f-b820-fc55f26c0992/call-trimseq/RunTrimSequencesTask/53ee5bac-eef5-45ea-928e-02036880f994/call-TRIMSEQ_paired/shard-0/inputs/-459509103/shared_functions.sh
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
+good rc:  ../bee0078e-c605-4b1f-b820-fc55f26c0992/call-trimseq/RunTrimSequencesTask/53ee5bac-eef5-45ea-928e-02036880f994/call-TRIMSEQ_paired/shard-1/execution
+
+
+~~~~~~~~~~full_filename~~~~~~~~~~~~~~:
+/projects/bioinformatics/DEL/cromwell-executions/GermlineMasterWF/bee0078e-c605-4b1f-b820-fc55f26c0992/call-trimseq/RunTrimSequencesTask/53ee5bac-eef5-45ea-928e-02036880f994/call-TRIMSEQ_paired/shard-1/execution/stdout
+
+
+
+*****************************************************************************
+
+/projects/bioinformatics/DEL/cromwell-executions/GermlineMasterWF/bee0078e-c605-4b1f-b820-fc55f26c0992/call-trimseq/RunTrimSequencesTask/53ee5bac-eef5-45ea-928e-02036880f994/call-TRIMSEQ_paired/shard-1/inputs/-459509103/trim_sequences.sh 
+
+called by: lanier4 on Wed Jan  9 10:08:30 CST 2019
+
+command line input: -P true -l /projects/bioinformatics/DEL/cromwell-executions/GermlineMasterWF/bee0078e-c605-4b1f-b820-fc55f26c0992/call-trimseq/RunTrimSequencesTask/53ee5bac-eef5-45ea-928e-02036880f994/call-TRIMSEQ_paired/shard-1/inputs/-1459658655/WGS_chr1_5X_E0.005_L2_read1.fastq.gz -r /projects/bioinformatics/DEL/Inputs/WGS_chr1_5X_E0.005_L2_read2.fastq.gz -s WGS_chr1_5X_E0.005_chunk1 -A /projects/bioinformatics/DEL/cromwell-executions/GermlineMasterWF/bee0078e-c605-4b1f-b820-fc55f26c0992/call-trimseq/RunTrimSequencesTask/53ee5bac-eef5-45ea-928e-02036880f994/call-TRIMSEQ_paired/shard-1/inputs/-1459658655/TruSeqAdaptors.fasta -C /usr/local/apps/bioapps/python/Python-3.6.1/bin -t 8 -e /projects/bioinformatics/DEL/cromwell-executions/GermlineMasterWF/bee0078e-c605-4b1f-b820-fc55f26c0992/call-trimseq/RunTrimSequencesTask/53ee5bac-eef5-45ea-928e-02036880f994/call-TRIMSEQ_paired/shard-1/inputs/-1630584390/TrimEnvProfile.file -F /projects/bioinformatics/DEL/cromwell-executions/GermlineMasterWF/bee0078e-c605-4b1f-b820-fc55f26c0992/call-trimseq/RunTrimSequencesTask/53ee5bac-eef5-45ea-928e-02036880f994/call-TRIMSEQ_paired/shard-1/inputs/-459509103/shared_functions.sh
+
+*****************************************************************************
+
+[2019-01-09T10:08:30-0600] [INFO] [trim_sequences.sh] [TBD] [TBD] [0] 	[CUTADAPT] START.
+
+[2019-01-09T10:08:51-0600] [INFO] [trim_sequences.sh] [TBD] [TBD] [0] 	[CUTADAPT] Trimmed adapters in /projects/bioinformatics/DEL/cromwell-executions/GermlineMasterWF/bee0078e-c605-4b1f-b820-fc55f26c0992/call-trimseq/RunTrimSequencesTask/53ee5bac-eef5-45ea-928e-02036880f994/call-TRIMSEQ_paired/shard-1/inputs/-1459658655/TruSeqAdaptors.fasta from input sequences. CUTADAPT log: WGS_chr1_5X_E0.005_chunk1.cutadapt.log
+
+[2019-01-09T10:08:51-0600] [INFO] [trim_sequences.sh] [TBD] [TBD] [0] 	[CUTADAPT] Finished trimming adapter sequences.
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
+
+~~~~~~~~~~full_filename~~~~~~~~~~~~~~:
+/projects/bioinformatics/DEL/cromwell-executions/GermlineMasterWF/bee0078e-c605-4b1f-b820-fc55f26c0992/call-trimseq/RunTrimSequencesTask/53ee5bac-eef5-45ea-928e-02036880f994/call-TRIMSEQ_paired/shard-1/execution/stderr
+
+++ trap sigusrhandler1 SIGUSR1
+
+++ trap sigusrhandler2 SIGUSR2
+
+++ export LD_LIBRARY_PATH=
+
+++ LD_LIBRARY_PATH=
+
++ /bin/bash /projects/bioinformatics/DEL/cromwell-executions/GermlineMasterWF/bee0078e-c605-4b1f-b820-fc55f26c0992/call-trimseq/RunTrimSequencesTask/53ee5bac-eef5-45ea-928e-02036880f994/call-TRIMSEQ_paired/shard-1/inputs/-459509103/trim_sequences.sh -P true -l /projects/bioinformatics/DEL/cromwell-executions/GermlineMasterWF/bee0078e-c605-4b1f-b820-fc55f26c0992/call-trimseq/RunTrimSequencesTask/53ee5bac-eef5-45ea-928e-02036880f994/call-TRIMSEQ_paired/shard-1/inputs/-1459658655/WGS_chr1_5X_E0.005_L2_read1.fastq.gz -r /projects/bioinformatics/DEL/Inputs/WGS_chr1_5X_E0.005_L2_read2.fastq.gz -s WGS_chr1_5X_E0.005_chunk1 -A /projects/bioinformatics/DEL/cromwell-executions/GermlineMasterWF/bee0078e-c605-4b1f-b820-fc55f26c0992/call-trimseq/RunTrimSequencesTask/53ee5bac-eef5-45ea-928e-02036880f994/call-TRIMSEQ_paired/shard-1/inputs/-1459658655/TruSeqAdaptors.fasta -C /usr/local/apps/bioapps/python/Python-3.6.1/bin -t 8 -e /projects/bioinformatics/DEL/cromwell-executions/GermlineMasterWF/bee0078e-c605-4b1f-b820-fc55f26c0992/call-trimseq/RunTrimSequencesTask/53ee5bac-eef5-45ea-928e-02036880f994/call-TRIMSEQ_paired/shard-1/inputs/-1630584390/TrimEnvProfile.file -F /projects/bioinformatics/DEL/cromwell-executions/GermlineMasterWF/bee0078e-c605-4b1f-b820-fc55f26c0992/call-trimseq/RunTrimSequencesTask/53ee5bac-eef5-45ea-928e-02036880f994/call-TRIMSEQ_paired/shard-1/inputs/-459509103/shared_functions.sh
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
+good rc:  ../bee0078e-c605-4b1f-b820-fc55f26c0992/call-haplotype/execution
+
+
+~~~~~~~~~~full_filename~~~~~~~~~~~~~~:
+/projects/bioinformatics/DEL/cromwell-executions/GermlineMasterWF/bee0078e-c605-4b1f-b820-fc55f26c0992/call-haplotype/execution/stdout
+
+
+
+*******************************************
+
+/projects/bioinformatics/DEL/cromwell-executions/GermlineMasterWF/bee0078e-c605-4b1f-b820-fc55f26c0992/call-haplotype/inputs/-459509103/haplotyper.sh
+
+called by: lanier4 on Wed Jan  9 10:12:08 CST 2019
+
+command line input: -s WGS_chr1_5X_E0.005_chunk1 -S /usr/local/apps/bioapps/sentieon/sentieon-genomics-201808.01 -G /projects/bioinformatics/DEL/cromwell-executions/GermlineMasterWF/bee0078e-c605-4b1f-b820-fc55f26c0992/call-haplotype/inputs/1570229526/Homo_sapiens_assembly38.fasta -t 40 -b /projects/bioinformatics/DEL/cromwell-executions/GermlineMasterWF/bee0078e-c605-4b1f-b820-fc55f26c0992/call-haplotype/inputs/2057521555/WGS_chr1_5X_E0.005_chunk1.aligned.sorted.deduped.realigned.bam -D /projects/bioinformatics/DEL/cromwell-executions/GermlineMasterWF/bee0078e-c605-4b1f-b820-fc55f26c0992/call-haplotype/inputs/1570229526/dbsnp_138.hg38.vcf -r /projects/bioinformatics/DEL/cromwell-executions/GermlineMasterWF/bee0078e-c605-4b1f-b820-fc55f26c0992/call-haplotype/inputs/1926490271/WGS_chr1_5X_E0.005_chunk1.recal_data.table -o '--emit_mode variant --gq_bands 1-60,60-99/19,99 --min_base_qual 10 --pcr_indel_model CONSERVATIVE --phasing 1 --ploidy 2 --prune_factor 2' -e /projects/bioinformatics/DEL/cromwell-executions/GermlineMasterWF/bee0078e-c605-4b1f-b820-fc55f26c0992/call-haplotype/inputs/-1630584390/HaplotyperEnvProfile.file -V /projects/bioinformatics/DEL/Config/HaplotyperVCFSourceField.file -F /projects/bioinformatics/DEL/cromwell-executions/GermlineMasterWF/bee0078e-c605-4b1f-b820-fc55f26c0992/call-haplotype/inputs/-459509103/shared_functions.sh
+
+*******************************************
+
+[2019-01-09T10:12:08-0600] [INFO] [Haplotyper.sh] [TBD] [TBD] [0] 	[Haplotyper] START.
+
+[2019-01-09T10:12:30-0600] [INFO] [Haplotyper.sh] [TBD] [TBD] [0] 	[Haplotyper] Finished running successfully. Output: WGS_chr1_5X_E0.005_chunk1.vcf
+
+cmdline: /usr/local/apps/bioapps/sentieon/sentieon-genomics-201808.01/libexec/util vcfindex WGS_chr1_5X_E0.005_chunk1.vcf
+
+This software is licensed to lmainzer@life.illinois.edu by Sentieon Inc.
+
+version: sentieon-genomics-201808.01
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
+
+~~~~~~~~~~full_filename~~~~~~~~~~~~~~:
+/projects/bioinformatics/DEL/cromwell-executions/GermlineMasterWF/bee0078e-c605-4b1f-b820-fc55f26c0992/call-haplotype/execution/stderr
+
+++ trap sigusrhandler1 SIGUSR1
+
+++ trap sigusrhandler2 SIGUSR2
+
+++ export LD_LIBRARY_PATH=
+
+++ LD_LIBRARY_PATH=
+
++ /bin/bash /projects/bioinformatics/DEL/cromwell-executions/GermlineMasterWF/bee0078e-c605-4b1f-b820-fc55f26c0992/call-haplotype/inputs/-459509103/haplotyper.sh -s WGS_chr1_5X_E0.005_chunk1 -S /usr/local/apps/bioapps/sentieon/sentieon-genomics-201808.01 -G /projects/bioinformatics/DEL/cromwell-executions/GermlineMasterWF/bee0078e-c605-4b1f-b820-fc55f26c0992/call-haplotype/inputs/1570229526/Homo_sapiens_assembly38.fasta -t 40 -b /projects/bioinformatics/DEL/cromwell-executions/GermlineMasterWF/bee0078e-c605-4b1f-b820-fc55f26c0992/call-haplotype/inputs/2057521555/WGS_chr1_5X_E0.005_chunk1.aligned.sorted.deduped.realigned.bam -D /projects/bioinformatics/DEL/cromwell-executions/GermlineMasterWF/bee0078e-c605-4b1f-b820-fc55f26c0992/call-haplotype/inputs/1570229526/dbsnp_138.hg38.vcf -r /projects/bioinformatics/DEL/cromwell-executions/GermlineMasterWF/bee0078e-c605-4b1f-b820-fc55f26c0992/call-haplotype/inputs/1926490271/WGS_chr1_5X_E0.005_chunk1.recal_data.table -o ''\''--emit_mode variant --gq_bands 1-60,60-99/19,99 --min_base_qual 10 --pcr_indel_model CONSERVATIVE --phasing 1 --ploidy 2 --prune_factor 2'\''' -e /projects/bioinformatics/DEL/cromwell-executions/GermlineMasterWF/bee0078e-c605-4b1f-b820-fc55f26c0992/call-haplotype/inputs/-1630584390/HaplotyperEnvProfile.file -V /projects/bioinformatics/DEL/Config/HaplotyperVCFSourceField.file -F /projects/bioinformatics/DEL/cromwell-executions/GermlineMasterWF/bee0078e-c605-4b1f-b820-fc55f26c0992/call-haplotype/inputs/-459509103/shared_functions.sh
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
+good rc:  ../bee0078e-c605-4b1f-b820-fc55f26c0992/call-vqsr/execution
+
+
+~~~~~~~~~~full_filename~~~~~~~~~~~~~~:
+/projects/bioinformatics/DEL/cromwell-executions/GermlineMasterWF/bee0078e-c605-4b1f-b820-fc55f26c0992/call-vqsr/execution/stdout
+
+
+
+*****************************************************************************
+
+/projects/bioinformatics/DEL/cromwell-executions/GermlineMasterWF/bee0078e-c605-4b1f-b820-fc55f26c0992/call-vqsr/inputs/-459509103/vqsr.sh
+
+called by: lanier4 on Wed Jan  9 10:12:34 CST 2019
+
+command line input: -s WGS_chr1_5X_E0.005_chunk1 -S /usr/local/apps/bioapps/sentieon/sentieon-genomics-201808.01 -G /projects/bioinformatics/DEL/cromwell-executions/GermlineMasterWF/bee0078e-c605-4b1f-b820-fc55f26c0992/call-vqsr/inputs/1570229526/Homo_sapiens_assembly38.fasta -t 40 -V /projects/bioinformatics/DEL/cromwell-executions/GermlineMasterWF/bee0078e-c605-4b1f-b820-fc55f26c0992/call-vqsr/inputs/921471221/WGS_chr1_5X_E0.005_chunk1.vcf -r '--resource /projects/bioinformatics/DataPacks/human/gatk_bundle_Oct_2017/gatk_bundle_hg38/1000G_phase1.snps.high_confidence.hg38.vcf.gz --resource_param 1000G,known=false,training=true,truth=false,prior=10.0 --resource /projects/bioinformatics/DataPacks/human/gatk_bundle_Oct_2017/gatk_bundle_hg38/1000G_omni2.5.hg38.vcf.gz --resource_param omni,known=false,training=true,truth=false,prior=12.0 --resource /projects/mgc/Project_1/MayomicsVC_MayoTesting/Reference/dbsnp_138.hg38.vcf --resource_param dbsnp,known=true,training=false,truth=false,prior=2.0 --resource /projects/bioinformatics/DataPacks/human/gatk_bundle_Oct_2017/gatk_bundle_hg38/hapmap_3.3.hg38.vcf.gz --resource_param hapmap,known=false,training=true,truth=true,prior=15.0' -R '--resource /projects/mgc/Project_1/MayomicsVC_MayoTesting/Reference/dbsnp_138.hg38.vcf --resource_param dbsnp,known=true,training=false,truth=false,prior=2.0 --resource /projects/mgc/Project_1/MayomicsVC_MayoTesting/Reference/Mills_and_1000G_gold_standard.indels.hg38.vcf --resource_param Mills,known=false,training=true,truth=true,prior=12.0' -a '--annotation DP --annotation QD --annotation FS --annotation SOR --annotation MQ --annotation MQRankSum --annotation ReadPosRankSum' -e /projects/bioinformatics/DEL/cromwell-executions/GermlineMasterWF/bee0078e-c605-4b1f-b820-fc55f26c0992/call-vqsr/inputs/-1630584390/VqsrEnvProfile.file -F /projects/bioinformatics/DEL/cromwell-executions/GermlineMasterWF/bee0078e-c605-4b1f-b820-fc55f26c0992/call-vqsr/inputs/-459509103/shared_functions.sh
+
+*****************************************************************************
+
+[2019-01-09T10:12:34-0600] [INFO] [vqsr.sh] [TBD] [TBD] [0] 	[VQSR] START. Performing VQSR on VCF output from Haplotyper.
+
+[2019-01-09T10:16:13-0600] [INFO] [vqsr.sh] [TBD] [TBD] [0] 	[vqsr] Finished running successfully for WGS_chr1_5X_E0.005_chunk1
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
+
+~~~~~~~~~~full_filename~~~~~~~~~~~~~~:
+/projects/bioinformatics/DEL/cromwell-executions/GermlineMasterWF/bee0078e-c605-4b1f-b820-fc55f26c0992/call-vqsr/execution/stderr
+
+++ trap sigusrhandler1 SIGUSR1
+
+++ trap sigusrhandler2 SIGUSR2
+
+++ export LD_LIBRARY_PATH=
+
+++ LD_LIBRARY_PATH=
+
++ /bin/bash /projects/bioinformatics/DEL/cromwell-executions/GermlineMasterWF/bee0078e-c605-4b1f-b820-fc55f26c0992/call-vqsr/inputs/-459509103/vqsr.sh -s WGS_chr1_5X_E0.005_chunk1 -S /usr/local/apps/bioapps/sentieon/sentieon-genomics-201808.01 -G /projects/bioinformatics/DEL/cromwell-executions/GermlineMasterWF/bee0078e-c605-4b1f-b820-fc55f26c0992/call-vqsr/inputs/1570229526/Homo_sapiens_assembly38.fasta -t 40 -V /projects/bioinformatics/DEL/cromwell-executions/GermlineMasterWF/bee0078e-c605-4b1f-b820-fc55f26c0992/call-vqsr/inputs/921471221/WGS_chr1_5X_E0.005_chunk1.vcf -r ''\''--resource /projects/bioinformatics/DataPacks/human/gatk_bundle_Oct_2017/gatk_bundle_hg38/1000G_phase1.snps.high_confidence.hg38.vcf.gz --resource_param 1000G,known=false,training=true,truth=false,prior=10.0 --resource /projects/bioinformatics/DataPacks/human/gatk_bundle_Oct_2017/gatk_bundle_hg38/1000G_omni2.5.hg38.vcf.gz --resource_param omni,known=false,training=true,truth=false,prior=12.0 --resource /projects/mgc/Project_1/MayomicsVC_MayoTesting/Reference/dbsnp_138.hg38.vcf --resource_param dbsnp,known=true,training=false,truth=false,prior=2.0 --resource /projects/bioinformatics/DataPacks/human/gatk_bundle_Oct_2017/gatk_bundle_hg38/hapmap_3.3.hg38.vcf.gz --resource_param hapmap,known=false,training=true,truth=true,prior=15.0'\''' -R ''\''--resource /projects/mgc/Project_1/MayomicsVC_MayoTesting/Reference/dbsnp_138.hg38.vcf --resource_param dbsnp,known=true,training=false,truth=false,prior=2.0 --resource /projects/mgc/Project_1/MayomicsVC_MayoTesting/Reference/Mills_and_1000G_gold_standard.indels.hg38.vcf --resource_param Mills,known=false,training=true,truth=true,prior=12.0'\''' -a ''\''--annotation DP --annotation QD --annotation FS --annotation SOR --annotation MQ --annotation MQRankSum --annotation ReadPosRankSum'\''' -e /projects/bioinformatics/DEL/cromwell-executions/GermlineMasterWF/bee0078e-c605-4b1f-b820-fc55f26c0992/call-vqsr/inputs/-1630584390/VqsrEnvProfile.file -F /projects/bioinformatics/DEL/cromwell-executions/GermlineMasterWF/bee0078e-c605-4b1f-b820-fc55f26c0992/call-vqsr/inputs/-459509103/shared_functions.sh
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
+good rc:  ../bee0078e-c605-4b1f-b820-fc55f26c0992/call-DHVC/execution
+
+
+~~~~~~~~~~full_filename~~~~~~~~~~~~~~:
+/projects/bioinformatics/DEL/cromwell-executions/GermlineMasterWF/bee0078e-c605-4b1f-b820-fc55f26c0992/call-DHVC/execution/stdout
+
+*****************************************************************************
+
+/projects/bioinformatics/DEL/cromwell-executions/GermlineMasterWF/bee0078e-c605-4b1f-b820-fc55f26c0992/call-DHVC/inputs/-459509103/deliver_haplotyperVC.sh
+
+called by: lanier4 on Wed Jan  9 10:16:49 CST 2019
+
+command line input: -s WGS_chr1_5X_E0.005_chunk1 -r /projects/bioinformatics/DEL/cromwell-executions/GermlineMasterWF/bee0078e-c605-4b1f-b820-fc55f26c0992/call-DHVC/inputs/405252363/WGS_chr1_5X_E0.005_chunk1.SNP.recaled.vcf -j /projects/bioinformatics/DEL/cromwell-executions/GermlineMasterWF/bee0078e-c605-4b1f-b820-fc55f26c0992/call-DHVC/inputs/785269523/GermlineMasterWorkflow.FilledIn.json -f /projects/bioinformatics/DEL/Delivery/HaplotyperVC -F /projects/bioinformatics/DEL/cromwell-executions/GermlineMasterWF/bee0078e-c605-4b1f-b820-fc55f26c0992/call-DHVC/inputs/-459509103/shared_functions.sh
+
+*****************************************************************************
+
+[2019-01-09T10:16:49-0600] [INFO] [deliver_haplotyperVC.sh] [TBD] [TBD] [0] 	[DELIVERY] Creating the Delivery folder.
+
+[2019-01-09T10:16:49-0600] [INFO] [deliver_haplotyperVC.sh] [TBD] [TBD] [0] 	[DELIVERY] Created the HaplotyperVC block delivery folder.
+
+[2019-01-09T10:16:49-0600] [INFO] [deliver_haplotyperVC.sh] [TBD] [TBD] [0] 	[DELIVERY] Copying HaplotyperVC block outputs into Delivery folder.
+
+[2019-01-09T10:16:49-0600] [INFO] [deliver_haplotyperVC.sh] [TBD] [TBD] [0] 	[DELIVERY] Recalibrated VCF delivered.
+
+[2019-01-09T10:16:49-0600] [INFO] [deliver_haplotyperVC.sh] [TBD] [TBD] [0] 	[DELIVERY] Recalibrated VCF.IDX delivered.
+
+[2019-01-09T10:16:49-0600] [INFO] [deliver_haplotyperVC.sh] [TBD] [TBD] [0] 	[DELIVERY] Workflow JSON delivered.
+
+[2019-01-09T10:16:49-0600] [INFO] [deliver_haplotyperVC.sh] [TBD] [TBD] [0] 	[DELIVERY] HaplotyperVC block delivered. Have a nice day.
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
+
+~~~~~~~~~~full_filename~~~~~~~~~~~~~~:
+/projects/bioinformatics/DEL/cromwell-executions/GermlineMasterWF/bee0078e-c605-4b1f-b820-fc55f26c0992/call-DHVC/execution/stderr
+
+++ trap sigusrhandler1 SIGUSR1
+
+++ trap sigusrhandler2 SIGUSR2
+
+++ export LD_LIBRARY_PATH=
+
+++ LD_LIBRARY_PATH=
+
++ /bin/bash /projects/bioinformatics/DEL/cromwell-executions/GermlineMasterWF/bee0078e-c605-4b1f-b820-fc55f26c0992/call-DHVC/inputs/-459509103/deliver_haplotyperVC.sh -s WGS_chr1_5X_E0.005_chunk1 -r /projects/bioinformatics/DEL/cromwell-executions/GermlineMasterWF/bee0078e-c605-4b1f-b820-fc55f26c0992/call-DHVC/inputs/405252363/WGS_chr1_5X_E0.005_chunk1.SNP.recaled.vcf -j /projects/bioinformatics/DEL/cromwell-executions/GermlineMasterWF/bee0078e-c605-4b1f-b820-fc55f26c0992/call-DHVC/inputs/785269523/GermlineMasterWorkflow.FilledIn.json -f /projects/bioinformatics/DEL/Delivery/HaplotyperVC -F /projects/bioinformatics/DEL/cromwell-executions/GermlineMasterWF/bee0078e-c605-4b1f-b820-fc55f26c0992/call-DHVC/inputs/-459509103/shared_functions.sh
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
+good rc:  ../bee0078e-c605-4b1f-b820-fc55f26c0992/call-align/RunAlignmentTask/3528f581-234a-48e3-b5f1-9f2c75cec572/call-ALIGN_paired/shard-0/execution
+
+
+~~~~~~~~~~full_filename~~~~~~~~~~~~~~:
+/projects/bioinformatics/DEL/cromwell-executions/GermlineMasterWF/bee0078e-c605-4b1f-b820-fc55f26c0992/call-align/RunAlignmentTask/3528f581-234a-48e3-b5f1-9f2c75cec572/call-ALIGN_paired/shard-0/execution/stdout
+
+
+
+*****************************************************************************
+
+/projects/bioinformatics/DEL/cromwell-executions/GermlineMasterWF/bee0078e-c605-4b1f-b820-fc55f26c0992/call-align/RunAlignmentTask/3528f581-234a-48e3-b5f1-9f2c75cec572/call-ALIGN_paired/shard-0/inputs/-459509103/alignment.sh
+
+called by: lanier4 on Wed Jan  9 10:09:11 CST 2019
+
+command line input: -P true -l /projects/bioinformatics/DEL/cromwell-executions/GermlineMasterWF/bee0078e-c605-4b1f-b820-fc55f26c0992/call-align/RunAlignmentTask/3528f581-234a-48e3-b5f1-9f2c75cec572/call-ALIGN_paired/shard-0/inputs/-910234823/WGS_chr1_5X_E0.005_L1_read1.fastq.gz -r /projects/bioinformatics/DEL/cromwell-executions/GermlineMasterWF/bee0078e-c605-4b1f-b820-fc55f26c0992/call-trimseq/RunTrimSequencesTask/53ee5bac-eef5-45ea-928e-02036880f994/call-TRIMSEQ_paired/shard-0/execution/glob-61db8dea51a2a3b9b418bc9d1b7070d5/WGS_chr1_5X_E0.005_L1_read2.fastq.gz -s WGS_chr1_5X_E0.005_chunk1 -p ILLUMINA -L fake_lib -f FLOWCELL_BARCODE.LANE.SAMPLE_BARCODE -c some_seq_center -G /projects/bioinformatics/DEL/cromwell-executions/GermlineMasterWF/bee0078e-c605-4b1f-b820-fc55f26c0992/call-align/RunAlignmentTask/3528f581-234a-48e3-b5f1-9f2c75cec572/call-ALIGN_paired/shard-0/inputs/1570229526/Homo_sapiens_assembly38.fasta -o '-M' -K 10000000 -S /usr/local/apps/bioapps/sentieon/sentieon-genomics-201808.01 -t 40 -e /projects/bioinformatics/DEL/cromwell-executions/GermlineMasterWF/bee0078e-c605-4b1f-b820-fc55f26c0992/call-align/RunAlignmentTask/3528f581-234a-48e3-b5f1-9f2c75cec572/call-ALIGN_paired/shard-0/inputs/-1630584390/AlignEnvProfile.file -F /projects/bioinformatics/DEL/cromwell-executions/GermlineMasterWF/bee0078e-c605-4b1f-b820-fc55f26c0992/call-align/RunAlignmentTask/3528f581-234a-48e3-b5f1-9f2c75cec572/call-ALIGN_paired/shard-0/inputs/-459509103/shared_functions.sh
+
+*****************************************************************************
+
+[2019-01-09T10:09:11-0600] [INFO] [alignment.sh] [TBD] [TBD] [0] 	[BWA-MEM] START.
+
+[2019-01-09T10:10:29-0600] [INFO] [alignment.sh] [TBD] [TBD] [0] 	[BWA-MEM] Aligned reads WGS_chr1_5X_E0.005_chunk1 to reference /projects/bioinformatics/DEL/cromwell-executions/GermlineMasterWF/bee0078e-c605-4b1f-b820-fc55f26c0992/call-align/RunAlignmentTask/3528f581-234a-48e3-b5f1-9f2c75cec572/call-ALIGN_paired/shard-0/inputs/1570229526/Homo_sapiens_assembly38.fasta.
+
+[2019-01-09T10:10:29-0600] [INFO] [alignment.sh] [TBD] [TBD] [0] 	[SENTIEON] Converting SAM to BAM...
+
+[2019-01-09T10:10:34-0600] [INFO] [alignment.sh] [TBD] [TBD] [0] 	[SENTIEON] Converted output to BAM format and sorted.
+
+[2019-01-09T10:10:34-0600] [INFO] [alignment.sh] [TBD] [TBD] [0] 	[BWA-MEM] Finished alignment. Aligned reads found in BAM format at WGS_chr1_5X_E0.005_chunk1.aligned.sorted.bam.
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
+
+~~~~~~~~~~full_filename~~~~~~~~~~~~~~:
+/projects/bioinformatics/DEL/cromwell-executions/GermlineMasterWF/bee0078e-c605-4b1f-b820-fc55f26c0992/call-align/RunAlignmentTask/3528f581-234a-48e3-b5f1-9f2c75cec572/call-ALIGN_paired/shard-0/execution/stderr
+
+++ trap sigusrhandler1 SIGUSR1
+
+++ trap sigusrhandler2 SIGUSR2
+
+++ export LD_LIBRARY_PATH=
+
+++ LD_LIBRARY_PATH=
+
++ /bin/bash /projects/bioinformatics/DEL/cromwell-executions/GermlineMasterWF/bee0078e-c605-4b1f-b820-fc55f26c0992/call-align/RunAlignmentTask/3528f581-234a-48e3-b5f1-9f2c75cec572/call-ALIGN_paired/shard-0/inputs/-459509103/alignment.sh -P true -l /projects/bioinformatics/DEL/cromwell-executions/GermlineMasterWF/bee0078e-c605-4b1f-b820-fc55f26c0992/call-align/RunAlignmentTask/3528f581-234a-48e3-b5f1-9f2c75cec572/call-ALIGN_paired/shard-0/inputs/-910234823/WGS_chr1_5X_E0.005_L1_read1.fastq.gz -r /projects/bioinformatics/DEL/cromwell-executions/GermlineMasterWF/bee0078e-c605-4b1f-b820-fc55f26c0992/call-trimseq/RunTrimSequencesTask/53ee5bac-eef5-45ea-928e-02036880f994/call-TRIMSEQ_paired/shard-0/execution/glob-61db8dea51a2a3b9b418bc9d1b7070d5/WGS_chr1_5X_E0.005_L1_read2.fastq.gz -s WGS_chr1_5X_E0.005_chunk1 -p ILLUMINA -L fake_lib -f FLOWCELL_BARCODE.LANE.SAMPLE_BARCODE -c some_seq_center -G /projects/bioinformatics/DEL/cromwell-executions/GermlineMasterWF/bee0078e-c605-4b1f-b820-fc55f26c0992/call-align/RunAlignmentTask/3528f581-234a-48e3-b5f1-9f2c75cec572/call-ALIGN_paired/shard-0/inputs/1570229526/Homo_sapiens_assembly38.fasta -o ''\''-M'\''' -K 10000000 -S /usr/local/apps/bioapps/sentieon/sentieon-genomics-201808.01 -t 40 -e /projects/bioinformatics/DEL/cromwell-executions/GermlineMasterWF/bee0078e-c605-4b1f-b820-fc55f26c0992/call-align/RunAlignmentTask/3528f581-234a-48e3-b5f1-9f2c75cec572/call-ALIGN_paired/shard-0/inputs/-1630584390/AlignEnvProfile.file -F /projects/bioinformatics/DEL/cromwell-executions/GermlineMasterWF/bee0078e-c605-4b1f-b820-fc55f26c0992/call-align/RunAlignmentTask/3528f581-234a-48e3-b5f1-9f2c75cec572/call-ALIGN_paired/shard-0/inputs/-459509103/shared_functions.sh
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
+good rc:  ../bee0078e-c605-4b1f-b820-fc55f26c0992/call-align/RunAlignmentTask/3528f581-234a-48e3-b5f1-9f2c75cec572/call-ALIGN_paired/shard-1/execution
+
+
+~~~~~~~~~~full_filename~~~~~~~~~~~~~~:
+/projects/bioinformatics/DEL/cromwell-executions/GermlineMasterWF/bee0078e-c605-4b1f-b820-fc55f26c0992/call-align/RunAlignmentTask/3528f581-234a-48e3-b5f1-9f2c75cec572/call-ALIGN_paired/shard-1/execution/stdout
+
+
+
+*****************************************************************************
+
+/projects/bioinformatics/DEL/cromwell-executions/GermlineMasterWF/bee0078e-c605-4b1f-b820-fc55f26c0992/call-align/RunAlignmentTask/3528f581-234a-48e3-b5f1-9f2c75cec572/call-ALIGN_paired/shard-1/inputs/-459509103/alignment.sh
+
+called by: lanier4 on Wed Jan  9 10:09:11 CST 2019
+
+command line input: -P true -l /projects/bioinformatics/DEL/cromwell-executions/GermlineMasterWF/bee0078e-c605-4b1f-b820-fc55f26c0992/call-align/RunAlignmentTask/3528f581-234a-48e3-b5f1-9f2c75cec572/call-ALIGN_paired/shard-1/inputs/-917994182/WGS_chr1_5X_E0.005_L2_read1.fastq.gz -r /projects/bioinformatics/DEL/cromwell-executions/GermlineMasterWF/bee0078e-c605-4b1f-b820-fc55f26c0992/call-trimseq/RunTrimSequencesTask/53ee5bac-eef5-45ea-928e-02036880f994/call-TRIMSEQ_paired/shard-1/execution/glob-61db8dea51a2a3b9b418bc9d1b7070d5/WGS_chr1_5X_E0.005_L2_read2.fastq.gz -s WGS_chr1_5X_E0.005_chunk1 -p ILLUMINA -L fake_lib -f FLOWCELL_BARCODE.LANE.SAMPLE_BARCODE -c some_seq_center -G /projects/bioinformatics/DEL/cromwell-executions/GermlineMasterWF/bee0078e-c605-4b1f-b820-fc55f26c0992/call-align/RunAlignmentTask/3528f581-234a-48e3-b5f1-9f2c75cec572/call-ALIGN_paired/shard-1/inputs/1570229526/Homo_sapiens_assembly38.fasta -o '-M' -K 10000000 -S /usr/local/apps/bioapps/sentieon/sentieon-genomics-201808.01 -t 40 -e /projects/bioinformatics/DEL/cromwell-executions/GermlineMasterWF/bee0078e-c605-4b1f-b820-fc55f26c0992/call-align/RunAlignmentTask/3528f581-234a-48e3-b5f1-9f2c75cec572/call-ALIGN_paired/shard-1/inputs/-1630584390/AlignEnvProfile.file -F /projects/bioinformatics/DEL/cromwell-executions/GermlineMasterWF/bee0078e-c605-4b1f-b820-fc55f26c0992/call-align/RunAlignmentTask/3528f581-234a-48e3-b5f1-9f2c75cec572/call-ALIGN_paired/shard-1/inputs/-459509103/shared_functions.sh
+
+*****************************************************************************
+
+[2019-01-09T10:09:11-0600] [INFO] [alignment.sh] [TBD] [TBD] [0] 	[BWA-MEM] START.
+
+[2019-01-09T10:10:29-0600] [INFO] [alignment.sh] [TBD] [TBD] [0] 	[BWA-MEM] Aligned reads WGS_chr1_5X_E0.005_chunk1 to reference /projects/bioinformatics/DEL/cromwell-executions/GermlineMasterWF/bee0078e-c605-4b1f-b820-fc55f26c0992/call-align/RunAlignmentTask/3528f581-234a-48e3-b5f1-9f2c75cec572/call-ALIGN_paired/shard-1/inputs/1570229526/Homo_sapiens_assembly38.fasta.
+
+[2019-01-09T10:10:29-0600] [INFO] [alignment.sh] [TBD] [TBD] [0] 	[SENTIEON] Converting SAM to BAM...
+
+[2019-01-09T10:10:34-0600] [INFO] [alignment.sh] [TBD] [TBD] [0] 	[SENTIEON] Converted output to BAM format and sorted.
+
+[2019-01-09T10:10:34-0600] [INFO] [alignment.sh] [TBD] [TBD] [0] 	[BWA-MEM] Finished alignment. Aligned reads found in BAM format at WGS_chr1_5X_E0.005_chunk1.aligned.sorted.bam.
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
+
+~~~~~~~~~~full_filename~~~~~~~~~~~~~~:
+/projects/bioinformatics/DEL/cromwell-executions/GermlineMasterWF/bee0078e-c605-4b1f-b820-fc55f26c0992/call-align/RunAlignmentTask/3528f581-234a-48e3-b5f1-9f2c75cec572/call-ALIGN_paired/shard-1/execution/stderr
+
+++ trap sigusrhandler1 SIGUSR1
+
+++ trap sigusrhandler2 SIGUSR2
+
+++ export LD_LIBRARY_PATH=
+
+++ LD_LIBRARY_PATH=
+
++ /bin/bash /projects/bioinformatics/DEL/cromwell-executions/GermlineMasterWF/bee0078e-c605-4b1f-b820-fc55f26c0992/call-align/RunAlignmentTask/3528f581-234a-48e3-b5f1-9f2c75cec572/call-ALIGN_paired/shard-1/inputs/-459509103/alignment.sh -P true -l /projects/bioinformatics/DEL/cromwell-executions/GermlineMasterWF/bee0078e-c605-4b1f-b820-fc55f26c0992/call-align/RunAlignmentTask/3528f581-234a-48e3-b5f1-9f2c75cec572/call-ALIGN_paired/shard-1/inputs/-917994182/WGS_chr1_5X_E0.005_L2_read1.fastq.gz -r /projects/bioinformatics/DEL/cromwell-executions/GermlineMasterWF/bee0078e-c605-4b1f-b820-fc55f26c0992/call-trimseq/RunTrimSequencesTask/53ee5bac-eef5-45ea-928e-02036880f994/call-TRIMSEQ_paired/shard-1/execution/glob-61db8dea51a2a3b9b418bc9d1b7070d5/WGS_chr1_5X_E0.005_L2_read2.fastq.gz -s WGS_chr1_5X_E0.005_chunk1 -p ILLUMINA -L fake_lib -f FLOWCELL_BARCODE.LANE.SAMPLE_BARCODE -c some_seq_center -G /projects/bioinformatics/DEL/cromwell-executions/GermlineMasterWF/bee0078e-c605-4b1f-b820-fc55f26c0992/call-align/RunAlignmentTask/3528f581-234a-48e3-b5f1-9f2c75cec572/call-ALIGN_paired/shard-1/inputs/1570229526/Homo_sapiens_assembly38.fasta -o ''\''-M'\''' -K 10000000 -S /usr/local/apps/bioapps/sentieon/sentieon-genomics-201808.01 -t 40 -e /projects/bioinformatics/DEL/cromwell-executions/GermlineMasterWF/bee0078e-c605-4b1f-b820-fc55f26c0992/call-align/RunAlignmentTask/3528f581-234a-48e3-b5f1-9f2c75cec572/call-ALIGN_paired/shard-1/inputs/-1630584390/AlignEnvProfile.file -F /projects/bioinformatics/DEL/cromwell-executions/GermlineMasterWF/bee0078e-c605-4b1f-b820-fc55f26c0992/call-align/RunAlignmentTask/3528f581-234a-48e3-b5f1-9f2c75cec572/call-ALIGN_paired/shard-1/inputs/-459509103/shared_functions.sh
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
+good rc:  ../bee0078e-c605-4b1f-b820-fc55f26c0992/call-realign/execution
+
+
+~~~~~~~~~~full_filename~~~~~~~~~~~~~~:
+/projects/bioinformatics/DEL/cromwell-executions/GermlineMasterWF/bee0078e-c605-4b1f-b820-fc55f26c0992/call-realign/execution/stdout
+
+
+
+*****************************************************************************
+
+/projects/bioinformatics/DEL/cromwell-executions/GermlineMasterWF/bee0078e-c605-4b1f-b820-fc55f26c0992/call-realign/inputs/-459509103/realignment.sh
+
+called by: lanier4 on Wed Jan  9 10:11:30 CST 2019
+
+command line input: -s WGS_chr1_5X_E0.005_chunk1 -b /projects/bioinformatics/DEL/cromwell-executions/GermlineMasterWF/bee0078e-c605-4b1f-b820-fc55f26c0992/call-realign/inputs/1757410751/WGS_chr1_5X_E0.005_chunk1.aligned.sorted.deduped.bam -G /projects/bioinformatics/DEL/cromwell-executions/GermlineMasterWF/bee0078e-c605-4b1f-b820-fc55f26c0992/call-realign/inputs/1570229526/Homo_sapiens_assembly38.fasta -k /projects/mgc/Project_1/MayomicsVC_MayoTesting/Reference/Mills_and_1000G_gold_standard.indels.hg38.vcf -S /usr/local/apps/bioapps/sentieon/sentieon-genomics-201808.01 -t 40 -e /projects/bioinformatics/DEL/cromwell-executions/GermlineMasterWF/bee0078e-c605-4b1f-b820-fc55f26c0992/call-realign/inputs/-1630584390/RealignEnvProfile.file -F /projects/bioinformatics/DEL/cromwell-executions/GermlineMasterWF/bee0078e-c605-4b1f-b820-fc55f26c0992/call-realign/inputs/-459509103/shared_functions.sh
+
+*****************************************************************************
+
+/projects/mgc/Project_1/MayomicsVC_MayoTesting/Reference/Mills_and_1000G_gold_standard.indels.hg38.vcf
+
+[2019-01-09T10:11:30-0600] [INFO] [realignment.sh] [TBD] [TBD] [0] 	[Realigner] START. Realigning deduped BAM. Using known sites at /projects/mgc/Project_1/MayomicsVC_MayoTesting/Reference/Mills_and_1000G_gold_standard.indels.hg38.vcf .
+
+[2019-01-09T10:11:50-0600] [INFO] [realignment.sh] [TBD] [TBD] [0] 	[Realigner] Realigned reads WGS_chr1_5X_E0.005_chunk1 to reference /projects/bioinformatics/DEL/cromwell-executions/GermlineMasterWF/bee0078e-c605-4b1f-b820-fc55f26c0992/call-realign/inputs/1570229526/Homo_sapiens_assembly38.fasta. Realigned BAM located at WGS_chr1_5X_E0.005_chunk1.aligned.sorted.deduped.realigned.bam.
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
+
+~~~~~~~~~~full_filename~~~~~~~~~~~~~~:
+/projects/bioinformatics/DEL/cromwell-executions/GermlineMasterWF/bee0078e-c605-4b1f-b820-fc55f26c0992/call-realign/execution/stderr
+
+++ trap sigusrhandler1 SIGUSR1
+
+++ trap sigusrhandler2 SIGUSR2
+
+++ export LD_LIBRARY_PATH=
+
+++ LD_LIBRARY_PATH=
+
++ /bin/bash /projects/bioinformatics/DEL/cromwell-executions/GermlineMasterWF/bee0078e-c605-4b1f-b820-fc55f26c0992/call-realign/inputs/-459509103/realignment.sh -s WGS_chr1_5X_E0.005_chunk1 -b /projects/bioinformatics/DEL/cromwell-executions/GermlineMasterWF/bee0078e-c605-4b1f-b820-fc55f26c0992/call-realign/inputs/1757410751/WGS_chr1_5X_E0.005_chunk1.aligned.sorted.deduped.bam -G /projects/bioinformatics/DEL/cromwell-executions/GermlineMasterWF/bee0078e-c605-4b1f-b820-fc55f26c0992/call-realign/inputs/1570229526/Homo_sapiens_assembly38.fasta -k /projects/mgc/Project_1/MayomicsVC_MayoTesting/Reference/Mills_and_1000G_gold_standard.indels.hg38.vcf -S /usr/local/apps/bioapps/sentieon/sentieon-genomics-201808.01 -t 40 -e /projects/bioinformatics/DEL/cromwell-executions/GermlineMasterWF/bee0078e-c605-4b1f-b820-fc55f26c0992/call-realign/inputs/-1630584390/RealignEnvProfile.file -F /projects/bioinformatics/DEL/cromwell-executions/GermlineMasterWF/bee0078e-c605-4b1f-b820-fc55f26c0992/call-realign/inputs/-459509103/shared_functions.sh
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
+good rc:  ../bee0078e-c605-4b1f-b820-fc55f26c0992/call-dedup/execution
+
+
+~~~~~~~~~~full_filename~~~~~~~~~~~~~~:
+/projects/bioinformatics/DEL/cromwell-executions/GermlineMasterWF/bee0078e-c605-4b1f-b820-fc55f26c0992/call-dedup/execution/stdout
+
+*****************************************************************************
+
+/projects/bioinformatics/DEL/cromwell-executions/GermlineMasterWF/bee0078e-c605-4b1f-b820-fc55f26c0992/call-dedup/inputs/-459509103/dedup.sh
+
+called by: lanier4 on Wed Jan  9 10:11:05 CST 2019
+
+command line input: -b /projects/bioinformatics/DEL/cromwell-executions/GermlineMasterWF/bee0078e-c605-4b1f-b820-fc55f26c0992/call-dedup/inputs/-887729255/WGS_chr1_5X_E0.005_chunk1.aligned.sorted.merged.bam -s WGS_chr1_5X_E0.005_chunk1 -S /usr/local/apps/bioapps/sentieon/sentieon-genomics-201808.01 -t 40 -e /projects/bioinformatics/DEL/cromwell-executions/GermlineMasterWF/bee0078e-c605-4b1f-b820-fc55f26c0992/call-dedup/inputs/-1630584390/DedupEnvProfile.file -F /projects/bioinformatics/DEL/cromwell-executions/GermlineMasterWF/bee0078e-c605-4b1f-b820-fc55f26c0992/call-dedup/inputs/-459509103/shared_functions.sh
+
+*****************************************************************************
+
+[2019-01-09T10:11:05-0600] [INFO] [dedup.sh] [TBD] [TBD] [0] 	[SENTIEON] Collecting info to deduplicate BAM with Locus Collector.
+
+[2019-01-09T10:11:13-0600] [INFO] [dedup.sh] [TBD] [TBD] [0] 	[SENTIEON] Locus Collector finished; starting Dedup.
+
+[2019-01-09T10:11:22-0600] [INFO] [dedup.sh] [TBD] [TBD] [0] 	[SENTIEON] Deduplication Finished. Deduplicated BAM found at WGS_chr1_5X_E0.005_chunk1.aligned.sorted.deduped.bam
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
+
+~~~~~~~~~~full_filename~~~~~~~~~~~~~~:
+/projects/bioinformatics/DEL/cromwell-executions/GermlineMasterWF/bee0078e-c605-4b1f-b820-fc55f26c0992/call-dedup/execution/stderr
+
+++ trap sigusrhandler1 SIGUSR1
+
+++ trap sigusrhandler2 SIGUSR2
+
+++ export LD_LIBRARY_PATH=
+
+++ LD_LIBRARY_PATH=
+
++ /bin/bash /projects/bioinformatics/DEL/cromwell-executions/GermlineMasterWF/bee0078e-c605-4b1f-b820-fc55f26c0992/call-dedup/inputs/-459509103/dedup.sh -b /projects/bioinformatics/DEL/cromwell-executions/GermlineMasterWF/bee0078e-c605-4b1f-b820-fc55f26c0992/call-dedup/inputs/-887729255/WGS_chr1_5X_E0.005_chunk1.aligned.sorted.merged.bam -s WGS_chr1_5X_E0.005_chunk1 -S /usr/local/apps/bioapps/sentieon/sentieon-genomics-201808.01 -t 40 -e /projects/bioinformatics/DEL/cromwell-executions/GermlineMasterWF/bee0078e-c605-4b1f-b820-fc55f26c0992/call-dedup/inputs/-1630584390/DedupEnvProfile.file -F /projects/bioinformatics/DEL/cromwell-executions/GermlineMasterWF/bee0078e-c605-4b1f-b820-fc55f26c0992/call-dedup/inputs/-459509103/shared_functions.sh
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
+good rc:  ../bee0078e-c605-4b1f-b820-fc55f26c0992/call-merge/execution
+
+
+~~~~~~~~~~full_filename~~~~~~~~~~~~~~:
+/projects/bioinformatics/DEL/cromwell-executions/GermlineMasterWF/bee0078e-c605-4b1f-b820-fc55f26c0992/call-merge/execution/stdout
+
+*****************************************************************************
+
+/projects/bioinformatics/DEL/cromwell-executions/GermlineMasterWF/bee0078e-c605-4b1f-b820-fc55f26c0992/call-merge/inputs/-459509103/merge_bams.sh
+
+called by: lanier4 on Wed Jan  9 10:10:54 CST 2019
+
+command line input: -b /projects/bioinformatics/DEL/cromwell-executions/GermlineMasterWF/bee0078e-c605-4b1f-b820-fc55f26c0992/call-merge/inputs/-930058321/WGS_chr1_5X_E0.005_chunk1.aligned.sorted.bam,/projects/bioinformatics/DEL/cromwell-executions/GermlineMasterWF/bee0078e-c605-4b1f-b820-fc55f26c0992/call-merge/inputs/1567957616/WGS_chr1_5X_E0.005_chunk1.aligned.sorted.bam -s WGS_chr1_5X_E0.005_chunk1 -S /usr/local/apps/bioapps/sentieon/sentieon-genomics-201808.01 -t 40 -e /projects/bioinformatics/DEL/cromwell-executions/GermlineMasterWF/bee0078e-c605-4b1f-b820-fc55f26c0992/call-merge/inputs/-1630584390/MergeBamEnvProfile.file -F /projects/bioinformatics/DEL/cromwell-executions/GermlineMasterWF/bee0078e-c605-4b1f-b820-fc55f26c0992/call-merge/inputs/-459509103/shared_functions.sh
+
+*****************************************************************************
+
+[2019-01-09T10:10:54-0600] [INFO] [merge_bams.sh] [TBD] [TBD] [0] 	[SENTIEON] Merging BAMs if list was given.
+
+[2019-01-09T10:11:02-0600] [INFO] [merge_bams.sh] [TBD] [TBD] [0] 	[SENTIEON] BAM merging complete.
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
+
+~~~~~~~~~~full_filename~~~~~~~~~~~~~~:
+/projects/bioinformatics/DEL/cromwell-executions/GermlineMasterWF/bee0078e-c605-4b1f-b820-fc55f26c0992/call-merge/execution/stderr
+
+++ trap sigusrhandler1 SIGUSR1
+
+++ trap sigusrhandler2 SIGUSR2
+
+++ export LD_LIBRARY_PATH=
+
+++ LD_LIBRARY_PATH=
+
++ /bin/bash /projects/bioinformatics/DEL/cromwell-executions/GermlineMasterWF/bee0078e-c605-4b1f-b820-fc55f26c0992/call-merge/inputs/-459509103/merge_bams.sh -b /projects/bioinformatics/DEL/cromwell-executions/GermlineMasterWF/bee0078e-c605-4b1f-b820-fc55f26c0992/call-merge/inputs/-930058321/WGS_chr1_5X_E0.005_chunk1.aligned.sorted.bam,/projects/bioinformatics/DEL/cromwell-executions/GermlineMasterWF/bee0078e-c605-4b1f-b820-fc55f26c0992/call-merge/inputs/1567957616/WGS_chr1_5X_E0.005_chunk1.aligned.sorted.bam -s WGS_chr1_5X_E0.005_chunk1 -S /usr/local/apps/bioapps/sentieon/sentieon-genomics-201808.01 -t 40 -e /projects/bioinformatics/DEL/cromwell-executions/GermlineMasterWF/bee0078e-c605-4b1f-b820-fc55f26c0992/call-merge/inputs/-1630584390/MergeBamEnvProfile.file -F /projects/bioinformatics/DEL/cromwell-executions/GermlineMasterWF/bee0078e-c605-4b1f-b820-fc55f26c0992/call-merge/inputs/-459509103/shared_functions.sh
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
+good rc:  ../bee0078e-c605-4b1f-b820-fc55f26c0992/call-bqsr/execution
+
+
+~~~~~~~~~~full_filename~~~~~~~~~~~~~~:
+/projects/bioinformatics/DEL/cromwell-executions/GermlineMasterWF/bee0078e-c605-4b1f-b820-fc55f26c0992/call-bqsr/execution/stdout
+
+
+
+*******************************************
+
+/projects/bioinformatics/DEL/cromwell-executions/GermlineMasterWF/bee0078e-c605-4b1f-b820-fc55f26c0992/call-bqsr/inputs/-459509103/bqsr.sh
+
+called by: lanier4 on Wed Jan  9 10:11:53 CST 2019
+
+command line input: -s WGS_chr1_5X_E0.005_chunk1 -S /usr/local/apps/bioapps/sentieon/sentieon-genomics-201808.01 -G /projects/bioinformatics/DEL/cromwell-executions/GermlineMasterWF/bee0078e-c605-4b1f-b820-fc55f26c0992/call-bqsr/inputs/1570229526/Homo_sapiens_assembly38.fasta -t 40 -b /projects/bioinformatics/DEL/cromwell-executions/GermlineMasterWF/bee0078e-c605-4b1f-b820-fc55f26c0992/call-bqsr/inputs/2057521555/WGS_chr1_5X_E0.005_chunk1.aligned.sorted.deduped.realigned.bam -k /projects/mgc/Project_1/MayomicsVC_MayoTesting/Reference/Mills_and_1000G_gold_standard.indels.hg38.vcf,/projects/mgc/Project_1/MayomicsVC_MayoTesting/Reference/dbsnp_138.hg38.vcf -e /projects/bioinformatics/DEL/cromwell-executions/GermlineMasterWF/bee0078e-c605-4b1f-b820-fc55f26c0992/call-bqsr/inputs/-1630584390/BqsrEnvProfile.file -F /projects/bioinformatics/DEL/cromwell-executions/GermlineMasterWF/bee0078e-c605-4b1f-b820-fc55f26c0992/call-bqsr/inputs/-459509103/shared_functions.sh
+
+*******************************************
+
+[2019-01-09T10:11:53-0600] [INFO] [bqsr.sh] [TBD] [TBD] [0] 	[bqsr] START. Performing bqsr on the input BAM to produce bqsr table.
+
+[2019-01-09T10:12:04-0600] [INFO] [bqsr.sh] [TBD] [TBD] [0] 	[bqsr] Finished running successfully for WGS_chr1_5X_E0.005_chunk1
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
+
+~~~~~~~~~~full_filename~~~~~~~~~~~~~~:
+/projects/bioinformatics/DEL/cromwell-executions/GermlineMasterWF/bee0078e-c605-4b1f-b820-fc55f26c0992/call-bqsr/execution/stderr
+
+++ trap sigusrhandler1 SIGUSR1
+
+++ trap sigusrhandler2 SIGUSR2
+
+++ export LD_LIBRARY_PATH=
+
+++ LD_LIBRARY_PATH=
+
++ /bin/bash /projects/bioinformatics/DEL/cromwell-executions/GermlineMasterWF/bee0078e-c605-4b1f-b820-fc55f26c0992/call-bqsr/inputs/-459509103/bqsr.sh -s WGS_chr1_5X_E0.005_chunk1 -S /usr/local/apps/bioapps/sentieon/sentieon-genomics-201808.01 -G /projects/bioinformatics/DEL/cromwell-executions/GermlineMasterWF/bee0078e-c605-4b1f-b820-fc55f26c0992/call-bqsr/inputs/1570229526/Homo_sapiens_assembly38.fasta -t 40 -b /projects/bioinformatics/DEL/cromwell-executions/GermlineMasterWF/bee0078e-c605-4b1f-b820-fc55f26c0992/call-bqsr/inputs/2057521555/WGS_chr1_5X_E0.005_chunk1.aligned.sorted.deduped.realigned.bam -k /projects/mgc/Project_1/MayomicsVC_MayoTesting/Reference/Mills_and_1000G_gold_standard.indels.hg38.vcf,/projects/mgc/Project_1/MayomicsVC_MayoTesting/Reference/dbsnp_138.hg38.vcf -e /projects/bioinformatics/DEL/cromwell-executions/GermlineMasterWF/bee0078e-c605-4b1f-b820-fc55f26c0992/call-bqsr/inputs/-1630584390/BqsrEnvProfile.file -F /projects/bioinformatics/DEL/cromwell-executions/GermlineMasterWF/bee0078e-c605-4b1f-b820-fc55f26c0992/call-bqsr/inputs/-459509103/shared_functions.sh
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
+good rc:  ../bee0078e-c605-4b1f-b820-fc55f26c0992/call-DAB/execution
+
+
+~~~~~~~~~~full_filename~~~~~~~~~~~~~~:
+/projects/bioinformatics/DEL/cromwell-executions/GermlineMasterWF/bee0078e-c605-4b1f-b820-fc55f26c0992/call-DAB/execution/stdout
+
+*****************************************************************************
+
+/projects/bioinformatics/DEL/cromwell-executions/GermlineMasterWF/bee0078e-c605-4b1f-b820-fc55f26c0992/call-DAB/inputs/-459509103/deliver_alignment.sh
+
+called by: lanier4 on Wed Jan  9 10:11:30 CST 2019
+
+command line input: -s WGS_chr1_5X_E0.005_chunk1 -b /projects/bioinformatics/DEL/cromwell-executions/GermlineMasterWF/bee0078e-c605-4b1f-b820-fc55f26c0992/call-DAB/inputs/1757410751/WGS_chr1_5X_E0.005_chunk1.aligned.sorted.deduped.bam -j /projects/bioinformatics/DEL/cromwell-executions/GermlineMasterWF/bee0078e-c605-4b1f-b820-fc55f26c0992/call-DAB/inputs/785269523/GermlineMasterWorkflow.FilledIn.json -f /projects/bioinformatics/DEL/Delivery/Alignment -F /projects/bioinformatics/DEL/cromwell-executions/GermlineMasterWF/bee0078e-c605-4b1f-b820-fc55f26c0992/call-DAB/inputs/-459509103/shared_functions.sh
+
+*****************************************************************************
+
+[2019-01-09T10:11:30-0600] [INFO] [deliver_alignment.sh] [TBD] [TBD] [0] 	[DELIVERY] Creating the Delivery folder.
+
+[2019-01-09T10:11:30-0600] [INFO] [deliver_alignment.sh] [TBD] [TBD] [0] 	[DELIVERY] Created the Design Block 1 delivery folder.
+
+[2019-01-09T10:11:30-0600] [INFO] [deliver_alignment.sh] [TBD] [TBD] [0] 	[DELIVERY] Copying Design Block 1 outputs into Delivery folder.
+
+[2019-01-09T10:11:30-0600] [INFO] [deliver_alignment.sh] [TBD] [TBD] [0] 	[DELIVERY] Aligned sorted deduped BAM delivered.
+
+[2019-01-09T10:11:30-0600] [INFO] [deliver_alignment.sh] [TBD] [TBD] [0] 	[DELIVERY] Aligned sorted deduped BAM index delivered.
+
+[2019-01-09T10:11:30-0600] [INFO] [deliver_alignment.sh] [TBD] [TBD] [0] 	[DELIVERY] Workflow JSON delivered.
+
+[2019-01-09T10:11:30-0600] [INFO] [deliver_alignment.sh] [TBD] [TBD] [0] 	[DELIVERY] Alignment block delivered. Have a nice day.
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
+
+~~~~~~~~~~full_filename~~~~~~~~~~~~~~:
+/projects/bioinformatics/DEL/cromwell-executions/GermlineMasterWF/bee0078e-c605-4b1f-b820-fc55f26c0992/call-DAB/execution/stderr
+
+++ trap sigusrhandler1 SIGUSR1
+
+++ trap sigusrhandler2 SIGUSR2
+
+++ export LD_LIBRARY_PATH=
+
+++ LD_LIBRARY_PATH=
+
++ /bin/bash /projects/bioinformatics/DEL/cromwell-executions/GermlineMasterWF/bee0078e-c605-4b1f-b820-fc55f26c0992/call-DAB/inputs/-459509103/deliver_alignment.sh -s WGS_chr1_5X_E0.005_chunk1 -b /projects/bioinformatics/DEL/cromwell-executions/GermlineMasterWF/bee0078e-c605-4b1f-b820-fc55f26c0992/call-DAB/inputs/1757410751/WGS_chr1_5X_E0.005_chunk1.aligned.sorted.deduped.bam -j /projects/bioinformatics/DEL/cromwell-executions/GermlineMasterWF/bee0078e-c605-4b1f-b820-fc55f26c0992/call-DAB/inputs/785269523/GermlineMasterWorkflow.FilledIn.json -f /projects/bioinformatics/DEL/Delivery/Alignment -F /projects/bioinformatics/DEL/cromwell-executions/GermlineMasterWF/bee0078e-c605-4b1f-b820-fc55f26c0992/call-DAB/inputs/-459509103/shared_functions.sh
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+

@@ -1,0 +1,27 @@
+{
+  "CallMutectTask.mutect.MutectExtraOptionsString": "String",
+  "CallMutectTask.mutect.Samtools": "String",
+  "CallMutectTask.mutect.BashPreamble": "File",
+  "CallMutectTask.mutect.MutectScript": "File",
+  "CallMutectTask.mutect.MutectEnvProfile": "File",
+  "CallMutectTask.mutect.NormalBams": "File",
+  "CallMutectTask.mutect.GatkJar": "String",
+  "CallMutectTask.mutect.Bgzip": "String",
+  "CallMutectTask.mutect.Ref": "File",
+  "CallMutectTask.mutect.MutectSoftMemLimit": "String",
+  "CallMutectTask.mutect.RefDict": "File",
+  "CallMutectTask.mutect.MutectThreads": "String",
+  "CallMutectTask.mutect.MutectJavaMemOption": "String",
+  "CallMutectTask.mutect.Java": "String",
+  "CallMutectTask.mutect.BashSharedFunctions": "File",
+  "CallMutectTask.mutect.TumorBams": "File",
+  "CallMutectTask.mutect.TumorBais": "File",
+  "CallMutectTask.mutect.FixDPScript": "File",
+  "CallMutectTask.mutect.SampleName": "String",
+  "CallMutectTask.mutect.MutectHardMemLimit": "String",
+  "CallMutectTask.mutect.DebugMode": "String",
+  "CallMutectTask.mutect.RefFai": "File",
+  "CallMutectTask.mutect.NormalBais": "File",
+  "CallMutectTask.mutect.Bcftools": "String"
+}
+
