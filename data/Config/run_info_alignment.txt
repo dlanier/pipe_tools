@@ -1,8 +1,14 @@
 DebugMode="-d"
 
 PairedEnd="true"
-InputRead1="/projects/bioinformatics/jallen17/Inputs/hg38_chr_20_21_22_merged_copy1_read1.fq.gz"
-InputRead2="/projects/bioinformatics/jallen17/Inputs/hg38_chr_20_21_22_merged_copy1_read2.fq.gz"
+
+NormalInputRead1="/projects/bioinformatics/DEL/Inputs/WGS_chr1_5X_E0.005_L1_read1.fastq.gz"
+#/projects/bioinformatics/DEL/Inputs/WGS_chr1_5X_E0.005_L2_read1.fastq.gz"
+NormalInputRead2="/projects/bioinformatics/DEL/Inputs/WGS_chr1_5X_E0.005_L1_read2.fastq.gz"
+#/projects/bioinformatics/DEL/Inputs/WGS_chr1_5X_E0.005_L2_read2.fastq.gz"
+
+#InputRead1="/projects/bioinformatics/jallen17/Inputs/hg38_chr_20_21_22_merged_copy1_read1.fq.gz"
+#InputRead2="/projects/bioinformatics/jallen17/Inputs/hg38_chr_20_21_22_merged_copy1_read2.fq.gz"
 
 Adapters="/projects/bioinformatics/jallen17/Inputs/TruSeqAdaptors.fasta"
 

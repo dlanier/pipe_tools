@@ -1,151 +1,39 @@
 #### SCRIPTS MEMORY ARGUMENTS
 
-##################
-##### QC
-##################
-##assuming 1 thread
-fastqc_mem="1792M"
-##assuming 1 thread
-ngsqc_mem="1G"
 
 ####################
 #### alignment and BAM formatting jobs
 ##################
-##assuming 4 threads
-align_novo_mem="2816M"
-##assuming 4 threads
-align_read_bwa_mem="2048M"
-##assuming 1 thread
-align_bwa_mem="8192M"
-##assuming 4 threads
-align_bwamem_mem="3G"
-##assuming 4 threads
-convert_sam_bam_mem="3840M"
-##assuming 4 threads
-processBAM_mem="2560M"
-### for external BAMs or start with fastq you need to use
-#processBAM_mem="3584M"
-##assuming 1 thread
-extract_reads_bam_mem="2048M"
-##assuming 1 threads
-rmdup_mem="8G"
-##assuming 4 threads
-reformat_BAM_mem="3840M"
-##assuming 4 threads
-reformat_pairBAM_mem="3840M"
+TrimHardMemLimit="100G"
+TrimSoftMemLimit="100G"
+
+AlignHardMemLimit="100G"
+AlignSoftMemLimit="100G"
+
+DedupHardMemLimit="100G"
+DedupSoftMemLimit="100G"
+
+MergeHardMemLimit="100G"
+MergeSoftMemLimit="100G"
+
 
 #################
 ### realignment and recalibration and BAM for visualization
 ##################
-##assuming 4 threads
-realignment_mem="5G"
-##assuming 4 threads
-recalibration_mem="4096M"
-##assuming 4 threads
-igv_bam_mem="3840M"
-##assuming 1 thread
-make_sim_bam_mem="512M"
+RealignHardMemLimit="100G"
+RealignSoftMemLimit="100G"
+
+BqsrHardMemLimit="100G"
+BqsrSoftMemLimit="100G"
+
 
 ########################
 ### variant calling and VCF manipulation jobs
 #######################
-##assuming 4 threads
-variant_multi_mem="4G"
-##assuming 4 threads
-variant_single_mem="4G"
-##assuming 4 threads
-somaticvariants_mem="4G"
-##assuming 4 threads
-GenotypeGVCFs_mem="4G"
-##assuming 4 threads
-haplotype_caller_mem="4G"
-##assuming 1 thread
-PhaseByTransmission_mem="8G"
-##assuming 1 thread
-CatVariants_mem="10G"
-##assuming 4 threads
-combinevcf_mem="3G"
-##assuming 4 threads
-unifiedgenotyper_backfill_mem="4G"
-##assuming 2 thread				
-####increase the memory required when large number of samples are in the run
-filtervcf_mem="16G"
+VqsrHardMemLimit="100G"
+VqsrSoftMemLimit="100G"
 
-#####################
-####### QC plots and numbers and delivery script
-#####################
-##assuming 2 threads
-BaseCoverageDistribution_mem="4G"
-##assuming 2 threads
-CollectInsertSizeMetrics_mem="4G"
-##assuming 2 thread
-CountReads_mem="4G"
-##assuming 1 thread
-alignment_numbers_mem="820M"
-##assuming 1 thread
-delivery_mem="4G"
-##assuming 1 thread
-final_mem="1G"
-
-########################
-##### annotation
-#######################
-annotate_mem="12G"
-annotate_ba_mem="14G"
-### you need to bump this for whole genome samples
-annotate_ba_merge="3G"
-bior_annotate_mem="1G"
-
-
-##assuming 1 thread
-dashboard_mem="5G"
-##assuming 1 thread
-gVCF_workflow_mem="15G"
-
-################
-###### pattern CNV
-#################
-##assuming 1 thread
-EXONKEY_mem="4G"
-BAM2WIG_mem="2G"
-CALLCNVS_mem="4G"
-
-#### JAVA VIRTUAL MACHINE ARGUMENTS
-
-###PICARD
-SORT_JVM="-Xmx5g -Xms2g"
-RMDUP_JVM="-Xmx6g -Xms3g -XX:-UseGCOverheadLimit "
-MERGE_JVM="-Xmx5g -Xms2g"
-REORDER_JVM="-Xmx5g -Xms2g"
-READGROUP_JVM="-Xmx5g -Xms2g"
-CollectInsertSizeMetrics_JVM="-Xmx4g -Xms2g"
-SamToFastq_JVM="-Xmx6g -Xms3g -XX:-UseGCOverheadLimit"
-
-###GATK
-CatVariants_JVM="-Xmx4g -Xms2g"
-UnifiedGenotyper_JVM="-XX:CompileThreshold=1000 -XX:ReservedCodeCacheSize=128m -Xmx10g -Xms5g"
-HaplotypeCaller_JVM="-XX:CompileThreshold=1000 -XX:ReservedCodeCacheSize=128m -Xmx10g -Xms5g"
-GenotypeGVCFs_JVM="-XX:CompileThreshold=1000 -XX:ReservedCodeCacheSize=128m -Xmx10g -Xms5g"
-MuTecT_JVM="-XX:CompileThreshold=1000 -XX:ReservedCodeCacheSize=128m -Xmx10g -Xms5g"
-SomaticIndelDetector_JVM="-XX:CompileThreshold=1000 -XX:ReservedCodeCacheSize=128m -Xmx10g -Xms5g"
-RealignerTargetCreator_JVM="-XX:CompileThreshold=1000 -XX:ReservedCodeCacheSize=128m -Xmx10g -Xms5g"
-IndelRealigner_JVM="-XX:CompileThreshold=1000 -XX:ReservedCodeCacheSize=128m -XX:+UseConcMarkSweepGC -Xmx10g -Xms5g"
-CombineVariants_JVM="-Xmx4g -Xms2g"
-BaseRecalibrator_JVM="-XX:CompileThreshold=1000 -XX:ReservedCodeCacheSize=128m -Xmx10g -Xms5g"
-PrintReads_JVM="-XX:CompileThreshold=1000 -XX:ReservedCodeCacheSize=128m -Xmx10g -Xms5g"
-VariantAnnotator_JVM="-Xmx4g -Xms2g"
-VariantFiltration_JVM="-Xmx4g -Xms2g"
-ValidateVariants_JVM="-Xmx4g -Xms2g"
-VariantRecalibrator_JVM="-XX:CompileThreshold=1000 -XX:ReservedCodeCacheSize=128m -Xmx10g -Xms5g "
-ApplyRecalibration_JVM="-XX:CompileThreshold=1000 -XX:ReservedCodeCacheSize=128m -Xmx10g -Xms5g -XX:-UseGCOverheadLimit"
-CollectAlignmentSummaryMetric_JVM="-Xmx4g -Xms2g"
-BaseCoverageDistribution_JVM="-Xmx4g -Xms2g"
-CountReads_JVM="-Xmx4g -Xms2g"
-PhaseByTransmission_JVM="-Xmx4g -Xms2g"
-snpEff_JVM="-Xmx6g -Xms3g"
-###others
-AddSecondaryAnalysis_JVM="-Xmx1g"
-### modules
-gVCF_JVM="-Xmx10g -Xms5g"
+HaplotyperHardMemLimit="100G"
+HaplotyperSoftMemLimit="100G"
 
 

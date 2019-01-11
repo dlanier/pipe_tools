@@ -1,74 +1,57 @@
 DebugMode=""
-BashSharedFunctions="/ui/ncsa/yanzhan2/MayomicsVC/src/bash_scripts/shared_functions.sh"
 
 PairedEnd="true"
-NormalInputRead1="/ui/ncsa/yanzhan2/scratch-global/data/hg38_chr_20_21_22_small_copy1_read1.fq,/ui/ncsa/yanzhan2/scratch-global/data/hg38_chr_20_21_22_small_copy1_read1.fq,/ui/ncsa/yanzhan2/scratch-global/data/hg38_chr_20_21_22_small_copy1_read1.fq,/ui/ncsa/yanzhan2/scratch-global/data/hg38_chr_20_21_22_small_copy1_read1.fq"
-NormalInputRead2="/ui/ncsa/yanzhan2/scratch-global/data/hg38_chr_20_21_22_small_copy1_read2.fq,/ui/ncsa/yanzhan2/scratch-global/data/hg38_chr_20_21_22_small_copy1_read2.fq,/ui/ncsa/yanzhan2/scratch-global/data/hg38_chr_20_21_22_small_copy1_read2.fq,/ui/ncsa/yanzhan2/scratch-global/data/hg38_chr_20_21_22_small_copy1_read2.fq"
-
-Adapters="/projects/bioinformatics/jallen17/Inputs/TruSeqAdaptors.fasta"
-
-Ref="/projects/bioinformatics/DataPacks/human/Hg38_chr20_21_22_simulated_data_Jan_2018/reference_and_index/Homo_sapiens_assembly38_chr20_21_22.fasta"
-RefAnn="/projects/bioinformatics/DataPacks/human/Hg38_chr20_21_22_simulated_data_Jan_2018/reference_and_index/Homo_sapiens_assembly38_chr20_21_22.fasta.ann"
-RefSa="/projects/bioinformatics/DataPacks/human/Hg38_chr20_21_22_simulated_data_Jan_2018/reference_and_index/Homo_sapiens_assembly38_chr20_21_22.fasta.sa"
-RefBwt="/projects/bioinformatics/DataPacks/human/Hg38_chr20_21_22_simulated_data_Jan_2018/reference_and_index/Homo_sapiens_assembly38_chr20_21_22.fasta.bwt"
-RefPac="/projects/bioinformatics/DataPacks/human/Hg38_chr20_21_22_simulated_data_Jan_2018/reference_and_index/Homo_sapiens_assembly38_chr20_21_22.fasta.pac"
-RefAmb="/projects/bioinformatics/DataPacks/human/Hg38_chr20_21_22_simulated_data_Jan_2018/reference_and_index/Homo_sapiens_assembly38_chr20_21_22.fasta.amb"
-RefFai="/projects/bioinformatics/DataPacks/human/Hg38_chr20_21_22_simulated_data_Jan_2018/reference_and_index/Homo_sapiens_assembly38_chr20_21_22.fasta.fai"
-
-Platform="ILLUMINA"
-Group="NEAT_sim"
-Library="Test_library"
-CenterName="NCSA"
-PlatformUnit="Flowcell1,Flowcell1,Flowcell1,Flowcell1"
-
-TrimHardMemLimit="10.1g"
-TrimSoftMemLimit="8.1g"
-AlignHardMemLimit="10.2g"
-AlignSoftMemLimit="8.2g"
-DedupHardMemLimit="10.3g"
-DedupSoftMemLimit="8.3g"
-MergeHardMemLimit="10.4g"
-MergeSoftMemLimit="8.4g"
-
-BqsrHardMemLimit="10.5g"
-BqsrSoftMemLimit="8.5g"
-HaplotyperHardMemLimit="10.6g"
-HaplotyperSoftMemLimit="8.6g"
-RealignHardMemLimit="10.7g"
-RealignSoftMemLimit="8.7g"
-VqsrHardMemLimit="10.8g"
-VqsrSoftMemLimit="8.8g"
-
-BashPreamble="/ui/ncsa/yanzhan2/MayomicsVC/src/bash_scripts/shell_preamble.sh"
-
 Trimming="true"
 MarkDuplicates="true"
+Bqsr="true"
 Vqsr="true"
 
-BWAExtraOptionsString="-M"
+InputReads="/projects/bioinformatics/DEL/Inputs/WGS_chr1_5X_E0.005_L1_read1.fastq.gz,/projects/bioinformatics/DEL/Inputs/WGS_chr1_5X_E0.005_L1_read2.fastq.gz"
+
+NormalInputRead1="/projects/bioinformatics/DEL/Inputs/WGS_chr1_5X_E0.005_L1_read1.fastq.gz,/projects/bioinformatics/DEL/Inputs/WGS_chr1_5X_E0.005_L2_read1.fastq.gz"
+#/projects/bioinformatics/DEL/Inputs/WGS_chr1_5X_E0.005_L2_read1.fastq.gz"
+NormalInputRead2="/projects/bioinformatics/DEL/Inputs/WGS_chr1_5X_E0.005_L1_read2.fastq.gz,/projects/bioinformatics/DEL/Inputs/WGS_chr1_5X_E0.005_L2_read2.fastq.gz"
+#/projects/bioinformatics/DEL/Inputs/WGS_chr1_5X_E0.005_L2_read2.fastq.gz"
+
+#NormalInputRead1="/projects/mgc/Project_1/MayomicsVC_MayoTesting/Reads/NEAT_L1_R1.fastq.gz,/projects/mgc/Project_1/MayomicsVC_MayoTesting/Reads/NEAT_L2_R1.fastq.gz"
+#NormalInputRead1="/projects/mgc/Project_1/MayomicsVC_MayoTesting/Reads/NEAT_L1_R1.fastq.gz"
+#NormalInputRead2="/projects/mgc/Project_1/MayomicsVC_MayoTesting/Reads/NEAT_L1_R2.fastq.gz,/projects/mgc/Project_1/MayomicsVC_MayoTesting/Reads/NEAT_L2_R2.fastq.gz"
+#NormalInputRead2="/projects/mgc/Project_1/MayomicsVC_MayoTesting/Reads/NEAT_L1_R2.fastq.gz"
+
+Adapters="/projects/bioinformatics/DEL/Inputs/TruSeqAdaptors.fasta"
+
+Ref="/projects/mgc/Project_1/MayomicsVC_MayoTesting/Reference/Homo_sapiens_assembly38.fasta"
+RefAnn="/projects/mgc/Project_1/MayomicsVC_MayoTesting/Reference/Homo_sapiens_assembly38.fasta.ann"
+RefSa="/projects/mgc/Project_1/MayomicsVC_MayoTesting/Reference/Homo_sapiens_assembly38.fasta.sa"
+RefBwt="/projects/mgc/Project_1/MayomicsVC_MayoTesting/Reference/Homo_sapiens_assembly38.fasta.bwt"
+RefPac="/projects/mgc/Project_1/MayomicsVC_MayoTesting/Reference/Homo_sapiens_assembly38.fasta.pac"
+RefAmb="/projects/mgc/Project_1/MayomicsVC_MayoTesting/Reference/Homo_sapiens_assembly38.fasta.amb"
+RefFai="/projects/mgc/Project_1/MayomicsVC_MayoTesting/Reference/Homo_sapiens_assembly38.fasta.fai"
+
+Platform="ILLUMINA"
+Library="fake_lib"
+CenterName="some_seq_center"
+#PlatformUnit="FLOWCELL_BARCODE.LANE.SAMPLE_BARCODE"
+PlatformUnit="FLOWCELL_BARCODE.LANE.SAMPLE_BARCODE,FLOWCELL_BARCODE.LANE.SAMPLE_BARCODE"
 
 ChunkSizeInBases="10000000"
 
-BqsrKnownSites="/projects/bioinformatics/jallen17/Reference/Mills_and_1000G_gold_standard.indels.hg38.vcf,/projects/bioinformatics/jallen17/Reference/dbsnp_138.hg38.vcf"
-RealignmentKnownSites="/projects/bioinformatics/jallen17/Reference/Mills_and_1000G_gold_standard.indels.hg38.vcf"
+BqsrKnownSites="/projects/mgc/Project_1/MayomicsVC_MayoTesting/Reference/Mills_and_1000G_gold_standard.indels.hg38.vcf,/projects/mgc/Project_1/MayomicsVC_MayoTesting/Reference/dbsnp_138.hg38.vcf"
+RealignmentKnownSites="/projects/mgc/Project_1/MayomicsVC_MayoTesting/Reference/Mills_and_1000G_gold_standard.indels.hg38.vcf"
 
-DBSNP="/projects/bioinformatics/jallen17/Reference/dbsnp_138.hg38.vcf"
-DBSNPIdx="/projects/bioinformatics/jallen17/Reference/dbsnp_138.hg38.vcf.idx"
+DBSNP="/projects/mgc/Project_1/MayomicsVC_MayoTesting/Reference/dbsnp_138.hg38.vcf"
+DBSNPIdx="/projects/mgc/Project_1/MayomicsVC_MayoTesting/Reference/dbsnp_138.hg38.vcf.idx"
 
+VqsrSnpResourceString=""'--resource /projects/bioinformatics/DataPacks/human/gatk_bundle_Oct_2017/gatk_bundle_hg38/1000G_phase1.snps.high_confidence.hg38.vcf.gz --resource_param 1000G,known=false,training=true,truth=false,prior=10.0 --resource /projects/bioinformatics/DataPacks/human/gatk_bundle_Oct_2017/gatk_bundle_hg38/1000G_omni2.5.hg38.vcf.gz --resource_param omni,known=false,training=true,truth=false,prior=12.0 --resource /projects/mgc/Project_1/MayomicsVC_MayoTesting/Reference/dbsnp_138.hg38.vcf --resource_param dbsnp,known=true,training=false,truth=false,prior=2.0 --resource /projects/bioinformatics/DataPacks/human/gatk_bundle_Oct_2017/gatk_bundle_hg38/hapmap_3.3.hg38.vcf.gz --resource_param hapmap,known=false,training=true,truth=true,prior=15.0'""
 
-InputBams="/ui/ncsa/yanzhan2/scratch-global/data/realign_test.aligned.sorted.deduped.bam"
-InputBais="/ui/ncsa/yanzhan2/scratch-global/data/realign_test.aligned.sorted.deduped.bam.bai"
-RecalTable="/projects/bioinformatics/jallen17/Delivery/1/WGS_chr1_5X_E0.005_chunk1.recal_data.table"
-HaplotyperExtraOptionsString="--emit_mode variant --gq_bands 1-60,60-99/19,99 --min_base_qual 10 --pcr_indel_model CONSERVATIVE --phasing 1 --ploidy 2 --prune_factor 2"
+VqsrIndelResourceString=""'--resource /projects/mgc/Project_1/MayomicsVC_MayoTesting/Reference/dbsnp_138.hg38.vcf --resource_param dbsnp,known=true,training=false,truth=false,prior=2.0 --resource /projects/mgc/Project_1/MayomicsVC_MayoTesting/Reference/Mills_and_1000G_gold_standard.indels.hg38.vcf --resource_param Mills,known=false,training=true,truth=true,prior=12.0'""
 
+HaplotyperExtraOptionsString=""'--emit_mode variant --gq_bands 1-60,60-99/19,99 --min_base_qual 10 --pcr_indel_model CONSERVATIVE --phasing 1 --ploidy 2 --prune_factor 2'""
 
-VqsrSnpResourceString="--resource /projects/bioinformatics/DataPacks/human/gatk_bundle_Oct_2017/gatk_bundle_hg38/1000G_phase1.snps.high_confidence.hg38.vcf.gz --resource_param 1000G,known=false,training=true,truth=false,prior=10.0 --resource /projects/bioinformatics/DataPacks/human/gatk_bundle_Oct_2017/gatk_bundle_hg38/1000G_omni2.5.hg38.vcf.gz --resource_param omni,known=false,training=true,truth=false,prior=12.0 --resource /projects/bioinformatics/jallen17/Reference/dbsnp_138.hg38.vcf --resource_param dbsnp,known=true,training=false,truth=false,prior=2.0 --resource /projects/bioinformatics/DataPacks/human/gatk_bundle_Oct_2017/gatk_bundle_hg38/hapmap_3.3.hg38.vcf.gz --resource_param hapmap,known=false,training=true,truth=true,prior=15.0"
+BWAExtraOptionsString=""'-M'""
 
-VqsrIndelResourceString="--resource /projects/bioinformatics/jallen17/Reference/dbsnp_138.hg38.vcf --resource_param dbsnp,known=true,training=false,truth=false,prior=2.0 --resource /projects/bioinformatics/jallen17/Reference/Mills_and_1000G_gold_standard.indels.hg38.vcf --resource_param Mills,known=false,training=true,truth=true,prior=12.0"
+AnnotateText=""'--annotation DP --annotation QD --annotation FS --annotation SOR --annotation MQ --annotation MQRankSum --annotation ReadPosRankSum'""
 
-AnnotateText=""'--annotation DP --annotation QD --annotation FS --annotation SOR --annotation ReadPosRankSum'""
+DeliveryFolder_Alignment="/projects/bioinformatics/DEL/Delivery/Alignment"
+DeliveryFolder_HaplotyperVC="/projects/bioinformatics/DEL/Delivery/HaplotyperVC"
 
-
-
-DeliveryFolder_Alignment="/ui/ncsa/yanzhan2/Delivery/Alignment"
-DeliveryFolder_HaplotyperVC="/ui/ncsa/yanzhan2/Delivery/HaplotyperVC"
