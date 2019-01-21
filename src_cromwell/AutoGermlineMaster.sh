@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Usage:
-# bash AutoGermlineMaster.sh . src/wdl/GermlineMasterWorkflow.wdl "-i Config/run_info.txt -i Config/tool_info.txt -i Config/memory_info.txt -i Config/sample_info.txt"
+# bash AutomatingSomaticTestTasks.sh . MayomicsVC/src/wdl/Alignment/Workflow/TestAlignment.wdl  "-i Config/run_info.txt -i Config/tool_info.txt -i Config/memory_info.txt -i Config/sample_info.txt"
 
 set -x
 set -o errexit
@@ -29,17 +29,17 @@ module load /usr/local/apps/bioapps/modules/cromwell/cromwell-34;
 module load python/python-3.6.1;
 
 # 			check JSON template against the workflow	(java)
-cd "./"; 
-java -jar ${WOMTOOL} inputs ../${WorkflowBeingTested} > ../Jsons/${BaseNameOfWorkflowBeingTested}.template.json;
-cd ../;
+#cd "./"; 
+java -jar ${WOMTOOL} inputs ${WorkflowBeingTested} > Jsons/${BaseNameOfWorkflowBeingTested}.template.json;
+#cd ../;
 
 echo ${ConfigsBeingUsed}
 
 # 			Fill In the JSON template			(python)
-python src/python/config_parser.py ${ConfigsBeingUsed} --jsonTemplate Jsons/${BaseNameOfWorkflowBeingTested}.template.json -o Jsons/${BaseNameOfWorkflowBeingTested}.FilledIn.json;
+python MayomicsVC/src/python/config_parser.py ${ConfigsBeingUsed} --jsonTemplate Jsons/${BaseNameOfWorkflowBeingTested}.template.json -o Jsons/${BaseNameOfWorkflowBeingTested}.FilledIn.json;
 
 #			Validate FilledIn JSON key file			(pyton)
-python src/python/key_validator.py -i Jsons/${BaseNameOfWorkflowBeingTested}.FilledIn.json --KeyTypeFile key_types.json;
+python MayomicsVC/src/python/key_validator.py -i Jsons/${BaseNameOfWorkflowBeingTested}.FilledIn.json --KeyTypeFile MayomicsVC/key_types.json;
 
 #			Zip the code repository for cromwell		(linux)
 cd MayomicsVC ; 
@@ -47,6 +47,7 @@ zip -r MayomicsVC.zip ./ ;
 mv MayomicsVC.zip ../ ;
 cd ../ ;
 
+module unload python/python-3.6.1;
+
 #			Run the workflow with WDL and .json file	(java - cromwell)
 java -jar ${CROMWELL} run ${WorkflowBeingTested} -i Jsons/${BaseNameOfWorkflowBeingTested}.FilledIn.json -p MayomicsVC.zip ;
-
