@@ -7,7 +7,10 @@ RUN export JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64/
 RUN export PATH=$PATH:$JAVA_HOME/bin
 
 ENV CROMWELL_JAR_LOC  /usr/locl/etc
-COPY files/* ${CROMWELL_JAR_LOC}/
+COPY jar_files/* ${CROMWELL_JAR_LOC}/
 
-# https://github.com/broadinstitute/cromwell/releases/download/36/cromwell-36.jar
+# RUN curl https://github.com/broadinstitute/cromwell/releases/download/36/womtool-36.jar
+# RUN curl  https://github.com/broadinstitute/cromwell/releases/download/36/cromwell-36.jar
 
+# 
+# 
