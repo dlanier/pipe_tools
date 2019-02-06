@@ -1,0 +1,3 @@
+#!/bin/bash
+
+bash MayomicsVC/src/shell/mutect.sh -s output/mutect -N Inputs/WGS_chr20_21_22_normal.aligned.sorted.deduped.realigned.bam -T Inputs/WGS_chr20_21_22_tumor.aligned.sorted.deduped.realigned.bam -g Reference/Homo_sapiens_assembly38.fasta -G /usr/local/apps/bioapps/gatk/GenomeAnalysisTK-3.8-1-0-gf15c1c3ef -J /usr/local/apps/bioapps/java/java-1.8-64bit/bin -j "'-Xms2G -Xmx8G'" -B /usr/local/apps/bioapps/bcftools/bcftools-1.5 -Z /usr/local/apps/bioapps/bcftools/htslib-1.3.1/bin -S /usr/local/apps/bioapps/samtools/samtools-1.5 -t 20 -e Config/EnvProfile.file -D /projects/bioinformatics/DEL/MayomicsVC/src/perl/fixDP.pl -o "'--dbsnp /projects/bioinformatics/DEL/Reference/dbsnp_138.hg38.vcf'" -F MayomicsVC/src/shell/shared_functions.sh

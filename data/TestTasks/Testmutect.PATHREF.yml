@@ -1,0 +1,8 @@
+BIOAPPS:       /usr/local/apps/bioapps
+RUNDIR:        /projects/bioinformatics/DEL
+RUNENV:        /projects/bioinformatics/DEL/Config
+SRCDIR:        /projects/bioinformatics/DEL/MayomicsVC
+GATKDATA:      /projects/bioinformatics/DataPacks/human/gatk_bundle_Oct_2017
+REFERENCEDATA: /projects/bioinformatics/DataPacks/human
+NORMALDATA:    /projects/mgc/Project_1/BR/MayomicsVC-Dev
+TUMORDATA:     /projects/bioinformatics/MRW/MayomicsVC-Dev
