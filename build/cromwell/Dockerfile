@@ -34,5 +34,8 @@ WORKDIR ${SRC_LOC}
 # docker login --username=${whodakine} --password=${123password4me} 
 # docker push aka1spanky/ncsa:dev0
 
+# pandoc - LaTeX >> pdf
+# http:http://pandoc.org/installing.html
+
  
 
