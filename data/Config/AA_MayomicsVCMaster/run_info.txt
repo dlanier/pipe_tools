@@ -1,0 +1,50 @@
+DebugMode="-d"
+
+PairedEnd="true"
+Trimming="false"
+MarkDuplicates="true"
+Bqsr="true"
+Vqsr="true"
+
+NormalInputRead1="/projects/abv/mken/variant_calling_demo/MayomicsVC_TestData/Reads/NEAT_L1_R1.fastq.gz"
+
+NormalInputRead2="/projects/abv/mken/variant_calling_demo/MayomicsVC_TestData/Reads/NEAT_L1_R2.fastq.gz"
+
+Adapters="/projects/abv/mken/variant_calling_demo/MayomicsVC_TestData/TruSeqAdaptors.fasta"
+
+Ref="/projects/abv/mken/variant_calling_demo/MayomicsVC_TestData/Reference/Homo_sapiens_assembly38.fasta"
+RefAnn="/projects/abv/mken/variant_calling_demo/MayomicsVC_TestData/Reference/Homo_sapiens_assembly38.fasta.ann"
+RefSa="/projects/abv/mken/variant_calling_demo/MayomicsVC_TestData/Reference/Homo_sapiens_assembly38.fasta.sa"
+RefBwt="/projects/abv/mken/variant_calling_demo/MayomicsVC_TestData/Reference/Homo_sapiens_assembly38.fasta.bwt"
+RefPac="/projects/abv/mken/variant_calling_demo/MayomicsVC_TestData/Reference/Homo_sapiens_assembly38.fasta.pac"
+RefAmb="/projects/abv/mken/variant_calling_demo/MayomicsVC_TestData/Reference/Homo_sapiens_assembly38.fasta.amb"
+RefFai="/projects/abv/mken/variant_calling_demo/MayomicsVC_TestData/Reference/Homo_sapiens_assembly38.fasta.fai"
+
+Platform="Illumina"
+Library="lib_name"
+CenterName="ABV"
+PlatformUnit="FLOWCELL_BARCODE.LANE1.SAMPLE_BARCODE"
+
+BWAExtraOptionsString="-M"
+
+ChunkSizeInBases="10000000"
+
+BqsrKnownSites="/projects/abv/mken/variant_calling_demo/MayomicsVC_TestData/Reference/dbsnp_138.hg38.vcf"
+RealignmentKnownSites="/projects/abv/mken/variant_calling_demo/MayomicsVC_TestData/Reference/Mills_and_1000G_gold_standard.indels.hg38.vcf"
+
+DBSNP="/projects/abv/mken/variant_calling_demo/MayomicsVC_TestData/Reference/dbsnp_138.hg38.vcf"
+DBSNPIdx="/projects/abv/mken/variant_calling_demo/MayomicsVC_TestData/Reference/dbsnp_138.hg38.vcf.idx"
+
+
+HaplotyperExtraOptionsString=""'--emit_mode variant --gq_bands 1-60,60-99/19,99 --min_base_qual 10 --pcr_indel_model CONSERVATIVE --phasing 1 --ploidy 2 --prune_factor 2'""
+HaplotyperVCFSourceField="Sentieon"
+
+VqsrSnpResourceString=""'--resource /projects/abv/mken/variant_calling_demo/MayomicsVC_TestData/Reference/1000G_phase1.snps.high_confidence.hg38.vcf.gz --resource_param 1000G,known=false,training=true,truth=false,prior=10.0 --resource /projects/abv/mken/variant_calling_demo/MayomicsVC_TestData/Reference/1000G_omni2.5.hg38.vcf.gz --resource_param omni,known=false,training=true,truth=false,prior=12.0 --resource /projects/abv/mken/variant_calling_demo/MayomicsVC_TestData/Reference/dbsnp_138.hg38.vcf --resource_param dbsnp,known=true,training=false,truth=false,prior=2.0 --resource /projects/abv/mken/variant_calling_demo/MayomicsVC_TestData/Reference/hapmap_3.3.hg38.vcf.gz --resource_param hapmap,known=false,training=true,truth=true,prior=15.0'""
+
+VqsrIndelResourceString=""'--resource /projects/abv/mken/variant_calling_demo/MayomicsVC_TestData/Reference/dbsnp_138.hg38.vcf --resource_param dbsnp,known=true,training=false,truth=false,prior=2.0 --resource /projects/abv/mken/variant_calling_demo/MayomicsVC_TestData/Reference/Mills_and_1000G_gold_standard.indels.hg38.vcf --resource_param Mills,known=false,training=true,truth=true,prior=12.0'""
+
+AnnotateText=""'--annotation DP --annotation QD --annotation FS --annotation SOR --annotation MQ --annotation MQRankSum --annotation ReadPosRankSum'""
+
+
+DeliveryFolder_Alignment="/projects/abv/mken/variant_calling_demo/Delivery/Alignment"
+DeliveryFolder_HaplotyperVC="/projects/abv/mken/variant_calling_demo/Delivery/HaplotyperVC"
