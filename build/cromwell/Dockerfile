@@ -25,7 +25,6 @@ ENV CROMWELL_JAR_LOC  /usr/local/etc
 RUN wget https://github.com/broadinstitute/cromwell/releases/download/36/womtool-36.jar -P ${CROMWELL_JAR_LOC}
 RUN wget  https://github.com/broadinstitute/cromwell/releases/download/36/cromwell-36.jar -P ${CROMWELL_JAR_LOC}
 
-
 # set up for a run_directory /home directory
 ENV SRC_LOC /home
 
@@ -47,11 +46,14 @@ WORKDIR ${SRC_LOC}
 # pandoc - LaTeX >> pdf
 # http:http://pandoc.org/installing.html
 
-#
 # docker create --name=cranky_container -p 8888:8888 -p 8000:8000 -v `pwd`:/home/tmp_usr/run_dir -i aka1spanky/ncsa:devwdlV02 
 # docker start cranky_container
 # docker exec -it cranky_container jupyter notebook --no-browser --port=8888 --ip=0.0.0.0
 
-docker exec -it cranky_container jupyter notebook password
+# docker exec -it cranky_container jupyter notebook --generate-config
+# docker exec -it cranky_container jupyter notebook password
+
+# --- add config first else:
 #FileNotFoundError: [Errno 2] No such file or directory: '/home/ncsausr/.jupyter/jupyter_notebook_config.json'
 
+#  Biggest 2do - add python 2.7 kernel
