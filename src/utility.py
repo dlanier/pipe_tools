@@ -277,3 +277,30 @@ def dict_write_file(input_dict, file_name='dict_file.txt'):
     except:
         print(file_name,'fails to write')
         pass
+
+
+def get_clone_imported_modules_list(dir_path):
+    """ Usage: modules_list = get_clone_imported_modules_list(dir_path) """
+    lib_list = []
+    for dir, dir_list, files_list in os.walk(dir_path):
+        for file in files_list:
+            if len(file) > len('.py') and file[-3:] == '.py':
+                full_file = os.path.join(dir, file)
+                with open(full_file, 'r') as fh:
+                    lines = fh.readlines()
+                if len(lines) > 1:
+                    for line in lines:
+                        if line[0] != "#" and "import" in line:
+                            line_list = line.strip().split(' ')
+                            if line_list[0] == 'import':
+                                if len(line_list) > 2:
+                                    for lib in line_list[1:]:
+                                        if lib != 'import' and lib != 'as':
+                                            lib_list.append(lib.split('.')[0])
+                                else:
+                                    lib_list.append(line_list[1].split('.')[0])
+                            elif line_list[0] == 'from':
+                                lib = line_list[1].split('\t')[0]
+                                lib_list.append(lib)
+
+    return sorted(list(set(lib_list)))
