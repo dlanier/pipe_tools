@@ -17,7 +17,10 @@ RUN pip3 install --upgrade pip
 RUN pip3 install -I numpy pandas scipy scikit-learn pyyaml xmlrunner jupyter
 RUN apt-get install -y python2.7 python-pip
 RUN pip install --upgrade pip
-#   RUN python2.7 -m pip install ipykernel
+
+#  				Wasie: Biggest 2do - add python 2.7 kernel
+RUN python2 -m pip install ipykernel
+RUN python2 -m ipykernel install
 
 ENV CROMWELL_JAR_LOC  /usr/local/etc
 #COPY jar_files/* ${CROMWELL_JAR_LOC}/
@@ -56,4 +59,4 @@ WORKDIR ${SRC_LOC}
 # --- add config first else:
 #FileNotFoundError: [Errno 2] No such file or directory: '/home/ncsausr/.jupyter/jupyter_notebook_config.json'
 
-#  Biggest 2do - add python 2.7 kernel
+#  				Biggest 2do add default notebook set
