@@ -1,0 +1,25 @@
+
+
+	Incremental build Multi-Sample, multi-lane from examples
+
+File In Progress:
+https://git.ncsa.illinois.edu/mayomics/MayomicsVC/blob/somatic/src/wdl/SomaticVC/Workflow/SomaticMasterMultiWorkflow.wdl
+
+	2 do notes:
+
+1) Iterate the normal and tumor samples in separate sections.
+https://git.ncsa.illinois.edu/mayomics/MayomicsVC/blob/somatic/src/wdl/SomaticVC/Workflow/MultiTumor_SingleNormalWorkflow.wdl
+
+
+2) Implement the Trimming switch
+https://git.ncsa.illinois.edu/mayomics/MayomicsVC/blob/somatic/src/wdl/Alignment/Workflow/TestAlignmentWorkflow.wdl
+
+
+3) Extend to DEDUP_WF (link 2)
+
+
+4) Extend to REALIGNMENT_WF (link 2)
+
+
+	GET HELP WITH:
+5) next branch | sequential steps.
