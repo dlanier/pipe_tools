@@ -1,0 +1,73 @@
+
+			Order of execution listing Feb 19, 2019 06:33 CST
+
+https://wiki.ncsa.illinois.edu/display/MSD/Code+executed
+
+
+
+			trim_sequences.sh
+
+bash MayomicsVC/src/shell/trim_sequences.sh 
+	-s output/sample 
+	-A Inputs/TruSeqAdaptors.fasta 
+	-l Inputs/WGS_chr1_5X_E0.005_L1_read1.fastq.gz 
+	-r Inputs/WGS_chr1_5X_E0.005_L1_read2.fastq.gz 
+	-C /usr/local/apps/bioapps/python/Python-3.6.1/bin 
+	-t 0 
+	-P true 
+	-e Config/EnvProfile.file 
+	-F MayomicsVC/src/shell/shared_functions.sh 
+	-d
+
+
+			alignment.sh
+
+bash MayomicsVC/src/shell/alignment.sh 
+	-s sample 
+	-p Illumina 
+	-L fake_lib 
+	-f niner.nine.ninereeno 
+	-c NCSA 
+	-l Inputs/WGS_chr1_5X_E0.005_L1_read1.fastq.gz 
+	-r Inputs/WGS_chr1_5X_E0.005_L1_read2.fastq.gz 
+	-G Reference/Homo_sapiens_assembly38.fasta 
+	-K 10000000 
+	-o "'-M'" 
+	-S /usr/local/apps/bioapps/sentieon/sentieon-genomics-201808 
+	-t 20 
+	-P true 
+	-e Config/EnvProfile.file 
+	-F MayomicsVC/src/shell/shared_functions.sh
+
+
+
+			dedup.sh
+
+bash MayomicsVC/src/shell/dedup.sh 
+	-s sample 
+	-b Inputs/WGS_chr20_21_22_normal.bam 
+	-t 20 
+	-e Config/EnvProfile.file 
+	-S /usr/local/apps/bioapps/sentieon/sentieon-genomics-201808 
+	-F MayomicsVC/src/shell/shared_functions.sh
+
+
+
+			mutect.sh
+
+bash MayomicsVC/src/shell/mutect.sh 
+	-s output/mutect 
+	-N Inputs/WGS_chr20_21_22_normal.bam 
+	-T Inputs/WGS_chr20_21_22_tumor.bam 
+	-g Reference/Homo_sapiens_assembly38.fasta 
+	-G /usr/local/apps/bioapps/gatk/GenomeAnalysisTK-3.8-1-0-gf15c1c3ef 
+	-J /usr/local/apps/bioapps/java/java-1.8-64bit/bin 
+	-j "'-Xms2G -Xmx8G'" 
+	-B /usr/local/apps/bioapps/bcftools/bcftools-1.5 
+	-Z /usr/local/apps/bioapps/bcftools/htslib-1.3.1/bin 
+	-S /usr/local/apps/bioapps/samtools/samtools-1.5 
+	-t 20 
+	-e Config/EnvProfile.file 
+	-D /projects/bioinformatics/jallen17/MayomicsVC/src/perl/fixDP.pl 
+	-o "'--dbsnp /projects/bioinformatics/jallen1 /Reference/dbsnp_138.hg38.vcf'" 
+	-F MayomicsVC/src/shell/shared_functions.sh
