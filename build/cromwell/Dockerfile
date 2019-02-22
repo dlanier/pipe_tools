@@ -1,5 +1,4 @@
-FROM ubuntu:16.04
-#FROM amd64/ubuntu:bionic
+FROM ubuntu:bionic
 LABEL dlanier="lanier4@illinois.edu"
 
 # install python 2.7 3.x, java 8, cromwell 36
@@ -11,8 +10,9 @@ RUN apt-get install -y default-jdk
 RUN export JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64/
 RUN export PATH=$PATH:$JAVA_HOME/bin
 
-RUN apt-get update && apt-get install -y vim python3-pip git wget
-RUN pip3 install --upgrade pip
+RUN apt-get update && apt-get install -y vim git wget
+
+RUN apt-get install -y python3-pip
 
 RUN pip3 install -I numpy pandas scipy scikit-learn pyyaml xmlrunner jupyter
 RUN apt-get install -y python2.7 python-pip
@@ -35,8 +35,8 @@ ENV SRC_LOC /home
 # RUN git clone https://github.com/KnowEnG/Samples_Clustering_Pipeline.git ${SRC_LOC} 
 
 # add admin user - prevent running as root
-RUN adduser --disabled-login --gecos "" ncsausr; echo "ncsausr:ncsausr" | chpasswd
-RUN usermod -aG sudo ncsausr
+RUN adduser --disabled-login --gecos "" ncsauser; echo "ncsauser:ncsauser" | chpasswd
+RUN usermod -aG sudo ncsauser
 USER ncsausr
 
 WORKDIR ${SRC_LOC}
