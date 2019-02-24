@@ -37,7 +37,7 @@ ENV SRC_LOC /home
 # add admin user - prevent running as root
 RUN adduser --disabled-login --gecos "" ncsauser; echo "ncsauser:ncsauser" | chpasswd
 RUN usermod -aG sudo ncsauser
-USER ncsausr
+USER ncsauser
 
 WORKDIR ${SRC_LOC}
 
