@@ -204,14 +204,11 @@ def write_filled_in_json_dict(json_dict, template_dict, filename_prefix='test', 
     out_string = '{\n'
     for json_key, json_value in json_dict.items():
         out_string += '    "' + json_key + '":'
-        if "Array" in template_dict[json_key] and ("File" in template_dict[json_key] or 
-                                                   "String" in template_dict[json_key]):
-            out_string += ' ' + json_value + ',\n'
-        #                               escaped double w single quotes for custom-config-json format
-        elif json_value[0:4] == '"\\"\'':
+        #                               magic string value first
+        if json_value[0:4] == '"\\"\'':
             out_string += ' \"\\\"' + json_value[3:] + '\"\n'
         else:
-            out_string += ' \"' + json_value + '\",\n'
+            out_string += ' ' + json_value + ',\n'
             
     out_string = out_string[:-2] + '\n}\n'
     
@@ -237,9 +234,6 @@ def args_dict_to_filledin_json(args_dict, output_dir=None):
     if output_dir is None or os.path.isdir(output_dir) == False:
         output_dir = os.getcwd()
         
-    for k, v in args_dict.items():
-        print('%30s: %s'%(k,v))
-          
     # get the template.json dictionary
     json_template_dict = get_json_file_dict(args_dict['jsonTemplate'])
     

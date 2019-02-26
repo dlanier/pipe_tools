@@ -9,6 +9,7 @@ def main(args):
     args_dict = json.loads(args_dict)
     
     rc = args_dict_to_filledin_json(args_dict)
+    
     return rc
         
 if __name__ == '__main__':
