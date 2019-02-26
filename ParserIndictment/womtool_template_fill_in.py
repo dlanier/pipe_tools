@@ -154,7 +154,7 @@ def configure_json_dict(json_dict, config_dict):
             config_used_dict[k] = v
 
             for var_name in keys_d[k]:
-                if v[0:2] == '""':
+                if len(v) > 2 and v[0:2] == '""':
                     v_fixed = '"' + '\\' + '"'
                     v_fixed += v[2:-2]
                     v_fixed += '"' + '\\'  + '"'
@@ -189,9 +189,9 @@ def write_filled_in_json_dict(json_dict, template_dict, filename_prefix='test', 
     if output_dir is None or os.path.isdir(output_dir) == False:
         output_dir = os.getcwd()
         
-    filename_suffix = 'FilledIn.json'
+    filename_suffix = '.FilledIn.json'
     if len(filename_prefix) < 1:
-        full_filename = os.path.join(output_dir, 'test.' + filename_suffix)
+        full_filename = os.path.join(output_dir, 'test' + filename_suffix)
     else:
         full_filename = os.path.join(output_dir, filename_prefix.strip('.') + filename_suffix)
         
