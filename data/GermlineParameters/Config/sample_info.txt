@@ -1,0 +1,3 @@
+SampleName="test02190sample, test02191sample"
+PanelNormals="/projects/bioinformatics/DEL/Inputs/mutect.vcf"
+
