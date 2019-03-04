@@ -9,11 +9,29 @@ import os
 import argparse
 import sys
 import json
-import yaml
 from collections import OrderedDict, defaultdict, Counter
 
 
-def get_json_file_dict(data_fullfilename):
+def read_json_raw(json_full_filename):
+    """ Usage: list_of_lines = read_json_raw(json_full_filename) 
+    
+    Args:
+        json_full_filename: full path name to the json file
+        
+    Returns:
+        list_of_lines:      list of strings terminated by '\n' newline character
+    """
+    lines = []
+    try:
+        with open(json_full_filename, 'r') as fh:
+            lines = fh.readlines()
+    except:
+        pass
+    
+    return lines
+
+
+def get_json_file_dict(json_full_filename):
     """ Usage: json_dict = get_json_file_dict(data_fullfilename)
     
     Args:
@@ -23,22 +41,16 @@ def get_json_file_dict(data_fullfilename):
     Returns:
         json_dict:               python dictionary of name - value parameters.
     """
-    with open(data_fullfilename, 'r') as fh:
-        json_dict = yaml.load(fh)
-
-    return json_dict
+    lines = read_json_raw(json_full_filename)
+    S = ''
+    for line in lines:
+        S += line.strip()
+    
+    return json.loads(S)
 
 
 def get_config_file_dict(configfile_fullpath):
     """ Usage:   config_file_dict = get_config_file_dict(configfile_fullpath)
-    
-    User must insure plain text encoding and the format dictated by WOMTOOLS - template.json 
-    key="value in a string form" 
-    key="124.7654"
-    key="0"
-    key="true"
-    key=""
-    key=[[["value1", "value2"]]]
     
     Args:
         configfile_fullpath:    full path to formatted plain text file 
@@ -77,11 +89,6 @@ def get_config_file_dict(configfile_fullpath):
 
 def assemble_config_dict(config_files_list):
     """ Usage: config_dict = assemble_config_dict(config_files_list)
-    Get an orderd dictionary of all variables from the config files list.
-    Note that the config files must exist and be of proper mayo format. 
-        (ascii key="value" with one special magic string value format)
-    -- stdout if file not found or duplicate information .
-    -- future version could return specific config duplicates info if they are not exact key:values match.
     
     Args:
         config_files_list:      python list of configurateion.txt files
@@ -171,10 +178,9 @@ def configure_json_dict(json_dict, config_dict):
     return configured_dict, json_missing_dict, config_used_dict
 
 
-def write_filled_in_json_dict(json_dict, template_dict, filename_prefix='test', output_dir=None):
-    """ Usage:    
+def write_filled_in_json_dict(json_dict, template_dict, full_filename):
+    """ Usage:
     outfile = write_filled_in_json_dict(json_dict, json_template_dict, filename_prefix, output_dir)
-    Write the json file input with respect to the types defined in the template.
     
     Args:
         json_dict:              template.json as dict and filled in with config.txt
@@ -185,16 +191,6 @@ def write_filled_in_json_dict(json_dict, template_dict, filename_prefix='test', 
     Returns:
         full_filename:          written output filename
     """
-    #                                   assemble full file name
-    if output_dir is None or os.path.isdir(output_dir) == False:
-        output_dir = os.getcwd()
-        
-    filename_suffix = '.FilledIn.json'
-    if len(filename_prefix) < 1:
-        full_filename = os.path.join(output_dir, 'test' + filename_suffix)
-    else:
-        full_filename = os.path.join(output_dir, filename_prefix.strip('.') + filename_suffix)
-        
     #                                   assemble filled-in json file as string
     out_string = '{\n'
     for json_key, json_value in json_dict.items():
@@ -211,7 +207,12 @@ def write_filled_in_json_dict(json_dict, template_dict, filename_prefix='test', 
     with open(full_filename, 'w') as fh:
         fh.writelines(out_string)
         
-    return full_filename
+    if os.path.isfile(full_filename):
+        rc = 0
+    else:
+        rc = -1
+        
+    return rc
 
 
 def args_dict_to_filledin_json(args_dict, output_dir=None):
@@ -238,20 +239,14 @@ def args_dict_to_filledin_json(args_dict, output_dir=None):
     # get the Filled In dict
     filled_in_dict, json_missing_dict, config_used_dict = configure_json_dict(json_template_dict, config_dict)
     
-    # make up the output file name
-    filename_prefix = args_dict['jsonTemplate'].split('.')[0]
-    full_filename = write_filled_in_json_dict(filled_in_dict, json_template_dict, filename_prefix, output_dir)
-
-    if os.path.isfile(full_filename):
-        rc = 0
-    else:
-        rc = -1
+    # write the output file
+    rc = write_filled_in_json_dict(json_dict, template_dict, full_filename=args_dict['o'])
     
     return rc
 
 
 def parse_args(args):
-    """         This function (parse_args) is copied from existing repo to preserve input signature 
+    """ This function (parse_args) is copy-adapted from existing repo to preserve input signature 
     By default, argparse treats all arguments that begin with '-' or '--' as optional in the help menu 
     (preferring to have required arguments be positional).
 
