@@ -1,9 +1,12 @@
 """ 
-Starting with a WOMTOOL created workflow.template.json file 
-a list of properly formatted configureation files
-is assembled and written to a workflow.FilledIn.json file.
+NCSA Industry Genomics Group
+lanier4@illinois.edu
 
-The previous repository version of the python command-line interface is preserved.
+Starting with a WOMTOOL created workflow.template.json file 
+and a list of properly formatted configuration files,
+assembled and write a workflow.FilledIn.json file.
+
+The previous version of the python command-line interface is unchanged.
 """
 import os
 import argparse
@@ -26,6 +29,7 @@ def read_json_raw(json_full_filename):
         with open(json_full_filename, 'r') as fh:
             lines = fh.readlines()
     except:
+        print('%s\nFailed to open and read with python std library'%(json_full_filename))
         pass
     
     return lines
@@ -51,12 +55,13 @@ def get_json_file_dict(json_full_filename):
 
 def get_config_file_dict(configfile_fullpath):
     """ Usage:   config_file_dict = get_config_file_dict(configfile_fullpath)
+    Ignore comments, only include lines with "=" sign, empty strings as empty strings.
     
     Args:
         configfile_fullpath:    full path to formatted plain text file 
                                 
     Returns:
-        config_file_dict:       python dictionary of key-value pairs 
+        config_file_dict:       python Ordered dictionary of key-value pairs 
                                 (suitable for json file insertion)
     """
     pairs_list = []
@@ -89,12 +94,13 @@ def get_config_file_dict(configfile_fullpath):
 
 def assemble_config_dict(config_files_list):
     """ Usage: config_dict = assemble_config_dict(config_files_list)
+    Prints Warning: BUT may retrun multiple duplicate keys with different values.
     
     Args:
         config_files_list:      python list of configurateion.txt files
         
     Returns:
-        config_dict:            python ordered dictionary of 
+        config_dict:            python ordered dictionary of all config files
     """
     config_dict_list = []
     for file_name in config_files_list:
@@ -118,7 +124,8 @@ def assemble_config_dict(config_files_list):
 
 
 def get_json_keys_config_dict(json_dict):
-    """ Usage:    keys_dict = get_json_keys_config_dict(json_dict) 
+    """ Usage:    keys_dict = get_json_keys_config_dict(json_dict)
+    Config file dictionary for x.template.json keys
     
     Args:
         json_dict:      json template file as python dict
@@ -136,7 +143,8 @@ def get_json_keys_config_dict(json_dict):
 
 
 def configure_json_dict(json_dict, config_dict):
-    """ Usage: 
+    """ Merge config-files dictionary into the json template dictionary. Also return reference dicts.
+    Usage: 
     configured_dict, json_missing_dict, config_used_dict = configure_json_dict(json_dict, config_dict)
     
     Args:
@@ -144,9 +152,9 @@ def configure_json_dict(json_dict, config_dict):
         config_dict:        python dict from config.txt file intended to fill in the json template
         
     Returns:
-        configured_dict:    json dict keys: config dict values
-        json_missing_dict:  keys: value (= types)  for json dict keys not found in config dict
-        config_used_dict:   the config file key-value pairs used
+        configured_dict:    The FilledIn dictionary suitable for writing.
+        json_missing_dict:  The missing json templte key-value pairs dictionary to inform user.
+        config_used_dict:   The actual config lines used - for future integration testing usage.
     """
     configured_dict = defaultdict()
     json_missing_dict = defaultdict()
@@ -189,7 +197,7 @@ def write_filled_in_json_dict(json_dict, template_dict, full_filename):
         output_dir:             (=None) if DNE current directory is used
         
     Returns:
-        full_filename:          written output filename
+        rc:                     return code is zero if no error detected with write
     """
     #                                   assemble filled-in json file as string
     out_string = '{\n'
@@ -204,20 +212,22 @@ def write_filled_in_json_dict(json_dict, template_dict, full_filename):
     out_string = out_string[:-2] + '\n}\n'
     
     #                                   open file handle an write the string
-    with open(full_filename, 'w') as fh:
-        fh.writelines(out_string)
-        
-    if os.path.isfile(full_filename):
-        rc = 0
-    else:
-        rc = -1
+    rc = -1
+    try:
+        with open(full_filename, 'w') as fh:
+            fh.writelines(out_string)
+            
+        if os.path.isfile(full_filename):
+            rc = 0
+    except:
+        pass
         
     return rc
 
 
 def args_dict_to_filledin_json(args_dict, output_dir=None):
     """ Usage: return_code = args_dict_to_filledin_json(args_dict, output_dir) 
-    WRAPPER - assemble all the above fucntions in the context of the input command line args.
+    Assemble all the above fucntions in the context of the input command line args.
     
     Args:
         args_dict:          Command line arguments converted to a python dict
@@ -226,7 +236,6 @@ def args_dict_to_filledin_json(args_dict, output_dir=None):
     Returns:
         rc:                 return code = 0 if write operation succeeded, else rc = -1
     """
-    
     if output_dir is None or os.path.isdir(output_dir) == False:
         output_dir = os.getcwd()
         

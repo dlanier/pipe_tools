@@ -1,7 +1,11 @@
 """
-main function for receiving command-line args
-and calling womtool_template_fill_in module functions
+NCSA Industry Genomics Group
+lanier4@illinois.edu
+
+main function for receiving command-line args & calling  womtool_template_fill_in.py
+
 requred args: '-i', '-o', '--jsonTemplate'
+
 return code is either 0 (success) or -1 (fail)
 """
 import sys
