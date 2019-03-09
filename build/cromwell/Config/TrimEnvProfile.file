@@ -1,2 +1,0 @@
-export SENTIEON_LICENSE=bwlm3.ncsa.illinois.edu:8989
-export SENTIEON_PYTHON=/usr/local/python-2.7.9/bin/python2.7
