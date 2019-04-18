@@ -1,0 +1,12 @@
+FROM ubuntu:16.04
+
+# Add the instruction to install gcc here
+RUN apt-get update -y && \
+    apt-get install -y --no-install-recommends \
+    build-essential \
+    gcc && \
+    rm -rf /var/lib/apt/lists/*
+
+COPY sources/hello.c /var/tmp/hello.c
+RUN gcc -o /var/tmp/hello /var/tmp/hello.c
+
