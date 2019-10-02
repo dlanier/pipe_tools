@@ -2,6 +2,8 @@
 get pip3 requirements file only for the required .py and .ipynb files in a repository
 """
 import os
+import sys
+import argparse
 import tempfile
 import json
 
@@ -115,8 +117,23 @@ def write_requirements_for(dirname, output_filename='requirements.txt'):
     """
     actual_req_dict, miss_list = get_py_requirements_for_dirname(dirname)
     S = get_pip_requirements_string(actual_req_dict)
+
     with open(output_filename, 'w') as fh:
         fh.write(S)
+
     if os.path.isfile(output_filename):
         print('File written:\n', output_filename)
-    
+
+
+if __name__ == '__main__':
+    parser = argparse.ArgumentParser()
+    parser.add_argument('-dirname', required=True)
+    parser.add_argument('-o', required=False)
+    parsed_args = parser.parse_args(sys.argv[1:])
+    args_dict = json.dumps(vars(parsed_args), indent=4)
+    args_dict = json.loads(args_dict)
+
+    if args_dict['o'] is None:
+        write_requirements_for(args_dict['dirname'])
+    else:
+        write_requirements_for(args_dict['dirname'], args_dict['o'])
