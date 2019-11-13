@@ -1,0 +1,2 @@
+group1="sampleA sampleB"
+group2="sampleC sampleD"

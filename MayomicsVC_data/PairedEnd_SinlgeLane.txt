@@ -1,0 +1,4 @@
+#FASTQ:sampleA=sampleA.R1.fastq.gz	sampleA.R2.fastq.gz
+#FASTQ:sampleB=sampleB.R1.fastq.gz	sampleB.R2.fastq.gz
+#FASTQ:sampleC=sampleC.R1.fastq.gz	sampleC.R2.fastq.gz
+#FASTQ:sampleD=sampleD.R1.fastq.gz	sampleD.R2.fastq.gz

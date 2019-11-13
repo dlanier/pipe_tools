@@ -1,0 +1,4 @@
+#FASTQ:sampleA=sampleA.L1.R1.fastq.gz	sampleA.L1.R2.fastq.gz	sampleA.L2.R1.fastq.gz	sampleA.L2.R2.fastq.gz	sampleA.L3.R1.fastq.gz	sampleA.L3.R2.fastq.gz
+#FASTQ:sampleB=sampleB.L1.R1.fastq.gz	sampleB.L1.R2.fastq.gz	sampleB.L2.R1.fastq.gz	sampleB.L2.R2.fastq.gz	sampleB.L3.R1.fastq.gz	sampleB.L3.R2.fastq.gz
+#FASTQ:sampleC=sampleC.L1.R1.fastq.gz	sampleC.L1.R2.fastq.gz	sampleC.L2.R1.fastq.gz	sampleC.L2.R2.fastq.gz	sampleC.L3.R1.fastq.gz	sampleC.L3.R2.fastq.gz
+#FASTQ:sampleD=sampleD.L1.R1.fastq.gz	sampleD.L1.R2.fastq.gz	sampleD.L2.R1.fastq.gz	sampleD.L2.R2.fastq.gz	sampleD.L3.R1.fastq.gz	sampleD.L3.R2.fastq.gz
