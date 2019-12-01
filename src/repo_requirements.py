@@ -8,7 +8,7 @@ import tempfile
 import json
 
 
-def get_pip_requirements_dict():
+def get_all_pip_installed_versions_dict():
     """ get the pip3 list of python installed modules
     
     Args:                   (none)
@@ -74,10 +74,15 @@ def get_python_file_import_list(py_file_name, imports_list=None):
 
 
 def get_py_requirements_for_dirname(dirname):
-    """  """
+    """ actual_required_dict, installed_not_used_list = get_py_requirements_for_dirname(dirname)
+
+    Returns:
+        actual_required_dict:
+        installed_not_used:
+    """
     actual_required_dict = {}
-    missed_list = []
-    requirements_dict = get_pip_requirements_dict()
+    installed_not_used_list = []
+    requirements_dict = get_all_pip_installed_versions_dict()
     imports_list = []
     if os.path.isdir(dirname) and len(requirements_dict) > 0:
         for d_name, d_list, f_list in os.walk(dirname):
@@ -97,9 +102,9 @@ def get_py_requirements_for_dirname(dirname):
                 if maybe_import in requirements_dict:
                     actual_required_dict[maybe_import] = requirements_dict[maybe_import]
                 else:
-                    missed_list.append(maybe_import)
+                    installed_not_used_list.append(maybe_import)
 
-    return actual_required_dict, sorted(list(set(missed_list)))
+    return actual_required_dict, sorted(list(set(installed_not_used_list)))
 
 def get_pip_requirements_string(actual_required_dict):
     """ get string for .txt file from actual_required_dict
